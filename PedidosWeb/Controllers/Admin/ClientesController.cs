@@ -18,7 +18,7 @@ namespace PedidosWeb.Controllers
         // GET: Clientes
         public ActionResult Index()
         {
-            return View(db.Clientes.ToList());
+            return View("~/Views/Admin/Clientes/Index.cshtml", db.Clientes.ToList());
         }
 
         // GET: Clientes/Details/5
@@ -33,7 +33,7 @@ namespace PedidosWeb.Controllers
             {
                 return HttpNotFound();
             }
-            return View(cliente);
+            return View("~/Views/Admin/Clientes/Details.cshtml", cliente);
         }
 
         // GET: Clientes/Create
@@ -41,7 +41,7 @@ namespace PedidosWeb.Controllers
         {
             Cliente Cliente = new Cliente();
 
-            return View(Cliente);
+            return View("~/Views/Admin/Clientes/Create.cshtml", Cliente);
         }
 
         // POST: Clientes/Create
@@ -73,7 +73,7 @@ namespace PedidosWeb.Controllers
             {
                 return HttpNotFound();
             }
-            return View(cliente);
+            return View("~/Views/Admin/Clientes/Edit.cshtml", cliente);
         }
 
         // POST: Clientes/Edit/5

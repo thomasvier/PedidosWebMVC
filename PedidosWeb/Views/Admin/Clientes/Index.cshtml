@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<PedidosWeb.Models.Admin.Cliente>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Clientes";
 }
 
-<h2>Index</h2>
+<h2>Clientes</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <button type="button" title="Novo" name="btnNovo" id="btnNovo" class="btn btn-primary" onclick="location.href='@Url.Action("Create", "Clientes")'">Novo</button>
 </p>
 <table class="table">
     <tr>
