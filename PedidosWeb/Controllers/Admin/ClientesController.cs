@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using PedidosWeb.DAL;
 using PedidosWeb.Models.Admin;
+using PedidosWeb.BLL.Admin;
+using PagedList;
 
 namespace PedidosWeb.Controllers
 {
@@ -16,9 +18,12 @@ namespace PedidosWeb.Controllers
         private Contexto db = new Contexto();
 
         // GET: Clientes
-        public ActionResult Index()
+        public ActionResult Index(int? page, string filtro)
         {
-            return View("~/Views/Admin/Clientes/Index.cshtml", db.Clientes.ToList());
+            ViewBag.Filtro = filtro;
+            ClienteBll clienteBll = new ClienteBll();
+            
+            return View("~/Views/Admin/Clientes/Index.cshtml", clienteBll.ListaClientesPaginacao(page, filtro, "2"));
         }
 
         // GET: Clientes/Details/5
