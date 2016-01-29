@@ -18,28 +18,37 @@ namespace PedidosWeb.BLL.Admin
             db = new Contexto();
         }
 
-        public IPagedList<Cliente> ListaClientesPaginacao(int? page, string filtro, string tipoTitularFiltro)
+        public IPagedList<Cliente> ListaClientesPaginacao(int? page, string filtro, string tipoTitularFiltro, string sortOrder)
         {
             var clientes = from c in db.Clientes
                            select c;
-            
-            if (!string.IsNullOrEmpty(filtro))
+
+            if (!String.IsNullOrEmpty(filtro))
             {
-                clientes = clientes.Where(x => x.RazaoSocial.Contains(filtro));
+                clientes = clientes.Where(s => s.RazaoSocial.Contains(filtro));
             }
 
-            int tipo = int.TryParse(tipoTitularFiltro, out tipo) ? tipo : 2;
-
-            if (tipo < 2)
+            switch (sortOrder)
             {
-                TipoTitular tipoTitular = (TipoTitular)tipo;
-
-                clientes = clientes.Where(x => x.Tipo == tipoTitular);
+                case "razaosocial_desc":
+                    clientes = clientes.OrderByDescending(s => s.RazaoSocial);
+                    break;
+                case "NomeFantasia":
+                    clientes = clientes.OrderBy(s => s.NomeFantasia);
+                    break;
+                case "nomefantasia_desc":
+                    clientes = clientes.OrderByDescending(s => s.NomeFantasia);
+                    break;
+                default:
+                    clientes = clientes.OrderBy(s => s.RazaoSocial);
+                    break;
             }
 
-            IPagedList<Cliente> clientesPaginados = clientes.OrderBy(x => x.RazaoSocial).ToPagedList(page ?? 1, 10);
 
-            return clientesPaginados;
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+            return clientes.ToPagedList(pageNumber, pageSize);
         }
     }
 }

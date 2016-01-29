@@ -18,12 +18,26 @@ namespace PedidosWeb.Controllers
         private Contexto db = new Contexto();
 
         // GET: Clientes
-        public ActionResult Index(int? page, string filtro)
+        public ActionResult Index(string sortOrder, string filtroAtual, string filtro, int? page)
         {
-            ViewBag.Filtro = filtro;
-            ClienteBll clienteBll = new ClienteBll();
-            
-            return View("~/Views/Admin/Clientes/Index.cshtml", clienteBll.ListaClientesPaginacao(page, filtro, "2"));
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.RazaoSocialSort = String.IsNullOrEmpty(sortOrder) ? "razaosocial_desc" : "";
+            ViewBag.NomeFantasiaSort = sortOrder == "NomeFantasia" ? "nomefantasia_desc" : "NomeFantasia";
+
+            if (filtro != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                filtro = filtroAtual;
+            }
+
+            ViewBag.FiltroAtual = filtro;
+
+            ClienteBll clientebll = new ClienteBll();
+
+            return View("~/Views/Admin/Clientes/Index.cshtml", clientebll.ListaClientesPaginacao(page, filtro, "2", sortOrder));
         }
 
         // GET: Clientes/Details/5

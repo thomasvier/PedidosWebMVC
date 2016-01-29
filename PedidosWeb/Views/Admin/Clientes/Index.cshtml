@@ -1,7 +1,7 @@
 ﻿@model IPagedList<PedidosWeb.Models.Admin.Cliente>
 @using PagedList;
 @using PagedList.Mvc;
-
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
     ViewBag.Title = "Clientes";
 }
@@ -22,11 +22,11 @@
                             <p class="navbar-brand">Filtro</p>
                         </div>                        
                             <div class="navbar-form navbar-left">
-                                @using (Html.BeginForm())
+                                @using (Html.BeginForm("Index", "Clientes", FormMethod.Get))
                                 { 
                                 <div class="row">
                                     <div class="col-md-4">
-                                        @Html.TextBox("filtro", ViewBag.filtro as String, htmlAttributes: new { @class = "form-control", @placeholder = "Razão Social" })
+                                        @Html.TextBox("filtro", ViewBag.FiltroAtual as String, htmlAttributes: new { @class = "form-control", @placeholder = "Razão Social" })
                                     </div>
                                     <div class="col-md-4">
                                         <select id="selTiposTitularFiltro" class="form-control">
@@ -51,10 +51,10 @@
 <table class="table table-striped">
     <tr>
         <th>
-            Razão Social
+            @Html.ActionLink("Razão Social", "Index", new { sortOrder = ViewBag.RazaoSocialSort, filtroAtual = @ViewBag.FiltroAtual })
         </th>
         <th>
-            Nome Fantasia
+            @Html.ActionLink("Nome Fantasia", "Index", new { sortOrder = ViewBag.NomeFantasiaSort, filtroAtual = @ViewBag.FiltroAtual })
         </th>
         <th>
             CNPJ/CPF
@@ -104,10 +104,8 @@
         </tr>
     }
 </table>
+<br />
+Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
 
-@if (Model.HasNextPage || Model.HasPreviousPage)
-{
-    <div style="text-align: center">
-        @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page, filtro = @ViewBag.filtro as string }), PagedListRenderOptions.Classic)
-    </div>
-}
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, filtroAtual = ViewBag.FiltroAtual }), PagedListRenderOptions.Classic)
