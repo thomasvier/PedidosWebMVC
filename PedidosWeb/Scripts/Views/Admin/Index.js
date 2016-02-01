@@ -1,11 +1,23 @@
 ﻿$(document).ready(function(){
-    var filtro = $('#TiposTitularFiltro').val();
-    alert(filtro);
-    if (filtro != "")
-        $('#selTiposTitularFiltro').val(filtro);
+    var tiposTitularFiltro = $('#tiposTitularFiltro').val();
 
-    $('#selTiposTitularFiltro').change(function () {        
-        var value = $('option:selected', $(this)).val();        
-        $('#TiposTitularFiltro').val(value);        
+    if (tiposTitularFiltro != "")
+        $('#selTiposTitularFiltro').val(tiposTitularFiltro);
+
+    $('#selTiposTitularFiltro').change(function () {
+        var value = $('option:selected', $(this)).val();
+        $('#tiposTitularFiltro').val(value);
+    });
+
+    var ativoFiltro = $('#ativoFiltro').val();
+
+    if (ativoFiltro != "")
+        $('#selAtivoFiltro').val(ativoFiltro);
+
+    $('#selAtivoFiltro').change(function () {
+        var value = $('option:selected', $(this)).val();
+        $('#ativoFiltro').val(value);
     });
 })
+
+

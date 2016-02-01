@@ -18,10 +18,15 @@ namespace PedidosWeb.Controllers
         private Contexto db = new Contexto();
 
         // GET: Clientes
-        public ActionResult Index(string sortOrder, string filtroAtual, string filtro, int? page)
+        public ActionResult Index(string sortOrder, string filtroAtual, 
+                                    string filtro, int? page, 
+                                    string tiposTitularFiltro, 
+                                    string tipoTitularAtual,
+                                    string ativoFiltro,
+                                    string ativoFiltroAtual)
         {
             ViewBag.CurrentSort = sortOrder;
-            ViewBag.RazaoSocialSort = String.IsNullOrEmpty(sortOrder) ? "razaosocial_desc" : "";
+            ViewBag.RazaoSocialSort = string.IsNullOrEmpty(sortOrder) ? "razaosocial_desc" : "";
             ViewBag.NomeFantasiaSort = sortOrder == "NomeFantasia" ? "nomefantasia_desc" : "NomeFantasia";
 
             if (filtro != null)
@@ -32,12 +37,31 @@ namespace PedidosWeb.Controllers
             {
                 filtro = filtroAtual;
             }
+            
+            if(tiposTitularFiltro != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                tiposTitularFiltro = tipoTitularAtual;
+            }
+
+            if(ativoFiltro != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                ativoFiltro = ativoFiltroAtual;
+            }
 
             ViewBag.FiltroAtual = filtro;
+            ViewBag.TipoTitularAtual = tiposTitularFiltro;
 
             ClienteBll clientebll = new ClienteBll();
 
-            return View("~/Views/Admin/Clientes/Index.cshtml", clientebll.ListaClientesPaginacao(page, filtro, "2", sortOrder));
+            return View("~/Views/Admin/Clientes/Index.cshtml", clientebll.ListaClientesPaginacao(page, filtro, tiposTitularFiltro, sortOrder));
         }
 
         // GET: Clientes/Details/5
