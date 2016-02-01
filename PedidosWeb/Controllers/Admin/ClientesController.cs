@@ -56,12 +56,14 @@ namespace PedidosWeb.Controllers
                 ativoFiltro = ativoFiltroAtual;
             }
 
+            
+
             ViewBag.FiltroAtual = filtro;
             ViewBag.TipoTitularAtual = tiposTitularFiltro;
 
             ClienteBll clientebll = new ClienteBll();
 
-            return View("~/Views/Admin/Clientes/Index.cshtml", clientebll.ListaClientesPaginacao(page, filtro, tiposTitularFiltro, sortOrder));
+            return View("~/Views/Admin/Clientes/Index.cshtml", clientebll.ListaClientesPaginacao(page, filtro, tiposTitularFiltro, sortOrder, ativoFiltro));
         }
 
         // GET: Clientes/Details/5

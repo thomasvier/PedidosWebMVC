@@ -13,6 +13,8 @@ namespace PedidosWeb.Models.Admin
     public class Cliente
     {
         public int ID { get; set; }
+                
+        public int CodigoInterno { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(Resources.Validations), ErrorMessageResourceName = "CampoObrigatorio")]
         [Display(Name="Razão Social")]

@@ -18,7 +18,7 @@ namespace PedidosWeb.BLL.Admin
             db = new Contexto();
         }
 
-        public IPagedList<Cliente> ListaClientesPaginacao(int? page, string filtro, string tipoTitularFiltro, string sortOrder, string ativo)
+        public IPagedList<Cliente> ListaClientesPaginacao(int? page, string filtro, string tipoTitularFiltro, string sortOrder, string ativoFiltro)
         {
             var clientes = from c in db.Clientes
                            select c;
@@ -34,6 +34,14 @@ namespace PedidosWeb.BLL.Admin
             {
                 TipoTitular tipoTitular = (TipoTitular)tipo;
                 clientes = clientes.Where(x => x.Tipo == tipoTitular);
+            }
+
+            int ativo = int.TryParse(ativoFiltro, out ativo) ? ativo : 2;
+
+            if(ativo < 2)
+            {
+                bool situacao = bool.Parse(ativo.ToString());
+                clientes = clientes.Where(x => x.Ativo == situacao);
             }
 
             switch (sortOrder)
