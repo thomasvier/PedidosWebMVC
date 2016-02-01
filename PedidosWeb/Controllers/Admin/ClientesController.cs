@@ -10,6 +10,7 @@ using PedidosWeb.DAL;
 using PedidosWeb.Models.Admin;
 using PedidosWeb.BLL.Admin;
 using PagedList;
+using PedidosWeb.Models;
 
 namespace PedidosWeb.Controllers
 {
@@ -23,11 +24,14 @@ namespace PedidosWeb.Controllers
                                     string tiposTitularFiltro, 
                                     string tipoTitularAtual,
                                     string ativoFiltro,
-                                    string ativoFiltroAtual)
+                                    string ativoFiltroAtual,
+                                    string codigoInternoFiltro,
+                                    string codigoInternoFiltroAtual)
         {
             ViewBag.CurrentSort = sortOrder;
             ViewBag.RazaoSocialSort = string.IsNullOrEmpty(sortOrder) ? "razaosocial_desc" : "";
             ViewBag.NomeFantasiaSort = sortOrder == "NomeFantasia" ? "nomefantasia_desc" : "NomeFantasia";
+            ViewBag.CodigoInternoSort = sortOrder == "CodigoInterno" ? "codigointerno_desc" : "CodigoInterno";
 
             if (filtro != null)
             {
@@ -55,15 +59,22 @@ namespace PedidosWeb.Controllers
             {
                 ativoFiltro = ativoFiltroAtual;
             }
-
             
+            if(codigoInternoFiltro != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                codigoInternoFiltro = codigoInternoFiltroAtual;
+            }            
 
             ViewBag.FiltroAtual = filtro;
             ViewBag.TipoTitularAtual = tiposTitularFiltro;
 
             ClienteBll clientebll = new ClienteBll();
 
-            return View("~/Views/Admin/Clientes/Index.cshtml", clientebll.ListaClientesPaginacao(page, filtro, tiposTitularFiltro, sortOrder, ativoFiltro));
+            return View("~/Views/Admin/Clientes/Index.cshtml", clientebll.ListaClientesPaginacao(page, filtro, tiposTitularFiltro, sortOrder, ativoFiltro, codigoInternoFiltro));
         }
 
         // GET: Clientes/Details/5
@@ -94,16 +105,30 @@ namespace PedidosWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,RazaoSocial,NomeFantasia,CPFCNPJ,InscricaoEstadual,Telefone,Celular,Email,Endereco,Cidade,Bairro,Estado,Numero,Cep,Complemento,Ativo,Tipo")] Cliente cliente)
+        public ActionResult Create([Bind(Include = "ID,CodigoInterno,RazaoSocial,NomeFantasia,CPFCNPJ,InscricaoEstadual,Telefone,Celular,Email,Endereco,Cidade,Bairro,Estado,Numero,Cep,Complemento,Ativo,Tipo")] Cliente cliente)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Clientes.Add(cliente);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ClienteBll.VericarCodigoExistente(cliente, TipoOperacao.Create))
+                {
+                    return View("~/Views/Admin/Clientes/Create.cshtml", cliente).ComMensagem(string.Format(Resources.Validations.ClienteExistente, cliente.CodigoInterno), TipoMensagem.Aviso);
+                }
+                else
+                {
+                    if (ModelState.IsValid)
+                    {
+                        db.Clientes.Add(cliente);
+                        db.SaveChanges();
+                        return RedirectToAction("Index").ComMensagem(Resources.Geral.ItemSalvoSucesso, TipoMensagem.Sucesso);
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                return View("~/Views/Admin/Clientes/Create.cshtml", cliente).ComMensagem(string.Format(Resources.Geral.ContateAdminsitrador, ex.Message), TipoMensagem.Erro);
             }
 
-            return View(cliente);
+            return View("~/Views/Admin/Clientes/Create.cshtml", cliente);
         }
 
         // GET: Clientes/Edit/5
@@ -126,15 +151,30 @@ namespace PedidosWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,RazaoSocial,NomeFantasia,CPFCNPJ,InscricaoEstadual,Telefone,Celular,Email,Endereco,Cidade,Bairro,Estado,Numero,Cep,Complemento,Ativo,Tipo")] Cliente cliente)
+        public ActionResult Edit([Bind(Include = "ID,CodigoInterno,RazaoSocial,NomeFantasia,CPFCNPJ,InscricaoEstadual,Telefone,Celular,Email,Endereco,Cidade,Bairro,Estado,Numero,Cep,Complemento,Ativo,Tipo")] Cliente cliente)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(cliente).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ClienteBll.VericarCodigoExistente(cliente, TipoOperacao.Update))
+                {
+                    return View("~/Views/Admin/Clientes/Edit.cshtml", cliente).ComMensagem(string.Format(Resources.Validations.ClienteExistente, cliente.CodigoInterno), TipoMensagem.Aviso);
+                }
+                else
+                {
+                    if (ModelState.IsValid)
+                    {
+                        db.Entry(cliente).State = EntityState.Modified;
+                        db.SaveChanges();
+                        return RedirectToAction("Index").ComMensagem(Resources.Geral.ItemAlteradoSucesso, TipoMensagem.Sucesso);
+                    }
+                }
             }
-            return View(cliente);
+            catch(Exception ex)
+            {
+                return View("~/Views/Admin/Clientes/Edit.cshtml", cliente).ComMensagem(string.Format(Resources.Geral.ContateAdminsitrador, ex.Message), TipoMensagem.Erro);
+            }
+            
+            return View("~/Views/Admin/Clientes/Edit.cshtml", cliente);
         }
 
         protected override void Dispose(bool disposing)

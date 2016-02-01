@@ -7,7 +7,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body>
+<body>    
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -26,8 +26,9 @@
                 </ul>
             </div>
         </div>
-    </div>
-    <div class="container body-content">
+    </div>        
+    <div class="container body-content">                
+        @{Html.RenderPartial("_Mensagem");}
         @RenderBody()
         <hr />
         <footer>

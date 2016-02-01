@@ -23,6 +23,14 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.CodigoInterno, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.CodigoInterno, new { htmlAttributes = new { @class = "form-control input-sm" } })
+                @Html.ValidationMessageFor(model => model.CodigoInterno, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
         <div class="row">            
             <div class="col-md-4">
                 @Html.LabelFor(model => model.RazaoSocial, htmlAttributes: new { @class = "control-label" })

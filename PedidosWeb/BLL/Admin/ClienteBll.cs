@@ -6,6 +6,7 @@ using System.Data.Entity;
 using PedidosWeb.DAL;
 using PedidosWeb.Models.Admin;
 using PagedList;
+using PedidosWeb.Models;
 
 namespace PedidosWeb.BLL.Admin
 {
@@ -18,17 +19,20 @@ namespace PedidosWeb.BLL.Admin
             db = new Contexto();
         }
 
-        public IPagedList<Cliente> ListaClientesPaginacao(int? page, string filtro, string tipoTitularFiltro, string sortOrder, string ativoFiltro)
+        public IPagedList<Cliente> ListaClientesPaginacao(int? page, string filtro, 
+                                                            string tipoTitularFiltro, string sortOrder, 
+                                                            string ativoFiltro, string codigoInternoFiltro)
         {
+            int ativo = int.TryParse(ativoFiltro, out ativo) ? ativo : 2;
+            int tipo = int.TryParse(tipoTitularFiltro, out tipo) ? tipo : 2;
+
             var clientes = from c in db.Clientes
                            select c;
 
             if (!String.IsNullOrEmpty(filtro))
             {
                 clientes = clientes.Where(s => s.RazaoSocial.Contains(filtro));
-            }
-
-            int tipo = int.TryParse(tipoTitularFiltro, out tipo) ? tipo : 2;
+            }            
 
             if(tipo < 2)
             {
@@ -36,12 +40,15 @@ namespace PedidosWeb.BLL.Admin
                 clientes = clientes.Where(x => x.Tipo == tipoTitular);
             }
 
-            int ativo = int.TryParse(ativoFiltro, out ativo) ? ativo : 2;
-
             if(ativo < 2)
             {
-                bool situacao = bool.Parse(ativo.ToString());
+                bool situacao = ativo.Equals(0) ? false : true;
                 clientes = clientes.Where(x => x.Ativo == situacao);
+            }
+
+            if (!string.IsNullOrEmpty(codigoInternoFiltro))
+            {
+                clientes = clientes.Where(x => x.CodigoInterno.Equals(codigoInternoFiltro));
             }
 
             switch (sortOrder)
@@ -55,6 +62,12 @@ namespace PedidosWeb.BLL.Admin
                 case "nomefantasia_desc":
                     clientes = clientes.OrderByDescending(s => s.NomeFantasia);
                     break;
+                case "CodigoInterno":
+                    clientes = clientes.OrderBy(s => s.CodigoInterno);
+                    break;
+                case "codigointerno_desc":
+                    clientes = clientes.OrderByDescending(s => s.CodigoInterno);
+                    break;
                 default:
                     clientes = clientes.OrderBy(s => s.RazaoSocial);
                     break;
@@ -64,6 +77,39 @@ namespace PedidosWeb.BLL.Admin
             int pageNumber = (page ?? 1);
 
             return clientes.ToPagedList(pageNumber, pageSize);
+        }
+        
+        public static bool VericarCodigoExistente(Cliente cliente, TipoOperacao tipoOperacao)
+        {
+            Contexto db = new Contexto();
+
+            List<Cliente> clientes = (from c in db.Clientes
+                          where c.CodigoInterno.Equals(cliente.CodigoInterno)
+                          select c).ToList();
+
+            if (!string.IsNullOrEmpty(cliente.CodigoInterno))
+            {
+                if (tipoOperacao.Equals(TipoOperacao.Create))
+                {
+                    if (clientes.Count > 0)
+                        return true;
+                }
+                else if (tipoOperacao.Equals(TipoOperacao.Update))
+                {
+                    if (clientes.Count > 0)
+                    {
+                        foreach (Cliente cli in clientes)
+                        {
+                            if (cli.CodigoInterno.Equals(cliente.CodigoInterno) && cli.ID != cliente.ID)
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+
+            return false;
         }
     }
 }

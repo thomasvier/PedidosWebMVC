@@ -22,14 +22,14 @@ namespace PedidosWeb.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Validations {
+    internal class Geral {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Validations() {
+        internal Geral() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace PedidosWeb.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PedidosWeb.Resources.Validations", typeof(Validations).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PedidosWeb.Resources.Geral", typeof(Geral).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,29 +61,38 @@ namespace PedidosWeb.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Campo obrigatório..
+        ///   Looks up a localized string similar to Ocorreu um erro durante o processo. Contate o administrador. Erro: {0}.
         /// </summary>
-        internal static string CampoObrigatorio {
+        internal static string ContateAdminsitrador {
             get {
-                return ResourceManager.GetString("CampoObrigatorio", resourceCulture);
+                return ResourceManager.GetString("ContateAdminsitrador", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Já existe um cliente cadastrado com o código interno: {0}.
+        ///   Looks up a localized string similar to Item alterado com sucesso..
         /// </summary>
-        internal static string ClienteExistente {
+        internal static string ItemAlteradoSucesso {
             get {
-                return ResourceManager.GetString("ClienteExistente", resourceCulture);
+                return ResourceManager.GetString("ItemAlteradoSucesso", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Insira um e-mail válido..
+        ///   Looks up a localized string similar to O item foi salvo com sucesso..
         /// </summary>
-        internal static string Email {
+        internal static string ItemSalvoSucesso {
             get {
-                return ResourceManager.GetString("Email", resourceCulture);
+                return ResourceManager.GetString("ItemSalvoSucesso", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string String1 {
+            get {
+                return ResourceManager.GetString("String1", resourceCulture);
             }
         }
     }

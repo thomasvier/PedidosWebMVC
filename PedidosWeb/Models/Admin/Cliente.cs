@@ -13,8 +13,9 @@ namespace PedidosWeb.Models.Admin
     public class Cliente
     {
         public int ID { get; set; }
-                
-        public int CodigoInterno { get; set; }
+
+        [Display(Name = "Código Interno")]
+        public string CodigoInterno { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(Resources.Validations), ErrorMessageResourceName = "CampoObrigatorio")]
         [Display(Name="Razão Social")]

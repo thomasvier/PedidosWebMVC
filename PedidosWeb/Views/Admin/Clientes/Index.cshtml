@@ -20,6 +20,12 @@
         {
             <div class="row">
                 <div class="col-md-4">
+                    <label for="codigoInternoFiltro">Código Interno</label>
+                    @Html.TextBox("codigoInternoFiltro", ViewBag.CodigoInternoFiltroAtual as string, htmlAttributes: new { @class = "form-control", @placeholder = "Código Interno" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
                     <label for="filtro">Razão Social/Nome Fantasia</label>
                     @Html.TextBox("filtro", ViewBag.FiltroAtual as String, htmlAttributes: new { @class = "form-control", @placeholder = "Razão Social/Nome Fantasia" })
                 </div>
@@ -53,6 +59,9 @@
     <table class="table table-striped">
         <tr>
             <th>
+                @Html.ActionLink("Código Interno", "Index", new { sortOrder = ViewBag.CodigoInternoSort, filtroAtual = @ViewBag.FiltroAtual })
+            </th>
+            <th>
                 @Html.ActionLink("Razão Social", "Index", new { sortOrder = ViewBag.RazaoSocialSort, filtroAtual = @ViewBag.FiltroAtual })
             </th>
             <th>
@@ -79,6 +88,9 @@
         @foreach (var item in Model)
             {
             <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CodigoInterno)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.RazaoSocial)
                 </td>
@@ -112,7 +124,8 @@
 Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
 
 @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, filtroAtual = ViewBag.FiltroAtual,
-    tipoTitularAtual = ViewBag.TipoTitularAtual, ativoFiltroAtual = ViewBag.AtivoFiltroAtual }), PagedListRenderOptions.Classic)
+    tipoTitularAtual = ViewBag.TipoTitularAtual, ativoFiltroAtual = ViewBag.AtivoFiltroAtual,
+    codigoInternoFiltroAtual = ViewBag.CodigoInternoFiltroAtual }), PagedListRenderOptions.Classic)
 
 @section Scripts { 
     @Scripts.Render("~/Scripts/Views/Admin/Index.js")

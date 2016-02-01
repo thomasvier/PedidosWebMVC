@@ -117,13 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CampoObrigatorio" xml:space="preserve">
-    <value>Campo obrigatório.</value>
+  <data name="Target" xml:space="preserve">
+    <value>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</value>
   </data>
-  <data name="ClienteExistente" xml:space="preserve">
-    <value>Já existe um cliente cadastrado com o código interno: {0}</value>
-  </data>
-  <data name="Email" xml:space="preserve">
-    <value>Insira um e-mail válido.</value>
+  <data name="DefaultSchema" xml:space="preserve">
+    <value>dbo</value>
   </data>
 </root>

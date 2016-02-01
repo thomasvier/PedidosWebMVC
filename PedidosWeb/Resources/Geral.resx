@@ -117,13 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CampoObrigatorio" xml:space="preserve">
-    <value>Campo obrigatório.</value>
+  <data name="ContateAdminsitrador" xml:space="preserve">
+    <value>Ocorreu um erro durante o processo. Contate o administrador. Erro: {0}</value>
   </data>
-  <data name="ClienteExistente" xml:space="preserve">
-    <value>Já existe um cliente cadastrado com o código interno: {0}</value>
+  <data name="ItemAlteradoSucesso" xml:space="preserve">
+    <value>Item alterado com sucesso.</value>
   </data>
-  <data name="Email" xml:space="preserve">
-    <value>Insira um e-mail válido.</value>
+  <data name="ItemSalvoSucesso" xml:space="preserve">
+    <value>O item foi salvo com sucesso.</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value />
   </data>
 </root>
