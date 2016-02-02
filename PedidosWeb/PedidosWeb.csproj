@@ -125,6 +125,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="BLL\Admin\ClienteBll.cs" />
+    <Compile Include="BLL\Admin\UsuarioBll.cs" />
     <Compile Include="Controllers\Admin\ClientesController.cs" />
     <Compile Include="Controllers\AutenticacaoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -172,6 +173,10 @@
     <Compile Include="Migrations\201602011529044_sdss.cs" />
     <Compile Include="Migrations\201602011529044_sdss.Designer.cs">
       <DependentUpon>201602011529044_sdss.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602021623107_init.cs" />
+    <Compile Include="Migrations\201602021623107_init.Designer.cs">
+      <DependentUpon>201602021623107_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ActionResultExtensions.cs" />
@@ -302,6 +307,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602011529044_sdss.resx">
       <DependentUpon>201602011529044_sdss.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602021623107_init.resx">
+      <DependentUpon>201602021623107_init.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Geral.resx">
       <Generator>ResXFileCodeGenerator</Generator>

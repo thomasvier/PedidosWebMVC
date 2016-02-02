@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PedidosWeb.BLL.Admin;
+using PedidosWeb.Models;
+using PedidosWeb.Models.Admin;
+using System.Web.Security;
 
 namespace PedidosWeb.Controllers
 {
@@ -16,7 +20,51 @@ namespace PedidosWeb.Controllers
 
         public ActionResult LogOn()
         {
-            return View();
+            if (this.HttpContext.User.Identity != null && User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home").ComMensagem("Você não tem permissão para acesso.", TipoMensagem.Info);
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+        [HttpPost]
+        public ActionResult LogOn(string login, string senha, string returnUrl)
+        {
+            try
+            {
+
+                    UsuarioBll usuarioBll = new UsuarioBll();
+
+                    Usuario usuario = usuarioBll.LogOn(login, senha);
+
+                    if (usuario != null)
+                    {
+                        FormsAuthentication.SetAuthCookie(login, false);
+
+                        if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
+                            && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
+                        {
+                            return Redirect(returnUrl);
+                        }
+                        else
+                        {
+                            return RedirectToAction("Index", "Home");
+                        }
+                    }
+                    else
+                    {
+                        return View().ComMensagem(Resources.Geral.UsuarioSenhaInvalidos, TipoMensagem.Aviso);
+                    }
+
+                return View();
+            }
+            catch(Exception ex)
+            {
+                return View().ComMensagem(string.Format(Resources.Geral.ContateAdminsitrador, ex.Message), TipoMensagem.Erro);
+            }
         }
     }
 }

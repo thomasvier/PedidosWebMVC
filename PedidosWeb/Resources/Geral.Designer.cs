@@ -95,5 +95,14 @@ namespace PedidosWeb.Resources {
                 return ResourceManager.GetString("String1", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Usuário ou senha inválidos..
+        /// </summary>
+        internal static string UsuarioSenhaInvalidos {
+            get {
+                return ResourceManager.GetString("UsuarioSenhaInvalidos", resourceCulture);
+            }
+        }
     }
 }

@@ -30,6 +30,8 @@ namespace PedidosWeb.Models.Admin
 
         public bool Ativo { get; set; }
 
+        public string Role { get; set; }
+
         public TipoUsuario Tipo { get; set; }
 
         public Usuario()
