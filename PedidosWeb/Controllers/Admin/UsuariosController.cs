@@ -6,11 +6,13 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using PedidosWeb.Models.Admin;
 using PedidosWeb.DAL;
+using PedidosWeb.Models.Admin;
+using PedidosWeb.Models;
 
-namespace PedidosWeb.Controllers
+namespace PedidosWeb.Controllers.Admin
 {
+    [Authorize(Roles="Admin")]
     public class UsuariosController : Controller
     {
         private Contexto db = new Contexto();
@@ -18,7 +20,18 @@ namespace PedidosWeb.Controllers
         // GET: Usuarios
         public ActionResult Index()
         {
-            return View(db.Usuarios.ToList());
+            List<Usuario> usuarios;
+
+            try
+            {
+                usuarios = db.Usuarios.ToList();
+            }
+            catch(Exception ex)
+            {
+                return View().ComMensagem("", TipoMensagem.Erro);
+            }
+
+            return View("~/Views/Admin/Clientes/Create.cshtml", usuarios);
         }
 
         // GET: Usuarios/Details/5
@@ -47,7 +60,7 @@ namespace PedidosWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Nome,Login,Senha,Email,Ativo,Tipo")] Usuario usuario)
+        public ActionResult Create([Bind(Include = "ID,Nome,Login,Senha,Email,Ativo,Role,Tipo")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +92,7 @@ namespace PedidosWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Nome,Login,Senha,Email,Ativo,Tipo")] Usuario usuario)
+        public ActionResult Edit([Bind(Include = "ID,Nome,Login,Senha,Email,Ativo,Role,Tipo")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {

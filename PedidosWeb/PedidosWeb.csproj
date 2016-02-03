@@ -127,9 +127,9 @@
     <Compile Include="BLL\Admin\ClienteBll.cs" />
     <Compile Include="BLL\Admin\UsuarioBll.cs" />
     <Compile Include="Controllers\Admin\ClientesController.cs" />
+    <Compile Include="Controllers\Admin\UsuariosController.cs" />
     <Compile Include="Controllers\AutenticacaoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="DAL\Contexto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -255,11 +255,10 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Usuarios\Create.cshtml" />
-    <Content Include="Views\Usuarios\Delete.cshtml" />
-    <Content Include="Views\Usuarios\Details.cshtml" />
-    <Content Include="Views\Usuarios\Edit.cshtml" />
-    <Content Include="Views\Usuarios\Index.cshtml" />
+    <Content Include="Views\Admin\Usuarios\Create.cshtml" />
+    <Content Include="Views\Admin\Usuarios\Details.cshtml" />
+    <Content Include="Views\Admin\Usuarios\Edit.cshtml" />
+    <Content Include="Views\Admin\Usuarios\Index.cshtml" />
     <Content Include="Views\Admin\Clientes\Create.cshtml" />
     <Content Include="Views\Admin\Clientes\Edit.cshtml" />
     <Content Include="Views\Admin\Clientes\Index.cshtml" />
