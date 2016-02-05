@@ -10,6 +10,7 @@ using PedidosWeb.DAL;
 using PedidosWeb.Models.Admin;
 using PedidosWeb.Models;
 
+
 namespace PedidosWeb.Controllers.Admin
 {
     [Authorize(Roles="Admin")]
@@ -28,7 +29,7 @@ namespace PedidosWeb.Controllers.Admin
             }
             catch(Exception ex)
             {
-                return View().ComMensagem("", TipoMensagem.Erro);
+                return View().ComMensagem(string.Format(Resources.Geral.ContateAdminsitrador, ex.Message), TipoMensagem.Erro);
             }
 
             return View("~/Views/Admin/Clientes/Create.cshtml", usuarios);
@@ -62,13 +63,21 @@ namespace PedidosWeb.Controllers.Admin
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Nome,Login,Senha,Email,Ativo,Role,Tipo")] Usuario usuario)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Usuarios.Add(usuario);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
 
+                if (ModelState.IsValid)
+                {
+                    db.Usuarios.Add(usuario);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch(Exception ex)
+            {
+                return View(usuario).ComMensagem(string.Format(Resources.Geral.ContateAdminsitrador, ex.Message), TipoMensagem.Erro);
+            }
+            
             return View(usuario);
         }
 
