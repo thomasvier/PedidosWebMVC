@@ -18,11 +18,21 @@
                 </button>
                 @*@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
             </div>
-            <div class="navbar-collapse collapse">
+            <div class="navbar-collapse collapse">                
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            Cadastro
+                            <span class="caret"></span>
+                            <ul id="menu-admin" class="dropdown-menu">
+                                <li>
+                                    @Html.ActionLink("Clientes", "Index", "Clientes")
+                                    @Html.ActionLink("Produtos", "Index", "Produtos")
+                                    @Html.ActionLink("Usuarios", "Index", "Usuarios")
+                                </li>
+                            </ul>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -39,6 +49,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/Scripts/jquery.mask.js")  
+    @Scripts.Render("~/Scripts/jquery.maskMoney.min.js")  
     @RenderSection("scripts", required: false)
 </body>
 </html>

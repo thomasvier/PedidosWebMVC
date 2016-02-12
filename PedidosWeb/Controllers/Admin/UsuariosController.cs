@@ -32,7 +32,7 @@ namespace PedidosWeb.Controllers.Admin
                 return View().ComMensagem(string.Format(Resources.Geral.ContateAdminsitrador, ex.Message), TipoMensagem.Erro);
             }
 
-            return View("~/Views/Admin/Clientes/Create.cshtml", usuarios);
+            return View("~/Views/Admin/Clientes/Index.cshtml", usuarios);
         }
 
         // GET: Usuarios/Details/5

@@ -1,0 +1,111 @@
+﻿@model IPagedList<PedidosWeb.Models.Admin.Produto>
+@using PagedList;
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Produtos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Produtos</h2>
+
+<p>
+    <button type="button" title="Novo" name="btnNovo" id="btnNovo" class="btn btn-primary" onclick="location.href='@Url.Action("Create", "Produtos")'">Novo</button>
+</p>
+<div class="panel panel-default">
+    <div class="panel-heading">Filtro</div>
+    <div class="panel-body">
+
+        @using (Html.BeginForm("Index", "Produtos", FormMethod.Get))
+        {
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="codigoInternoFiltro">Código Interno</label>
+                    @Html.TextBox("codigoInternoFiltro", ViewBag.CodigoInternoFiltroAtual as string, htmlAttributes: new { @class = "form-control", @placeholder = "Código Interno" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="filtro">Descrição</label>
+                    @Html.TextBox("filtro", ViewBag.FiltroAtual as String, htmlAttributes: new { @class = "form-control", @placeholder = "Descrição" })
+                </div>
+                <div class="col-md-4">
+                    <label for="selAtivoFiltro">Situação</label>
+                    <select id="selAtivoFiltro" class="form-control">
+                        <option value="2">Todos</option>
+                        <option value="1">Ativos</option>
+                        <option value="0">Inativos</option>
+                    </select>
+                    @Html.Hidden("ativoFiltro", ViewBag.AtivoFiltroAtual as string, htmlAttributes: new { @value = @ViewBag.AtivoFiltroAtual })
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-4">
+                    <input type="submit" id="btnPesquisar" class="btn btn-primary" value="Pesquisar">
+                </div>
+            </div>
+        }
+    </div>
+    <table class="table table-striped">
+        <tr>
+            <th>
+                @Html.ActionLink("Código Interno", "Index", new { sortOrder = ViewBag.CodigoInternoSort, filtroAtual = @ViewBag.FiltroAtual })
+            </th>
+            <th>
+                @Html.ActionLink("Descrição", "Index", new { sortOrder = ViewBag.DescricaoSort, filtroAtual = @ViewBag.FiltroAtual })
+            </th>
+            <th>
+                Preço unitário
+            </th>
+            <th>
+                Preço quantidade
+            </th>
+            <th>
+                Ativo
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CodigoInterno)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descricao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PrecoUnitario)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PrecoQuantidade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ativo)
+                </td>
+                <td>
+                    <button type="button" class="btn btn-primary edit" title="Editar" onclick="location.href='@Url.Action("Edit", "Produtos", new { item.ID })'"><i class="glyphicon glyphicon-edit"></i></button>
+                    <button type="button" class="btn btn-default print" title="Imprimir" onclick="location.href='@Url.Action("Edit", "Produtos", new { item.ID })'"><i class="glyphicon glyphicon-print"></i></button>
+                </td>
+            </tr>
+        }
+    </table>
+    </div>
+
+<br />
+Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new
+{
+    page,
+    sortOrder = ViewBag.CurrentSort,
+    filtroAtual = ViewBag.FiltroAtual,
+    ativoFiltroAtual = ViewBag.AtivoFiltroAtual,
+    codigoInternoFiltroAtual = ViewBag.CodigoInternoFiltroAtual
+}), PagedListRenderOptions.Classic)
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/Views/Admin/Produtos/Index.js")
+}

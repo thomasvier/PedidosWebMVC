@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
     MascaraCampos();
-    AplicaFuncoes()
+    AplicaFuncoes();
 })
 
 //Método que mascara os campos do form
