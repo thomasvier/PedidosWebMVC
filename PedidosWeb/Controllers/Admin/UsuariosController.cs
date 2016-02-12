@@ -9,67 +9,30 @@ using System.Web.Mvc;
 using PedidosWeb.DAL;
 using PedidosWeb.Models.Admin;
 using PedidosWeb.Models;
-using PedidosWeb.BLL.Admin;
+
 
 namespace PedidosWeb.Controllers.Admin
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class UsuariosController : Controller
     {
         private Contexto db = new Contexto();
 
         // GET: Usuarios
-        public ActionResult Index(string sortOrder, string filtroAtual,
-                                    string filtro, int? page,
-                                    string tipoUsuarioFiltro,
-                                    string tipoUsuarioAtual,
-                                    string ativoFiltro,
-                                    string ativoFiltroAtual,
-                                    string idFiltro,
-                                    string idFiltroAtual)
+        public ActionResult Index()
         {
-            ViewBag.CurrentSort = sortOrder;
-            ViewBag.LoginSort = string.IsNullOrEmpty(sortOrder) ? "login_desc" : "";
-            ViewBag.NomeSort = sortOrder == "Nome" ? "nome_desc" : "Nome";
-            ViewBag.IDSort = sortOrder == "ID" ? "id_desc" : "ID";
+            List<Usuario> usuarios;
 
-            if (filtro != null)
+            try
             {
-                page = 1;
+                usuarios = db.Usuarios.ToList();
             }
-            else
+            catch (Exception ex)
             {
-                filtro = filtroAtual;
+                return View().ComMensagem(string.Format(Resources.Geral.ContateAdminsitrador, ex.Message), TipoMensagem.Erro);
             }
 
-            if (tipoUsuarioFiltro != null)
-            {
-                page = 1;
-            }
-            else
-            {
-                tipoUsuarioFiltro = tipoUsuarioAtual;
-            }
-
-            if (ativoFiltro != null)
-            {
-                page = 1;
-            }
-            else
-        {
-                ativoFiltro = ativoFiltroAtual;
-            }
-
-            if (idFiltro != null)
-            {
-                page = 1;
-            }
-            else
-            {
-                idFiltro = idFiltroAtual;
-            }
-
-            return View("~/Views/Admin/Clientes/Create.cshtml", usuarios);
+            return View("~/Views/Admin/Clientes/Index.cshtml", usuarios);
         }
 
         // GET: Usuarios/Details/5
@@ -110,11 +73,11 @@ namespace PedidosWeb.Controllers.Admin
                     return RedirectToAction("Index");
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return View(usuario).ComMensagem(string.Format(Resources.Geral.ContateAdminsitrador, ex.Message), TipoMensagem.Erro);
             }
-            
+
             return View(usuario);
         }
 
