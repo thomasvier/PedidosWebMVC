@@ -1,0 +1,67 @@
+﻿@model PedidosWeb.Models.Admin.Produto
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Produto</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CodigoInterno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CodigoInterno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descricao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PrecoUnitario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrecoUnitario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PrecoQuantidade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrecoQuantidade)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QuantidadePreco)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuantidadePreco)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ativo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ativo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

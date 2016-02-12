@@ -8,30 +8,26 @@ using System.Web;
 using System.Web.Mvc;
 using PedidosWeb.DAL;
 using PedidosWeb.Models.Admin;
-using PedidosWeb.Models;
+using PagedList;
 using PedidosWeb.BLL.Admin;
 
 namespace PedidosWeb.Controllers.Admin
 {
-    [Authorize]
-    public class UsuariosController : Controller
+    public class ProdutosController : Controller
     {
         private Contexto db = new Contexto();
 
-        // GET: Usuarios
+        // GET: Produtos
         public ActionResult Index(string sortOrder, string filtroAtual,
                                     string filtro, int? page,
-                                    string tipoUsuarioFiltro,
-                                    string tipoUsuarioAtual,
                                     string ativoFiltro,
                                     string ativoFiltroAtual,
-                                    string idFiltro,
-                                    string idFiltroAtual)
+                                    string codigoInternoFiltro,
+                                    string codigoInternoFiltroAtual)
         {
             ViewBag.CurrentSort = sortOrder;
-            ViewBag.LoginSort = string.IsNullOrEmpty(sortOrder) ? "login_desc" : "";
-            ViewBag.NomeSort = sortOrder == "Nome" ? "nome_desc" : "Nome";
-            ViewBag.IDSort = sortOrder == "ID" ? "id_desc" : "ID";
+            ViewBag.DescricaoSort = string.IsNullOrEmpty(sortOrder) ? "descricao_desc" : "";
+            ViewBag.CodigoInternoSort = sortOrder == "CodigoInterno" ? "codigointerno_desc" : "CodigoInterno";
 
             if (filtro != null)
             {
@@ -42,135 +38,124 @@ namespace PedidosWeb.Controllers.Admin
                 filtro = filtroAtual;
             }
 
-            if (tipoUsuarioFiltro != null)
-            {
-                page = 1;
-            }
-            else
-            {
-                tipoUsuarioFiltro = tipoUsuarioAtual;
-            }
-
             if (ativoFiltro != null)
             {
                 page = 1;
             }
             else
-        {
+            {
                 ativoFiltro = ativoFiltroAtual;
             }
 
-            if (idFiltro != null)
+            if (codigoInternoFiltro != null)
             {
                 page = 1;
             }
             else
             {
-                idFiltro = idFiltroAtual;
+                codigoInternoFiltro = codigoInternoFiltroAtual;
             }
 
-            return View("~/Views/Admin/Clientes/Create.cshtml", usuarios);
+            ViewBag.FiltroAtual = filtro;
+
+            ProdutoBll produtobll = new ProdutoBll();
+
+            return View("~/Views/Admin/Produtos/Index.cshtml", produtobll.ListarProdutosPaginacao(page, filtro, sortOrder, ativoFiltro, codigoInternoFiltro));            
         }
 
-        // GET: Usuarios/Details/5
+        // GET: Produtos/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Usuario usuario = db.Usuarios.Find(id);
-            if (usuario == null)
+            Produto produto = db.Produtos.Find(id);
+            if (produto == null)
             {
                 return HttpNotFound();
             }
-            return View(usuario);
+            return View("~/Views/Admin/Produtos/Details.cshtml", produto);
         }
 
-        // GET: Usuarios/Create
+        // GET: Produtos/Create
         public ActionResult Create()
         {
-            return View();
+            Produto produto = new Produto();
+
+            return View("~/Views/Admin/Produtos/Create.cshtml", produto);
         }
 
-        // POST: Usuarios/Create
+        // POST: Produtos/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Nome,Login,Senha,Email,Ativo,Role,Tipo")] Usuario usuario)
+        public ActionResult Create([Bind(Include = "ID,CodigoInterno,Descricao,PrecoUnitario,PrecoQuantidade,QuantidadePreco,Ativo")] Produto produto)
         {
-            try
+            if (ModelState.IsValid)
             {
+                db.Produtos.Add(produto);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
 
-                if (ModelState.IsValid)
-                {
-                    db.Usuarios.Add(usuario);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
-            }
-            catch(Exception ex)
-            {
-                return View(usuario).ComMensagem(string.Format(Resources.Geral.ContateAdminsitrador, ex.Message), TipoMensagem.Erro);
-            }
-            
-            return View(usuario);
+            return View(produto);
         }
 
-        // GET: Usuarios/Edit/5
+        // GET: Produtos/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Usuario usuario = db.Usuarios.Find(id);
-            if (usuario == null)
+            Produto produto = db.Produtos.Find(id);
+            if (produto == null)
             {
                 return HttpNotFound();
             }
-            return View(usuario);
+            return View("~/Views/Admin/Produtos/Edit.cshtml", produto);
         }
 
-        // POST: Usuarios/Edit/5
+        // POST: Produtos/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Nome,Login,Senha,Email,Ativo,Role,Tipo")] Usuario usuario)
+        public ActionResult Edit([Bind(Include = "ID,CodigoInterno,Descricao,PrecoUnitario,PrecoQuantidade,QuantidadePreco,Ativo")] Produto produto)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(usuario).State = EntityState.Modified;
+                db.Entry(produto).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(usuario);
+            return View(produto);
         }
 
-        // GET: Usuarios/Delete/5
+        // GET: Produtos/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Usuario usuario = db.Usuarios.Find(id);
-            if (usuario == null)
+            Produto produto = db.Produtos.Find(id);
+            if (produto == null)
             {
                 return HttpNotFound();
             }
-            return View(usuario);
+            return View(produto);
         }
 
-        // POST: Usuarios/Delete/5
+        // POST: Produtos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Usuario usuario = db.Usuarios.Find(id);
-            db.Usuarios.Remove(usuario);
+            Produto produto = db.Produtos.Find(id);
+            db.Produtos.Remove(produto);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
