@@ -9,30 +9,72 @@ using System.Web.Mvc;
 using PedidosWeb.DAL;
 using PedidosWeb.Models.Admin;
 using PedidosWeb.Models;
-
+using PedidosWeb.BLL.Admin;
 
 namespace PedidosWeb.Controllers.Admin
 {
-    [Authorize(Roles="Admin")]
+    [Authorize]
     public class UsuariosController : Controller
     {
         private Contexto db = new Contexto();
 
         // GET: Usuarios
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string filtroAtual,
+                                    string filtro, int? page,
+                                    string tipoUsuarioFiltro,
+                                    string tipoUsuarioAtual,
+                                    string ativoFiltro,
+                                    string ativoFiltroAtual,
+                                    string idFiltro,
+                                    string idFiltroAtual)
         {
-            List<Usuario> usuarios;
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.LoginSort = string.IsNullOrEmpty(sortOrder) ? "login_desc" : "";
+            ViewBag.NomeSort = sortOrder == "Nome" ? "nome_desc" : "Nome";
+            ViewBag.IDSort = sortOrder == "ID" ? "id_desc" : "ID";
 
-            try
+            if (filtro != null)
             {
-                usuarios = db.Usuarios.ToList();
+                page = 1;
             }
-            catch(Exception ex)
+            else
             {
-                return View().ComMensagem(string.Format(Resources.Geral.ContateAdminsitrador, ex.Message), TipoMensagem.Erro);
+                filtro = filtroAtual;
             }
 
-            return View("~/Views/Admin/Clientes/Create.cshtml", usuarios);
+            if (tipoUsuarioFiltro != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                tipoUsuarioFiltro = tipoUsuarioAtual;
+            }
+
+            if (ativoFiltro != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                ativoFiltro = ativoFiltroAtual;
+            }
+
+            if (idFiltro != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                idFiltro = idFiltroAtual;
+            }
+
+            ViewBag.FiltroAtual = filtro;
+            ViewBag.TipoUsuarioAtual = tipoUsuarioFiltro;
+
+            UsuarioBll usuariobll = new UsuarioBll();
+
+            return View("~/Views/Admin/Usuarios/Create.cshtml", usuariobll.ListaUsuariosPaginacao(page, filtro, tipoUsuarioFiltro, sortOrder, ativoFiltro, idFiltroAtual));
         }
 
         // GET: Usuarios/Details/5

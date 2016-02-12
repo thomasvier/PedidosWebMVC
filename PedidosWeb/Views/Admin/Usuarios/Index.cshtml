@@ -1,70 +1,129 @@
-﻿@model IEnumerable<PedidosWeb.Models.Admin.Usuario>
+﻿@model IPagedList<PedidosWeb.Models.Admin.Usuario>
+@using PagedList;
+@using PagedList.Mvc;
 
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/_ViewStart.cshtml";
+    ViewBag.Title = "Usários";
 }
 
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <button type="button" title="Novo" name="btnNovo" id="btnNovo" class="btn btn-primary" onclick="location.href='@Url.Action("Create", "Usuarios")'">Novo</button>
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Nome)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Login)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Senha)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Ativo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Role)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Tipo)
-        </th>
-        <th></th>
-    </tr>
+<div class="panel panel-default">
+    <div class="panel-heading">Filtro</div>
+    <div class="panel-body">
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Login)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Senha)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ativo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Role)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Tipo)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+        @using (Html.BeginForm("Index", "Usuarios", FormMethod.Get))
+        {
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="codigoInternoFiltro">ID</label>
+                    @Html.TextBox("idFiltro", ViewBag.IDFiltroAtual as string, htmlAttributes: new { @class = "form-control", @placeholder = "ID" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="filtro">Nome</label>
+                    @Html.TextBox("filtro", ViewBag.FiltroAtual as String, htmlAttributes: new { @class = "form-control", @placeholder = "Nome" })
+                </div>
+                <div class="col-md-4">
+                    <label for="selTiposTitularFiltro">Tipo do usuário</label>
+                    <select id="selTiposTitularFiltro" class="form-control">
+                        <option value="999">Todos</option>
+                        <option value="0">Administrador</option>
+                        <option value="1">Representante</option>
+                        <option value="2">Cliente</option>
+                    </select>
+                    @Html.Hidden("tipoUsuarioFiltro", ViewBag.TipoUsuarioAtual as string, htmlAttributes: new { @value = @ViewBag.TipoUsuarioFiltro })
+                </div>
+                <div class="col-md-4">
+                    <label for="selAtivoFiltro">Situação</label>
+                    <select id="selAtivoFiltro" class="form-control">
+                        <option value="2">Todos</option>
+                        <option value="1">Ativos</option>
+                        <option value="0">Inativos</option>
+                    </select>
+                    @Html.Hidden("ativoFiltro", ViewBag.AtivoFiltroAtual as string, htmlAttributes: new { @value = @ViewBag.AtivoFiltroAtual })
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-4">
+                    <input type="submit" id="btnPesquisar" class="btn btn-primary" value="Pesquisar">
+                </div>
+            </div>
+        }
+    </div>
+    <table class="table table-striped">
+        <tr>
+            <th>
+                @Html.ActionLink("Código", "Index", new { sortOrder = ViewBag.IDSort, filtroAtual = @ViewBag.FiltroAtual })
+            </th>
+            <th>
+                @Html.ActionLink("Nome", "Index", new { sortOrder = ViewBag.NomeSort, filtroAtual = @ViewBag.FiltroAtual })
+            </th>
+            <th>
+                @Html.ActionLink("Login", "Index", new { sortOrder = ViewBag.LoginSort, filtroAtual = @ViewBag.FiltroAtual })
+            </th>
+            <th>
+                E-mail
+            </th>
+            <th>
+                Ativo
+            </th>
+            <th>
+                Tipo
+            </th>
+            <th></th>
+        </tr>
 
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Login)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ativo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Role)
+                </td>
+                <td>
+                    <button type="button" class="btn btn-primary edit" title="Editar" onclick="location.href='@Url.Action("Edit", "Clientes", new { item.ID })'"><i class="glyphicon glyphicon-edit"></i></button>
+                    <button type="button" class="btn btn-default print" title="Imprimir" onclick="location.href='@Url.Action("Edit", "Clientes", new { item.ID })'"><i class="glyphicon glyphicon-print"></i></button>
+                </td>
+            </tr>
+        }
+
+    </table>
+    </div>
+
+    <br />
+    Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index", new
+{
+    page,
+    sortOrder = ViewBag.CurrentSort,
+    filtroAtual = ViewBag.FiltroAtual,
+    tipoUsuarioAtual = ViewBag.TipoUsuarioAtual,
+    ativoFiltroAtual = ViewBag.AtivoFiltroAtual,
+    idFiltroAtual = ViewBag.IDFiltroAtual
+}), PagedListRenderOptions.Classic)
+
+    @section Scripts {
+        @Scripts.Render("~/Scripts/Views/Admin/Usuarios/Index.js")
+    }

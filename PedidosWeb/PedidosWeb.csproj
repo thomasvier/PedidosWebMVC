@@ -182,7 +182,7 @@
     <Compile Include="Models\ActionResultExtensions.cs" />
     <Compile Include="Models\Admin\Cliente.cs" />
     <Compile Include="Models\Admin\TipoTitular.cs" />
-    <Compile Include="Models\Admin\TipoUsuario.cs" />
+    <Compile Include="Models\TipoUsuario.cs" />
     <Compile Include="Models\Admin\Usuario.cs" />
     <Compile Include="Models\TempDataActionResult.cs" />
     <Compile Include="Models\TipoMensagem.cs" />
@@ -237,6 +237,7 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\Views\Admin\Cliente.js" />
     <Content Include="Scripts\Views\Admin\Index.js" />
+    <Content Include="Scripts\Views\Admin\Usuarios\Index.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -268,6 +269,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\Financeiro\" />
+    <Folder Include="Scripts\Views\Admin\Clientes\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
