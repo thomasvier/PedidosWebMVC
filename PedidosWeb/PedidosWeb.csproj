@@ -260,8 +260,13 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\Views\Admin\Cliente.js" />
-    <Content Include="Scripts\Views\Admin\Index.js" />
+    <Content Include="Scripts\Views\Admin\Clientes\Cliente.js" />
+    <Content Include="Scripts\Views\Admin\Clientes\Cliente.js" />
+    <Content Include="Scripts\Views\Admin\Clientes\Index.js" />
+    <Content Include="Scripts\Views\Admin\Clientes\Index.js" />
+    <Content Include="Scripts\Views\Admin\Produtos\Index.js" />
+    <Content Include="Scripts\Views\Admin\Produtos\Produto.js" />
+    <Content Include="Scripts\Views\Admin\Usuarios\Index.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -298,7 +303,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\Financeiro\" />
-    <Folder Include="Scripts\Views\Admin\Clientes\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
