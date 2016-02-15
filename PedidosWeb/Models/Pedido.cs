@@ -16,11 +16,11 @@ namespace PedidosWeb.Models
         }
 
         public int ID { get; set; }
-                
+                                
+        public int ClienteID { get; set; }
+
         [Display(Name="Código interno")]
         public string CodigoInterno { get; set; }
-
-        public int IDCliente { get; set; }
 
         [DisplayFormat(ApplyFormatInEditMode=true, DataFormatString="{0:dd/MM/yyyy}")]
         [Display(Name="Data do pedido")]
@@ -36,7 +36,7 @@ namespace PedidosWeb.Models
 
         [Display(Name="Situação do pedido")]
         public SituacaoPedido SituacaoPedido { get; set; }
-
+       
         public List<ItemPedido> ItensPedido { get; set; }
     }
 }

@@ -20,8 +20,8 @@
         </div>
         <div class="col-md-4">
             @Html.Label("Cliente", htmlAttributes: new { @class = "control-label" })
-            @Html.DropDownListFor(model => model.IDCliente, new SelectList(ViewBag.Clientes, "ID", "RazaoSocial"), htmlAttributes: new { @class = "form-control input-sm" })
-            @Html.HiddenFor(model => model.IDCliente)
+            @Html.DropDownList("ClienteID", new SelectList(ViewBag.Clientes, "ID", "RazaoSocial"), htmlAttributes: new { @class = "form-control input-sm" })
+            
         </div>
     </div>
 
@@ -111,4 +111,9 @@
             <button type="button" class="btn btn-danger" title="Voltar" onclick="location.href='@Url.Action("Index", "Pedidos")'"><i class="glyphicon glyphicon-arrow-left"></i></button>
         </div>
     </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/Views/Pedidos/PedidosAdm.js")
 }

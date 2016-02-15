@@ -79,6 +79,28 @@ namespace PedidosWeb.BLL.Admin
             return clientes.ToPagedList(pageNumber, pageSize);
         }
         
+        public static Cliente RetornarCliente(int ID)
+        {
+            Contexto db = new Contexto();
+
+            Cliente cliente = (from c in db.Clientes
+                               where c.ID.Equals(ID)
+                               select c).FirstOrDefault();
+
+            return cliente;
+        }
+
+        public static string RetornarRazaoSocial(int ID)
+        {
+            Contexto db = new Contexto();
+
+            string razaoSocial = (from c in db.Clientes
+                                  where c.ID.Equals(ID)
+                                  select c.RazaoSocial).FirstOrDefault();
+
+            return razaoSocial;
+        }
+
         public List<Cliente> ListarClientesAtivos()
         {
             List<Cliente> clientes = (from c in db.Clientes

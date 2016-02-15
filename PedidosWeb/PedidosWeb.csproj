@@ -144,6 +144,7 @@
     <Compile Include="Controllers\Admin\UsuariosController.cs" />
     <Compile Include="Controllers\AutenticacaoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PedidosCliController.cs" />
     <Compile Include="Controllers\PedidosController.cs" />
     <Compile Include="DAL\Contexto.cs" />
     <Compile Include="Global.asax.cs">
@@ -232,6 +233,18 @@
     <Compile Include="Migrations\201602151613056_dataentrega.cs" />
     <Compile Include="Migrations\201602151613056_dataentrega.Designer.cs">
       <DependentUpon>201602151613056_dataentrega.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602152250332_clped.cs" />
+    <Compile Include="Migrations\201602152250332_clped.Designer.cs">
+      <DependentUpon>201602152250332_clped.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602152252431_clipednov.cs" />
+    <Compile Include="Migrations\201602152252431_clipednov.Designer.cs">
+      <DependentUpon>201602152252431_clipednov.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602152344426_clieped2.cs" />
+    <Compile Include="Migrations\201602152344426_clieped2.Designer.cs">
+      <DependentUpon>201602152344426_clieped2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ActionResultExtensions.cs" />
@@ -365,6 +378,11 @@
     <Content Include="Views\Pedidos\Details.cshtml" />
     <Content Include="Views\Pedidos\Edit.cshtml" />
     <Content Include="Views\Pedidos\Index.cshtml" />
+    <Content Include="Views\PedidosCli\Create.cshtml" />
+    <Content Include="Views\PedidosCli\Delete.cshtml" />
+    <Content Include="Views\PedidosCli\Details.cshtml" />
+    <Content Include="Views\PedidosCli\Edit.cshtml" />
+    <Content Include="Views\PedidosCli\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -439,6 +457,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602151613056_dataentrega.resx">
       <DependentUpon>201602151613056_dataentrega.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602152250332_clped.resx">
+      <DependentUpon>201602152250332_clped.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602152252431_clipednov.resx">
+      <DependentUpon>201602152252431_clipednov.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602152344426_clieped2.resx">
+      <DependentUpon>201602152344426_clieped2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Geral.resx">
       <Generator>ResXFileCodeGenerator</Generator>

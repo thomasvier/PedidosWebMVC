@@ -9,30 +9,20 @@ using System.Web.Mvc;
 using PedidosWeb.DAL;
 using PedidosWeb.Models;
 using PedidosWeb.Models.Admin;
-using PedidosWeb.BLL.Admin;
 
 namespace PedidosWeb.Controllers
 {
-    public class PedidosController : Controller
+    public class PedidosCliController : Controller
     {
         private Contexto db = new Contexto();
 
-        // GET: Pedidos
+        // GET: PedidosCli
         public ActionResult Index()
         {
-            try
-            {
-                ClienteBll clienteBll = new ClienteBll();
-                List<Pedido> pedidos = new List<Pedido>();
-                pedidos = db.Pedidos.ToList();
-                ViewBag.NomeCliente = clienteBll.ListarClientesAtivos();
-            }
-
-            catch (Exception ex) { }
             return View(db.Pedidos.ToList());
         }
 
-        // GET: Pedidos/Details/5
+        // GET: PedidosCli/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -47,26 +37,18 @@ namespace PedidosWeb.Controllers
             return View(pedido);
         }
 
-        // GET: Pedidos/Create
+        // GET: PedidosCli/Create
         public ActionResult Create()
         {
-            ClienteBll clienteBll = new ClienteBll();
-            ProdutoBll produtoBll = new ProdutoBll();
-
-            ViewBag.Produtos = produtoBll.ListarProdutosAtivos();
-            ViewBag.Clientes = clienteBll.ListarClientesAtivos();
-
-            Pedido pedido = new Pedido();
-
-            return View(pedido);
+            return View();
         }
 
-        // POST: Pedidos/Create
+        // POST: PedidosCli/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,CodigoInterno,DataPedido, DataEntrega,ValorTotal,SituacaoPedido,ClienteID")] Pedido pedido)
+        public ActionResult Create([Bind(Include = "ID,CodigoInterno,DataPedido,DataEntrega,ValorTotal,SituacaoPedido")] Pedido pedido)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +60,7 @@ namespace PedidosWeb.Controllers
             return View(pedido);
         }
 
-        // GET: Pedidos/Edit/5
+        // GET: PedidosCli/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -93,12 +75,12 @@ namespace PedidosWeb.Controllers
             return View(pedido);
         }
 
-        // POST: Pedidos/Edit/5
+        // POST: PedidosCli/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,CodigoInterno,DataPedido,DataEntrega,ValorTotal,SituacaoPedido,ClienteID")] Pedido pedido)
+        public ActionResult Edit([Bind(Include = "ID,CodigoInterno,DataPedido,DataEntrega,ValorTotal,SituacaoPedido")] Pedido pedido)
         {
             if (ModelState.IsValid)
             {
@@ -109,7 +91,7 @@ namespace PedidosWeb.Controllers
             return View(pedido);
         }
 
-        // GET: Pedidos/Delete/5
+        // GET: PedidosCli/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -124,7 +106,7 @@ namespace PedidosWeb.Controllers
             return View(pedido);
         }
 
-        // POST: Pedidos/Delete/5
+        // POST: PedidosCli/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

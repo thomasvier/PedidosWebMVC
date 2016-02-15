@@ -16,7 +16,7 @@
             @Html.DisplayNameFor(model => model.CodigoInterno)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.IDCliente)
+            Cliente
         </th>
         <th>
             @Html.DisplayNameFor(model => model.DataPedido)
@@ -31,12 +31,16 @@
     </tr>
 
 @foreach (var item in Model) {
+    PedidosWeb.DAL.Contexto db = new PedidosWeb.DAL.Contexto();
+
+    string RazaoSocial = db.Clientes.Where(x => x.ID.Equals(item.ClienteID)).Select(x => x.RazaoSocial).FirstOrDefault();
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.CodigoInterno)
         </td>
+        
         <td>
-            @Html.DisplayFor(modelItem => item.IDCliente)
+            @RazaoSocial
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.DataPedido)
@@ -48,9 +52,8 @@
             @Html.DisplayFor(modelItem => item.SituacaoPedido)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            <button type="button" class="btn btn-primary edit" title="Editar" onclick="location.href='@Url.Action("Edit", "Pedidos", new { item.ID })'"><i class="glyphicon glyphicon-edit"></i></button>
+            <button type="button" class="btn btn-default print" title="Imprimir" onclick="location.href='@Url.Action("Edit", "Pedidos", new { item.ID })'"><i class="glyphicon glyphicon-print"></i></button>
         </td>
     </tr>
 }
