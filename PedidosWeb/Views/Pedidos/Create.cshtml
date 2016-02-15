@@ -1,0 +1,114 @@
+﻿@model PedidosWeb.Models.Pedido
+
+@{
+    ViewBag.Title = "Pedido";
+}
+
+<h2>Pedido</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="row">            
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.CodigoInterno, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.CodigoInterno, new { htmlAttributes = new { @class = "form-control input-sm" } })
+            @Html.ValidationMessageFor(model => model.CodigoInterno, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-md-4">
+            @Html.Label("Cliente", htmlAttributes: new { @class = "control-label" })
+            @Html.DropDownListFor(model => model.IDCliente, new SelectList(ViewBag.Clientes, "ID", "RazaoSocial"), htmlAttributes: new { @class = "form-control input-sm" })
+            @Html.HiddenFor(model => model.IDCliente)
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.DataPedido, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.DataPedido, new { htmlAttributes = new { @class = "form-control input-sm" } })
+            @Html.ValidationMessageFor(model => model.DataPedido, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.DataEntrega, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.DataEntrega, new { htmlAttributes = new { @class = "form-control input-sm" } })
+            @Html.ValidationMessageFor(model => model.DataEntrega, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.SituacaoPedido, htmlAttributes: new { @class = "control-label" })
+            @Html.EnumDropDownListFor(model => model.SituacaoPedido, htmlAttributes: new { @class = "form-control input-sm" })
+            @Html.ValidationMessageFor(model => model.SituacaoPedido, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <br />
+    <div class="panel panel-primary">
+        <div class="panel-heading" role="tab" id="headingOne">
+            <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#produtos" aria-expanded="true" aria-controls="produtos">
+                    Produtos
+                </a>
+            </h4>
+        </div>
+        <div id="produtos" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        @Html.Label("Produto", htmlAttributes: new { @class = "control-label" })
+                        @Html.DropDownList("ddlProdutos", new SelectList(ViewBag.Produtos, "ID", "Descricao"), htmlAttributes: new { @class = "form-control input-sm" })
+                    </div>
+                    <div class="col-md-2">
+                        @Html.Label("Quantidade", htmlAttributes: new { @class = "control-label" })
+                        @Html.TextBox("txtQuantidade", "", htmlAttributes: new { @class = "form-control input-sm", @placeholder = "0,00" })
+                    </div>
+                    <div class="col-md-2">
+                        @Html.Label("Preço", htmlAttributes: new { @class = "control-label" })
+                        @Html.TextBox("txtPreco", "", htmlAttributes: new { @class = "form-control input-sm", @disabled = "disabled", @placeholder = "0,00" })
+                    </div>
+                    <div class="col-md-2">
+                        @Html.Label("Total", htmlAttributes: new { @class = "control-label" })
+                        @Html.TextBox("txtTotal", "", htmlAttributes: new { @class = "form-control input-sm", @disabled = "disabled", @placeholder = "0,00" })                        
+                    </div>                                    
+                    <div class="col-md-2">
+                        <br />
+                        <button type="button" class="btn btn-primary" title="Inserir"><i class="glyphicon glyphicon-plus"></i></button>
+                    </div>
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Produto</th>
+                            <th>Quantidade</th>
+                            <th>Preço</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Teste</td>
+                            <td>1,00</td>
+                            <td>10,00</td>
+                            <td>10,00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.ValorTotal, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.ValorTotal, new { htmlAttributes = new { @class = "form-control input-sm", @disabled = "disabled", @placeholder = "0,00" } })
+            @Html.ValidationMessageFor(model => model.ValorTotal, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <br />
+    <div class="row">
+        <div class="col-md-10">
+            <button type="submit" class="btn btn-primary" title="Salvar"><i class="glyphicon glyphicon-floppy-save"></i></button>
+            <button type="button" class="btn btn-danger" title="Voltar" onclick="location.href='@Url.Action("Index", "Pedidos")'"><i class="glyphicon glyphicon-arrow-left"></i></button>
+        </div>
+    </div>
+}

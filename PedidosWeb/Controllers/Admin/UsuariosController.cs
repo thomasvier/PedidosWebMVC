@@ -102,9 +102,18 @@ namespace PedidosWeb.Controllers.Admin
         // GET: Usuarios/Create
         public ActionResult Create()
         {
-            Usuario usuario = new Usuario();
+            try
+            {
+                Usuario usuario = new Usuario();
 
-            return View("~/Views/Admin/Usuarios/Create.cshtml", usuario);
+                ViewBag.IDUsuario = string.Format("{0:000000}", UsuarioBll.RetornarNovoID());
+
+                return View("~/Views/Admin/Usuarios/Create.cshtml", usuario);
+            }
+            catch(Exception ex)
+            {
+                return View("~/Views/Admin/Usuarios/Create.cshtml").ComMensagem(Resources.Geral.TenteNovamente, TipoMensagem.Erro);
+            }
         }
 
         // POST: Usuarios/Create
@@ -116,34 +125,50 @@ namespace PedidosWeb.Controllers.Admin
         {
             try
             {
-                if (ModelState.IsValid)
+                if(UsuarioBll.VericarLoginExistente(usuario, TipoOperacao.Create))
+                {
+                    ViewBag.IDUsuario = string.Format("{0:000000}", UsuarioBll.RetornarNovoID());
+
+                    return View("~/Views/Admin/Usuarios/Create.cshtml", usuario).ComMensagem(string.Format(Resources.Validations.UsuarioExistente, usuario.Login), TipoMensagem.Erro);
+                }
+                else if (ModelState.IsValid)
                 {
                     db.Usuarios.Add(usuario);
                     db.SaveChanges();
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index").ComMensagem(Resources.Geral.ItemSalvoSucesso, TipoMensagem.Sucesso);
                 }
             }
             catch (Exception ex)
             {
-                return View(usuario).ComMensagem(string.Format(Resources.Geral.ContateAdminsitrador, ex.Message), TipoMensagem.Erro);
+                return View("~/Views/Admin/Usuarios/Create.cshtml", usuario).ComMensagem(string.Format(Resources.Geral.ContateAdminsitrador, ex.Message), TipoMensagem.Erro);
             }
 
-            return View(usuario);
+            return View("~/Views/Admin/Usuarios/Create.cshtml", usuario);
         }
 
         // GET: Usuarios/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            Usuario usuario;
+
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                usuario  = db.Usuarios.Find(id);
+                if (usuario == null)
+                {
+                    return HttpNotFound();
+                }
+                return View("~/Views/Admin/Usuarios/Edit.cshtml", usuario);
             }
-            Usuario usuario = db.Usuarios.Find(id);
-            if (usuario == null)
+            catch(Exception ex)
             {
-                return HttpNotFound();
+                //TODO: implementar log
+                return View("~/Views/Admin/Usuarios/Edit.cshtml").ComMensagem(Resources.Geral.TenteNovamente, TipoMensagem.Aviso);
             }
-            return View(usuario);
         }
 
         // POST: Usuarios/Edit/5
@@ -153,28 +178,46 @@ namespace PedidosWeb.Controllers.Admin
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Nome,Login,Senha,Email,Ativo,Role,Tipo")] Usuario usuario)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(usuario).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if(UsuarioBll.VericarLoginExistente(usuario, TipoOperacao.Update))
+                {
+                    return View("~/Views/Admin/Usuarios/Edit.cshtml", usuario).ComMensagem(string.Format(Resources.Validations.UsuarioExistente), TipoMensagem.Aviso);
+                }
+                else if (ModelState.IsValid)
+                {
+                    db.Entry(usuario).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index").ComMensagem(Resources.Geral.ItemAlteradoSucesso, TipoMensagem.Sucesso);
+                }
+                return View("~/Views/Admin/Usuarios/Edit.cshtml", usuario);
             }
-            return View(usuario);
+            catch(Exception ex)
+            {
+                return View("~/Views/Admin/Usuarios/Edit.cshtml").ComMensagem(Resources.Geral.TenteNovamente, TipoMensagem.Erro);
+            }
         }
 
         // GET: Usuarios/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Usuario usuario = db.Usuarios.Find(id);
+                if (usuario == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(usuario);
             }
-            Usuario usuario = db.Usuarios.Find(id);
-            if (usuario == null)
+            catch(Exception ex)
             {
-                return HttpNotFound();
+                return View("~/Views/Admin/Usuarios/Edit.cshtml").ComMensagem(Resources.Geral.TenteNovamente, TipoMensagem.Erro);
             }
-            return View(usuario);
         }
 
         // POST: Usuarios/Delete/5

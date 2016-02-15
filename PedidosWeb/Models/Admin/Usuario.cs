@@ -9,6 +9,7 @@ namespace PedidosWeb.Models.Admin
 {
     public class Usuario
     {
+        [DisplayFormat(DataFormatString = "{0:000000}", ApplyFormatInEditMode = true)]
         public int ID { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(Resources.Validations), ErrorMessageResourceName = "CampoObrigatorio")]

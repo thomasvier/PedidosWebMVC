@@ -79,6 +79,15 @@ namespace PedidosWeb.BLL.Admin
             return clientes.ToPagedList(pageNumber, pageSize);
         }
         
+        public List<Cliente> ListarClientesAtivos()
+        {
+            List<Cliente> clientes = (from c in db.Clientes
+                                      where c.Ativo == true
+                                      select c).ToList();
+
+            return clientes;
+        }
+
         public static bool VericarCodigoExistente(Cliente cliente, TipoOperacao tipoOperacao)
         {
             Contexto db = new Contexto();

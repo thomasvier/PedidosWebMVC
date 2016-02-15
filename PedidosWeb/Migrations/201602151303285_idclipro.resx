@@ -117,19 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CampoObrigatorio" xml:space="preserve">
-    <value>Campo obrigatório.</value>
+  <data name="Target" xml:space="preserve">
+    <value>H4sIAAAAAAAEAO1c3W7juBW+L9B3EHTVFrO2k0GBbWDvIuMkhXcnP42dbe8GtEQ7RCVSFakgadEn60Ufqa/QI4mSSOrHoi1nMotgbmKK/A55eA55/jj/+89/pz8+h4HzhGNOGJ25J6OJ62DqMZ/Q7cxNxOa7790ff/jtb6aXfvjs/FL0+5j2g5GUz9xHIaKz8Zh7jzhEfBQSL2acbcTIY+EY+Wx8Opn8aXxyMsYA4QKW40zvEypIiLMf8HPOqIcjkaDgmvk44LIdviwzVOcGhZhHyMMz9w77xGf8r3g9ujj/7DrnAUEwiyUONq6DKGUCCZjj2QPHSxEzul1G0ICC1UuEod8GBRzLuZ9V3fsuY3KaLmNcDSygvIQLFloCnnyUfBmbw/firlvyDTh3CRwWL+mqM+7N3HlAMBWwdpPW2TyI034ab/ONGJ37IaEjOfSDU3X4UAoDyEz674MzTwKRxHhGcSJiFEDvZB0Q72f8smJ/x3RGkyBQpwiThG9aAzTdxSzCsXi5xxs58cWF64z1cWNzYDlMGZOvaUHFx1PXuQHiaB3gUgKU9S8Fi/GfMcUxEti/Q0LgGDZw4eOMhzXqBq05aMuWAR0YxQqyIHugQq5zjZ4/Y7oVjzMX/nSdK/KM/aJFTuWBEtA4GCTiBO+ido/+idiSeSDSHbT+OJn0olVjSzfxGxbiK0QF4gS9PvX53dX85u6nDsIn3w/A4QXlXkw8xC65QH7Syedh9nSFA7xhFB+d0BwHSYDio9O5DBE5PtsuqY9j7HXpXF9J3ME24iO/a3eGIfMJkTg+/moyse4iczoAkZskxJ1rGUqgo+PTYGEU4BAug+PvzbkgTyWVT4wFGFHrc3JFomqmYBeN0oYVEbnqd4JNx5Xd0GlN5JaAnTGRt7xbES1S9ppWxOKiNAe7F9gNc4EEKiQhx4EWvALT3hrqFxSweAXMLO+NC+yRMP15B4c8kQ4KXPBLD6Wo9rNdggoguNf1GWcaYn7ahXyDnsg223eTsQJTXqDc4yDrwx9JJAnln75o3a5iFt6zoNQZ9euXJUtiL90m1tplheItFnsqMgCF+yhzNe5doVtoQYOfVJfGfiqW6UXK7IHUov8JX8ze3l+UQ98Fo5HW0Ce97ZmNpXvz+qRTiWUAIVBMWH957gH6lwS8Us1KPxS2QrxTfYxDYfcw8Hpr7ANPcsbaa6wc+q6xjbTSsMfrhzs+sy2hXW7aUaguMX3siu30pHpYfODk7ThTqdV1/ABQk8dWqvOep0MSKmeD5gIu+FWAtlU03P68UOCGODOAWz6OgxfgrqrTOs+ucbjGcel/cs7QFZzAHkgrGEkJNE5qfG4Y81MSE18ddVJnaM66Dnaa/sIhHNWxvhY7qZ+7g/1YeR7F7CmLIjUz0ew/R9QDZ0gZcLoH1zWtOITlCtDX4XemRYQDpM/ivky/x1GMOWwTUndqF+cLP9+G7+egKB7J2KjFezS/VSd6SX1ntxNbnXCF5lwDg0kELIUzDDgwGtXX0wldOL8KtOrS6vB/MBevLLRuWs0ZsJrQipXwGz83ukQPHEtx4/LEN5eQAi6x0HeFu051esvZlxtW44IOIcW2AaFY+w6Aik2N81C5uGsqub/XOJfCi9wBIbWxCaLUeANC2TuTK3p8RenYHoUxrdRe8lyuQtmOsRVSIb4Kkr4vpl2sr7rBECiltsqij/M0epFuH7fk26fXKIrgDFPy77LFWebJ9/l3S/vMdJhjjD3ekKAuZ1tSAlMdbbHxNfOa8RWJuUhjjmuUnvhzP2zoJnW0RdwKMoYa1vesEMJiQPq3pniyAqHUVwOiYt4VrCfNHmRLw8pGt47MCh8Q2FYNPs+cBUlI2/ymrtFG3EEFMj71x9Sy0Sqi9qE/np5gVgH1LxarLpLG2nqLxv44DVlhbSvqn/tjV/lfFbJqtVhtkeDVVls09seRDpqKIpssMMr0rAZTtlqsSkZ2tEXJtv4oRXpVRSnaLFYls6fammSbhZzL9Kgm4bLNZrcjc6cjuxNByWzq54HyoT+edLhVJNlkoQuZK6zpQdZSR5iOjQPWPMTHtVPcuEvNW6HXnVFc9AdcGc0mR48bo23gt3NhKIlHfWItZm8Xlpp9VMHU9v5oagJSRVPb+6OZAQIV0fz2ZkRbszwPkG/FdbCX8a7Bx5FzJVOng7Q4LzulKE/X1YQob34zu116bYecZJJDexxlbSO/nbNMyaRpx0/V3B/LSI2peMYnS0w1M1ZDVT/2x62lxlTc2sfjmA9fSWfKMMUBOlPEM+x1pnXkcXQmT3uZTpgNgkxhqRCyyeImzRNS2gWaN72uOzOEcZsnkzQ/OWv5Fs1jPRDVZCPrUbgd1rDeub9RkIbXzHOvNWBXZ1IvtSkAG7Qn5VJJf6+pyQjgnlOzntOcUZ9kgf0FTxOLZf6k14LN+GNdMmphSLNLKZdlONIIO05lCHD3W6BaTDDvkhZnsCfip/HA5QsH0RmlHUbLfwS5l1F1uEaUbDAXeTLHPZ2cnBpPit7O854x537Q742PvmevUINBUqburLKwfe/RVChFn1DsPaL4dyF6/r0KuefjmQKvXtExwNuYwcCNpy+NuGkZkh07Wl+6HMRk8zXLQWDGi5WDsLSqk8OQjJcnffbZ/qHJUKj6u5KhUPVnJI2op7aY+quRAwUnGgan/vpjKA5q9UlrIg566JGdwIO+7Xi/RNombLyd2M36Okj95YQP6xXDvJzwX+flxIAi12bff7NiV6v+30dIarX/g2+sYugr06yVtyzgvnueuf/KRp05i799KQd+cG5juAzPnInz725Nsn558OuQBLsDaL8S/sPgGsvybUStz6nZUqY/NJmWsv2hyVhe3dYl/L8O0Vfr5gdzhbSy+Gaz0x5Uq3rvAbq3u1Evc39lm1GtZz/MzRvE+Byg0vTwslK11HGfOlIAAz0Ej5Cm/9PMnNG0sJfUI653MaEeiVCgz78e+uuj3SlPS0DzywWO8oru+gr7UOsMeJbYxmGziwXW1bZmwV9LhsYsdG6vqM3Dg3AbrNONzmXVrty2o9q2Cdy6EndHHW4TDfs63a4y3cZV2NXwdpXwNsG/jfrehmLezlre+p6ZiYqjlO7WY+OgeMr/pgWaz8m2gkjj/RR7msqVfRZ0wwrlN2ZUdDEO/WssEDiq6DwWZIM8AZ89zHn2Kko+MLgM19hf0NtERImAJeNwHWgv7NITpIt+Vp+sz3l6G2Xv6IdYAkyTpL72Lf2UkMAv533VcGm1QKRHkzST0r0Uqbm0fSmRbmpFm21Akn3librCYRQAGL+lS/SE95nbA8ef8RZ5L0WKox1k90bobJ9eELSNUcglRjUefoIM++HzD/8H1NZoNlROAAA=</value>
   </data>
-  <data name="ClienteExistente" xml:space="preserve">
-    <value>Já existe um cliente cadastrado com o código interno: {0}</value>
-  </data>
-  <data name="Email" xml:space="preserve">
-    <value>Insira um e-mail válido.</value>
-  </data>
-  <data name="ProdutoExistente" xml:space="preserve">
-    <value>Já existe um produto cadastrado com o código interno: {0}</value>
-  </data>
-  <data name="UsuarioExistente" xml:space="preserve">
-    <value>Já existe um usuário cadastrado com o login: {0}</value>
+  <data name="DefaultSchema" xml:space="preserve">
+    <value>dbo</value>
   </data>
 </root>

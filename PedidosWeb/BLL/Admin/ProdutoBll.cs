@@ -97,5 +97,14 @@ namespace PedidosWeb.BLL.Admin
 
             return false;
         }
+
+        public List<Produto> ListarProdutosAtivos()
+        {
+            List<Produto> Produtos = (from p in db.Produtos
+                                      where p.Ativo == true
+                                      select p).ToList();
+
+            return Produtos;
+        }
     }
 }

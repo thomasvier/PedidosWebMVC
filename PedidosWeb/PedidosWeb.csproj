@@ -144,6 +144,7 @@
     <Compile Include="Controllers\Admin\UsuariosController.cs" />
     <Compile Include="Controllers\AutenticacaoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PedidosController.cs" />
     <Compile Include="DAL\Contexto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -220,11 +221,26 @@
     <Compile Include="Migrations\201602130131054_requicodin.Designer.cs">
       <DependentUpon>201602130131054_requicodin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201602151258021_pedidos.cs" />
+    <Compile Include="Migrations\201602151258021_pedidos.Designer.cs">
+      <DependentUpon>201602151258021_pedidos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602151303285_idclipro.cs" />
+    <Compile Include="Migrations\201602151303285_idclipro.Designer.cs">
+      <DependentUpon>201602151303285_idclipro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602151613056_dataentrega.cs" />
+    <Compile Include="Migrations\201602151613056_dataentrega.Designer.cs">
+      <DependentUpon>201602151613056_dataentrega.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ActionResultExtensions.cs" />
     <Compile Include="Models\Admin\Cliente.cs" />
     <Compile Include="Models\Admin\Produto.cs" />
     <Compile Include="Models\Admin\TipoTitular.cs" />
+    <Compile Include="Models\ItemPedido.cs" />
+    <Compile Include="Models\Pedido.cs" />
+    <Compile Include="Models\SituacaoPedido.cs" />
     <Compile Include="Models\TipoUsuario.cs" />
     <Compile Include="Models\Admin\Usuario.cs" />
     <Compile Include="Models\TempDataActionResult.cs" />
@@ -311,6 +327,7 @@
     <Content Include="Scripts\Views\Admin\Produtos\Index.js" />
     <Content Include="Scripts\Views\Admin\Produtos\Produto.js" />
     <Content Include="Scripts\Views\Admin\Usuarios\Index.js" />
+    <Content Include="Scripts\Views\Pedidos\PedidosAdm.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -343,10 +360,14 @@
     <Content Include="Views\Admin\Produtos\Details.cshtml" />
     <Content Include="Views\Admin\Produtos\Edit.cshtml" />
     <Content Include="Views\Admin\Produtos\Index.cshtml" />
+    <Content Include="Views\Pedidos\Create.cshtml" />
+    <Content Include="Views\Pedidos\Delete.cshtml" />
+    <Content Include="Views\Pedidos\Details.cshtml" />
+    <Content Include="Views\Pedidos\Edit.cshtml" />
+    <Content Include="Views\Pedidos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\Financeiro\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -409,6 +430,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602130131054_requicodin.resx">
       <DependentUpon>201602130131054_requicodin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602151258021_pedidos.resx">
+      <DependentUpon>201602151258021_pedidos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602151303285_idclipro.resx">
+      <DependentUpon>201602151303285_idclipro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602151613056_dataentrega.resx">
+      <DependentUpon>201602151613056_dataentrega.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Geral.resx">
       <Generator>ResXFileCodeGenerator</Generator>

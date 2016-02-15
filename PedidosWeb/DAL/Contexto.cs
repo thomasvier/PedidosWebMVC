@@ -22,5 +22,7 @@ namespace PedidosWeb.DAL
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
+
+        public System.Data.Entity.DbSet<PedidosWeb.Models.Pedido> Pedidos { get; set; }
     }
 }

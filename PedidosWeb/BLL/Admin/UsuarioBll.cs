@@ -122,5 +122,18 @@ namespace PedidosWeb.BLL.Admin
 
             return false;
         }
+
+        public static int RetornarNovoID()
+        {
+            Contexto db = new Contexto();
+
+            int ID = (from u in db.Usuarios
+                     orderby u.ID descending
+                      select u.ID).FirstOrDefault();
+
+            ID++;
+
+            return ID;                     
+        }
     }
 }
