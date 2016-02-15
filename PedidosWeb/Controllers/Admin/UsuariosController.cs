@@ -9,30 +9,78 @@ using System.Web.Mvc;
 using PedidosWeb.DAL;
 using PedidosWeb.Models.Admin;
 using PedidosWeb.Models;
-
+using PedidosWeb.BLL.Admin;
 
 namespace PedidosWeb.Controllers.Admin
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize]
     public class UsuariosController : Controller
     {
         private Contexto db = new Contexto();
 
         // GET: Usuarios
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string filtroAtual,
+                                    string filtro, int? page,
+                                    string tipoUsuarioFiltro,
+                                    string tipoUsuarioFiltroAtual,
+                                    string ativoFiltro,
+                                    string ativoFiltroAtual,
+                                    string codigoUsuarioFiltro,
+                                    string codigoUsuarioFiltroAtual)
         {
-            List<Usuario> usuarios;
-
             try
             {
-                usuarios = db.Usuarios.ToList();
+                ViewBag.CurrentSort = sortOrder;
+                ViewBag.NomeSort = string.IsNullOrEmpty(sortOrder) ? "nome_desc" : "";
+                ViewBag.LoginSort = sortOrder == "Login" ? "login_desc" : "Login";
+                ViewBag.IDSort = sortOrder == "ID" ? "id_desc" : "ID";
+
+                if (filtro != null)
+                {
+                    page = 1;
+                }
+                else
+                {
+                    filtro = filtroAtual;
+                }
+
+                if (tipoUsuarioFiltro != null)
+                {
+                    page = 1;
+                }
+                else
+                {
+                    tipoUsuarioFiltro = tipoUsuarioFiltroAtual;
+                }
+
+                if (ativoFiltro != null)
+                {
+                    page = 1;
+                }
+                else
+                {
+                    ativoFiltro = ativoFiltroAtual;
+                }
+
+                if (codigoUsuarioFiltro != null)
+                {
+                    page = 1;
+                }
+                else
+                {
+                    codigoUsuarioFiltro = codigoUsuarioFiltroAtual;
+                }
+
+                ViewBag.FiltroAtual = filtro;
+
+                UsuarioBll usuarioBll = new UsuarioBll();
+
+                return View("~/Views/Admin/Usuarios/Index.cshtml", usuarioBll.ListaUsuariosPaginacao(page, filtro, tipoUsuarioFiltro, sortOrder, ativoFiltro, codigoUsuarioFiltro));
             }
             catch (Exception ex)
             {
-                return View().ComMensagem(string.Format(Resources.Geral.ContateAdminsitrador, ex.Message), TipoMensagem.Erro);
+                return View("~/Views/Admin/Usuarios/Index.cshtml").ComMensagem(string.Format(Resources.Geral.ContateAdminsitrador, ex.Message), TipoMensagem.Erro);
             }
-
-            return View("~/Views/Admin/Clientes/Index.cshtml", usuarios);
         }
 
         // GET: Usuarios/Details/5
@@ -47,13 +95,16 @@ namespace PedidosWeb.Controllers.Admin
             {
                 return HttpNotFound();
             }
-            return View(usuario);
+
+            return View(usuario);            
         }
 
         // GET: Usuarios/Create
         public ActionResult Create()
         {
-            return View();
+            Usuario usuario = new Usuario();
+
+            return View("~/Views/Admin/Usuarios/Create.cshtml", usuario);
         }
 
         // POST: Usuarios/Create
@@ -65,7 +116,6 @@ namespace PedidosWeb.Controllers.Admin
         {
             try
             {
-
                 if (ModelState.IsValid)
                 {
                     db.Usuarios.Add(usuario);

@@ -10,6 +10,8 @@ using PedidosWeb.DAL;
 using PedidosWeb.Models.Admin;
 using PagedList;
 using PedidosWeb.BLL.Admin;
+using PedidosWeb.Models;
+
 
 namespace PedidosWeb.Controllers.Admin
 {
@@ -25,65 +27,87 @@ namespace PedidosWeb.Controllers.Admin
                                     string codigoInternoFiltro,
                                     string codigoInternoFiltroAtual)
         {
-            ViewBag.CurrentSort = sortOrder;
-            ViewBag.DescricaoSort = string.IsNullOrEmpty(sortOrder) ? "descricao_desc" : "";
-            ViewBag.CodigoInternoSort = sortOrder == "CodigoInterno" ? "codigointerno_desc" : "CodigoInterno";
-
-            if (filtro != null)
+            try
             {
-                page = 1;
-            }
-            else
-            {
-                filtro = filtroAtual;
-            }
+                ViewBag.CurrentSort = sortOrder;
+                ViewBag.DescricaoSort = string.IsNullOrEmpty(sortOrder) ? "descricao_desc" : "";
+                ViewBag.CodigoInternoSort = sortOrder == "CodigoInterno" ? "codigointerno_desc" : "CodigoInterno";
 
-            if (ativoFiltro != null)
-            {
-                page = 1;
-            }
-            else
-            {
-                ativoFiltro = ativoFiltroAtual;
-            }
+                if (filtro != null)
+                {
+                    page = 1;
+                }
+                else
+                {
+                    filtro = filtroAtual;
+                }
 
-            if (codigoInternoFiltro != null)
-            {
-                page = 1;
+                if (ativoFiltro != null)
+                {
+                    page = 1;
+                }
+                else
+                {
+                    ativoFiltro = ativoFiltroAtual;
+                }
+
+                if (codigoInternoFiltro != null)
+                {
+                    page = 1;
+                }
+                else
+                {
+                    codigoInternoFiltro = codigoInternoFiltroAtual;
+                }
+
+                ViewBag.FiltroAtual = filtro;
+
+                ProdutoBll produtobll = new ProdutoBll();
+
+                return View("~/Views/Admin/Produtos/Index.cshtml", produtobll.ListarProdutosPaginacao(page, filtro, sortOrder, ativoFiltro, codigoInternoFiltro));
             }
-            else
+            catch(Exception ex)
             {
-                codigoInternoFiltro = codigoInternoFiltroAtual;
+                return View("~/Views/Admin/Produtos/Index.cshtml").ComMensagem(Resources.Geral.TenteNovamente, TipoMensagem.Erro);
             }
-
-            ViewBag.FiltroAtual = filtro;
-
-            ProdutoBll produtobll = new ProdutoBll();
-
-            return View("~/Views/Admin/Produtos/Index.cshtml", produtobll.ListarProdutosPaginacao(page, filtro, sortOrder, ativoFiltro, codigoInternoFiltro));            
         }
 
         // GET: Produtos/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Produto produto = db.Produtos.Find(id);
+                if (produto == null)
+                {
+                    return HttpNotFound();
+                }
+                return View("~/Views/Admin/Produtos/Details.cshtml", produto);
             }
-            Produto produto = db.Produtos.Find(id);
-            if (produto == null)
+            catch(Exception ex)
             {
-                return HttpNotFound();
+                //TODO: implementar log
+                return View("~/Views/Admin/Produtos/Details.cshtml").ComMensagem(Resources.Geral.TenteNovamente, TipoMensagem.Erro);
             }
-            return View("~/Views/Admin/Produtos/Details.cshtml", produto);
         }
 
         // GET: Produtos/Create
         public ActionResult Create()
         {
-            Produto produto = new Produto();
+            try
+            {
+                Produto produto = new Produto();
 
-            return View("~/Views/Admin/Produtos/Create.cshtml", produto);
+                return View("~/Views/Admin/Produtos/Create.cshtml", produto);
+            }
+            catch(Exception ex)
+            {
+                return View("~/Views/Admin/Produtos/Create.cshtml").ComMensagem(Resources.Geral.TenteNovamente, TipoMensagem.Erro);
+            }
         }
 
         // POST: Produtos/Create
@@ -93,11 +117,25 @@ namespace PedidosWeb.Controllers.Admin
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,CodigoInterno,Descricao,PrecoUnitario,PrecoQuantidade,QuantidadePreco,Ativo")] Produto produto)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Produtos.Add(produto);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ProdutoBll.VericarCodigoExistente(produto, TipoOperacao.Create))
+                {
+                    return View("~/Views/Admin/Produtos/Create.cshtml", produto).ComMensagem(string.Format(Resources.Validations.ProdutoExistente, produto.CodigoInterno), TipoMensagem.Aviso);
+                }
+                else
+                {
+                    if (ModelState.IsValid)
+                    {
+                        db.Produtos.Add(produto);
+                        db.SaveChanges();
+                        return RedirectToAction("Index").ComMensagem(Resources.Geral.ItemSalvoSucesso, TipoMensagem.Sucesso);
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                return View("~/Views/Admin/Produtos/Create.cshtml", produto).ComMensagem(Resources.Geral.TenteNovamente, TipoMensagem.Erro);
             }
 
             return View(produto);
@@ -106,16 +144,23 @@ namespace PedidosWeb.Controllers.Admin
         // GET: Produtos/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Produto produto = db.Produtos.Find(id);
+                if (produto == null)
+                {
+                    return HttpNotFound();
+                }
+                return View("~/Views/Admin/Produtos/Edit.cshtml", produto);
             }
-            Produto produto = db.Produtos.Find(id);
-            if (produto == null)
+            catch(Exception ex)
             {
-                return HttpNotFound();
+                return View("~/Views/Admin/Produtos/Edit.cshtml").ComMensagem(Resources.Geral.TenteNovamente, TipoMensagem.Erro);
             }
-            return View("~/Views/Admin/Produtos/Edit.cshtml", produto);
         }
 
         // POST: Produtos/Edit/5

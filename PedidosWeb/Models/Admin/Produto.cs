@@ -17,6 +17,7 @@ namespace PedidosWeb.Models.Admin
         public int ID { get; set; }
 
         [Display(Name="Código Interno")]
+        [Required]
         public string CodigoInterno { get; set; }
 
         [Required(ErrorMessage="O campo descrição é obrigatório")]

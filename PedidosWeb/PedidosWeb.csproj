@@ -47,6 +47,18 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.ReportViewer.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Report.Viewer.11.0.0.0\lib\net\Microsoft.ReportViewer.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Report.Viewer.11.0.0.0\lib\net\Microsoft.ReportViewer.ProcessingObjectModel.DLL</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Report.Viewer.11.0.0.0\lib\net\Microsoft.ReportViewer.WebForms.DLL</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="PagedList">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
     </Reference>
@@ -200,6 +212,14 @@
     <Compile Include="Migrations\201602121825149_decim.Designer.cs">
       <DependentUpon>201602121825149_decim.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201602130126116_dbnote.cs" />
+    <Compile Include="Migrations\201602130126116_dbnote.Designer.cs">
+      <DependentUpon>201602130126116_dbnote.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602130131054_requicodin.cs" />
+    <Compile Include="Migrations\201602130131054_requicodin.Designer.cs">
+      <DependentUpon>201602130131054_requicodin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ActionResultExtensions.cs" />
     <Compile Include="Models\Admin\Cliente.cs" />
@@ -211,6 +231,18 @@
     <Compile Include="Models\TipoMensagem.cs" />
     <Compile Include="Models\TipoOperacao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Relatorios\Produtos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Produtos.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Relatorios\Relatorio.aspx.cs">
+      <DependentUpon>Relatorio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Relatorios\Relatorio.aspx.designer.cs">
+      <DependentUpon>Relatorio.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Geral.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -232,8 +264,20 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Relatorios\Relatorio.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Relatorios\Produtos.xsc">
+      <DependentUpon>Produtos.xsd</DependentUpon>
+    </Content>
+    <None Include="Relatorios\Produtos.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Produtos.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Relatorios\Produtos.xss">
+      <DependentUpon>Produtos.xsd</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\cldr.js" />
     <Content Include="Scripts\cldr\event.js" />
@@ -359,6 +403,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602121825149_decim.resx">
       <DependentUpon>201602121825149_decim.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602130126116_dbnote.resx">
+      <DependentUpon>201602130126116_dbnote.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602130131054_requicodin.resx">
+      <DependentUpon>201602130131054_requicodin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Geral.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -126,4 +126,7 @@
   <data name="Email" xml:space="preserve">
     <value>Insira um e-mail válido.</value>
   </data>
+  <data name="ProdutoExistente" xml:space="preserve">
+    <value>Já existe um produto cadastrado com o código interno: {0}</value>
+  </data>
 </root>

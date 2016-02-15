@@ -117,19 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ContateAdminsitrador" xml:space="preserve">
-    <value>Ocorreu um erro durante o processo. Contate o administrador. Erro: {0}</value>
+  <data name="Target" xml:space="preserve">
+    <value>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</value>
   </data>
-  <data name="ItemAlteradoSucesso" xml:space="preserve">
-    <value>Item alterado com sucesso.</value>
-  </data>
-  <data name="ItemSalvoSucesso" xml:space="preserve">
-    <value>O item foi salvo com sucesso.</value>
-  </data>
-  <data name="TenteNovamente" xml:space="preserve">
-    <value>Ocorreu um erro. Tente novamente mais tarde.</value>
-  </data>
-  <data name="UsuarioSenhaInvalidos" xml:space="preserve">
-    <value>Usuário ou senha inválidos.</value>
+  <data name="DefaultSchema" xml:space="preserve">
+    <value>dbo</value>
   </data>
 </root>

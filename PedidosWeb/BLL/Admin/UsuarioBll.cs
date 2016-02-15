@@ -64,14 +64,14 @@ namespace PedidosWeb.BLL.Admin
 
             switch (sortOrder)
             {
-                case "login_desc":
-                    usuarios = usuarios.OrderByDescending(s => s.Login);
-                    break;
-                case "Nome":
-                    usuarios = usuarios.OrderBy(s => s.Nome);
-                    break;
                 case "nome_desc":
                     usuarios = usuarios.OrderByDescending(s => s.Nome);
+                    break;
+                case "Login":
+                    usuarios = usuarios.OrderBy(s => s.Login);
+                    break;
+                case "login_desc":
+                    usuarios = usuarios.OrderByDescending(s => s.Login);
                     break;
                 case "ID":
                     usuarios = usuarios.OrderBy(s => s.ID);
@@ -80,7 +80,7 @@ namespace PedidosWeb.BLL.Admin
                     usuarios = usuarios.OrderByDescending(s => s.ID);
                     break;
                 default:
-                    usuarios = usuarios.OrderBy(s => s.Login);
+                    usuarios = usuarios.OrderBy(s => s.Nome);
                     break;
             }
 

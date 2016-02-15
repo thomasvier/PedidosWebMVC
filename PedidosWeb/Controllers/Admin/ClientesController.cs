@@ -14,7 +14,7 @@ using PedidosWeb.Models;
 
 namespace PedidosWeb.Controllers
 {
-    [Authorize(Roles ="Admin")]
+    [Authorize]
     public class ClientesController : Controller
     {
         private Contexto db = new Contexto();
@@ -29,76 +29,98 @@ namespace PedidosWeb.Controllers
                                     string codigoInternoFiltro,
                                     string codigoInternoFiltroAtual)
         {
-            ViewBag.CurrentSort = sortOrder;
-            ViewBag.RazaoSocialSort = string.IsNullOrEmpty(sortOrder) ? "razaosocial_desc" : "";
-            ViewBag.NomeFantasiaSort = sortOrder == "NomeFantasia" ? "nomefantasia_desc" : "NomeFantasia";
-            ViewBag.CodigoInternoSort = sortOrder == "CodigoInterno" ? "codigointerno_desc" : "CodigoInterno";
+            try
+            {
+                ViewBag.CurrentSort = sortOrder;
+                ViewBag.RazaoSocialSort = string.IsNullOrEmpty(sortOrder) ? "razaosocial_desc" : "";
+                ViewBag.NomeFantasiaSort = sortOrder == "NomeFantasia" ? "nomefantasia_desc" : "NomeFantasia";
+                ViewBag.CodigoInternoSort = sortOrder == "CodigoInterno" ? "codigointerno_desc" : "CodigoInterno";
 
-            if (filtro != null)
-            {
-                page = 1;
-            }
-            else
-            {
-                filtro = filtroAtual;
-            }
-            
-            if(tiposTitularFiltro != null)
-            {
-                page = 1;
-            }
-            else
-            {
-                tiposTitularFiltro = tipoTitularAtual;
-            }
+                if (filtro != null)
+                {
+                    page = 1;
+                }
+                else
+                {
+                    filtro = filtroAtual;
+                }
 
-            if(ativoFiltro != null)
-            {
-                page = 1;
-            }
-            else
-            {
-                ativoFiltro = ativoFiltroAtual;
-            }
-            
-            if(codigoInternoFiltro != null)
-            {
-                page = 1;
-            }
-            else
-            {
-                codigoInternoFiltro = codigoInternoFiltroAtual;
-            }            
+                if (tiposTitularFiltro != null)
+                {
+                    page = 1;
+                }
+                else
+                {
+                    tiposTitularFiltro = tipoTitularAtual;
+                }
 
-            ViewBag.FiltroAtual = filtro;
-            ViewBag.TipoTitularAtual = tiposTitularFiltro;
+                if (ativoFiltro != null)
+                {
+                    page = 1;
+                }
+                else
+                {
+                    ativoFiltro = ativoFiltroAtual;
+                }
 
-            ClienteBll clientebll = new ClienteBll();
+                if (codigoInternoFiltro != null)
+                {
+                    page = 1;
+                }
+                else
+                {
+                    codigoInternoFiltro = codigoInternoFiltroAtual;
+                }
 
-            return View("~/Views/Admin/Clientes/Index.cshtml", clientebll.ListaClientesPaginacao(page, filtro, tiposTitularFiltro, sortOrder, ativoFiltro, codigoInternoFiltro));
+                ViewBag.FiltroAtual = filtro;
+                ViewBag.TipoTitularAtual = tiposTitularFiltro;
+
+                ClienteBll clientebll = new ClienteBll();
+
+                return View("~/Views/Admin/Clientes/Index.cshtml", clientebll.ListaClientesPaginacao(page, filtro, tiposTitularFiltro, sortOrder, ativoFiltro, codigoInternoFiltro));
+            }
+            catch(Exception ex)
+            {
+                return View("~/Views/Admin/Clientes/Index.cshtml").ComMensagem(string.Format(Resources.Geral.ContateAdminsitrador, ex.Message), TipoMensagem.Erro);
+            }
         }
 
         // GET: Clientes/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Cliente cliente = db.Clientes.Find(id);
+                if (cliente == null)
+                {
+                    return HttpNotFound();
+                }
+
+                return View("~/Views/Admin/Clientes/Details.cshtml", cliente);
             }
-            Cliente cliente = db.Clientes.Find(id);
-            if (cliente == null)
+            catch(Exception ex)
             {
-                return HttpNotFound();
+                return RedirectToAction("Index").ComMensagem(Resources.Geral.TenteNovamente, TipoMensagem.Erro);
             }
-            return View("~/Views/Admin/Clientes/Details.cshtml", cliente);
         }
 
         // GET: Clientes/Create
         public ActionResult Create()
         {
-            Cliente Cliente = new Cliente();
+            try
+            {
+                Cliente Cliente = new Cliente();
 
-            return View("~/Views/Admin/Clientes/Create.cshtml", Cliente);
+                return View("~/Views/Admin/Clientes/Create.cshtml", Cliente);
+            }
+            catch(Exception ex)
+            {
+                return View("~/Views/Admin/Clientes/Create.cshtml").ComMensagem(Resources.Geral.TenteNovamente, TipoMensagem.Erro);
+            }
         }
 
         // POST: Clientes/Create
