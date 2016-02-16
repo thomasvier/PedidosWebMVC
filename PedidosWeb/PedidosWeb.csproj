@@ -138,9 +138,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="BLL\Admin\ClienteBll.cs" />
     <Compile Include="BLL\Admin\ProdutoBll.cs" />
+    <Compile Include="BLL\Admin\RepresentanteBll.cs" />
     <Compile Include="BLL\Admin\UsuarioBll.cs" />
     <Compile Include="Controllers\Admin\ClientesController.cs" />
     <Compile Include="Controllers\Admin\ProdutosController.cs" />
+    <Compile Include="Controllers\Admin\RepresentantesController.cs" />
     <Compile Include="Controllers\Admin\UsuariosController.cs" />
     <Compile Include="Controllers\AutenticacaoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -246,10 +248,27 @@
     <Compile Include="Migrations\201602152344426_clieped2.Designer.cs">
       <DependentUpon>201602152344426_clieped2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201602161106001_rolesnovo.cs" />
+    <Compile Include="Migrations\201602161106001_rolesnovo.Designer.cs">
+      <DependentUpon>201602161106001_rolesnovo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602161236318_clienterep.cs" />
+    <Compile Include="Migrations\201602161236318_clienterep.Designer.cs">
+      <DependentUpon>201602161236318_clienterep.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602161249097_representantes.cs" />
+    <Compile Include="Migrations\201602161249097_representantes.Designer.cs">
+      <DependentUpon>201602161249097_representantes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602161314345_rep2.cs" />
+    <Compile Include="Migrations\201602161314345_rep2.Designer.cs">
+      <DependentUpon>201602161314345_rep2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ActionResultExtensions.cs" />
     <Compile Include="Models\Admin\Cliente.cs" />
     <Compile Include="Models\Admin\Produto.cs" />
+    <Compile Include="Models\Admin\Representante.cs" />
     <Compile Include="Models\Admin\TipoTitular.cs" />
     <Compile Include="Models\ItemPedido.cs" />
     <Compile Include="Models\Pedido.cs" />
@@ -334,7 +353,6 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\Views\Admin\Clientes\Cliente.js" />
-    <Content Include="Scripts\Views\Admin\Clientes\Cliente.js" />
     <Content Include="Scripts\Views\Admin\Clientes\Index.js" />
     <Content Include="Scripts\Views\Admin\Clientes\Index.js" />
     <Content Include="Scripts\Views\Admin\Produtos\Index.js" />
@@ -383,6 +401,10 @@
     <Content Include="Views\PedidosCli\Details.cshtml" />
     <Content Include="Views\PedidosCli\Edit.cshtml" />
     <Content Include="Views\PedidosCli\Index.cshtml" />
+    <Content Include="Views\Admin\Representantes\Create.cshtml" />
+    <Content Include="Views\Admin\Representantes\Details.cshtml" />
+    <Content Include="Views\Admin\Representantes\Edit.cshtml" />
+    <Content Include="Views\Admin\Representantes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -466,6 +488,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602152344426_clieped2.resx">
       <DependentUpon>201602152344426_clieped2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602161106001_rolesnovo.resx">
+      <DependentUpon>201602161106001_rolesnovo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602161236318_clienterep.resx">
+      <DependentUpon>201602161236318_clienterep.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602161249097_representantes.resx">
+      <DependentUpon>201602161249097_representantes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602161314345_rep2.resx">
+      <DependentUpon>201602161314345_rep2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Geral.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -15,6 +15,7 @@ using PedidosWeb.Models;
 
 namespace PedidosWeb.Controllers.Admin
 {
+    [Authorize(Roles="Admin")]
     public class ProdutosController : Controller
     {
         private Contexto db = new Contexto();

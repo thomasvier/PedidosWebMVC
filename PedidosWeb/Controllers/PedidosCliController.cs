@@ -12,6 +12,7 @@ using PedidosWeb.Models.Admin;
 
 namespace PedidosWeb.Controllers
 {
+    [Authorize(Roles="Cliente")]
     public class PedidosCliController : Controller
     {
         private Contexto db = new Contexto();

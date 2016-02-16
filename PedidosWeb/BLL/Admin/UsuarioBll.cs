@@ -48,7 +48,7 @@ namespace PedidosWeb.BLL.Admin
             if (tipo < 2)
             {
                 TipoUsuario tipoUsuario = (TipoUsuario)tipo;
-                usuarios = usuarios.Where(x => x.Tipo == tipoUsuario);
+                usuarios = usuarios.Where(x => x.Role == tipoUsuario);
             }
 
             if (ativo < 2)

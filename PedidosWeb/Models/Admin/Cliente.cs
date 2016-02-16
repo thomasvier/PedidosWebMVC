@@ -70,6 +70,8 @@ namespace PedidosWeb.Models.Admin
 
         public TipoTitular Tipo { get; set; }
 
+        public int IDRepresentante { get; set; }
+
         public Cliente()
         {
             Tipo = TipoTitular.PessoaJuridica;

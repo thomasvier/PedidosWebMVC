@@ -14,7 +14,7 @@ using PedidosWeb.Models;
 
 namespace PedidosWeb.Controllers
 {
-    [Authorize]
+    [Authorize(Roles="Admin")]
     public class ClientesController : Controller
     {
         private Contexto db = new Contexto();
@@ -115,6 +115,12 @@ namespace PedidosWeb.Controllers
             {
                 Cliente Cliente = new Cliente();
 
+                var representantes = RepresentanteBll.ListarRepresentantesAtivos();
+
+                representantes.Add(new Representante { ID = 0, Nome = "Selecione" });
+
+                ViewBag.Representantes = representantes;
+
                 return View("~/Views/Admin/Clientes/Create.cshtml", Cliente);
             }
             catch(Exception ex)
@@ -128,7 +134,7 @@ namespace PedidosWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,CodigoInterno,RazaoSocial,NomeFantasia,CPFCNPJ,InscricaoEstadual,Telefone,Celular,Email,Endereco,Cidade,Bairro,Estado,Numero,Cep,Complemento,Ativo,Tipo")] Cliente cliente)
+        public ActionResult Create([Bind(Include = "ID,CodigoInterno,RazaoSocial,NomeFantasia,CPFCNPJ,InscricaoEstadual,Telefone,Celular,Email,Endereco,Cidade,Bairro,Estado,Numero,Cep,Complemento,Ativo,Tipo,IDRepresentante")] Cliente cliente)
         {
             try
             {
@@ -157,16 +163,30 @@ namespace PedidosWeb.Controllers
         // GET: Clientes/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                var representantes = RepresentanteBll.ListarRepresentantesAtivos();
+
+                representantes.Add(new Representante { ID = 0, Nome = "Selecione" });
+
+                ViewBag.Representantes = representantes;
+
+                Cliente cliente = db.Clientes.Find(id);
+                if (cliente == null)
+                {
+                    return HttpNotFound();
+                }
+                return View("~/Views/Admin/Clientes/Edit.cshtml", cliente);
             }
-            Cliente cliente = db.Clientes.Find(id);
-            if (cliente == null)
+            catch(Exception ex)
             {
-                return HttpNotFound();
+                return View("~/Views/Admin/Clientes/Edit.cshtml").ComMensagem(Resources.Geral.TenteNovamente, TipoMensagem.Erro);
             }
-            return View("~/Views/Admin/Clientes/Edit.cshtml", cliente);
         }
 
         // POST: Clientes/Edit/5
@@ -174,7 +194,7 @@ namespace PedidosWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,CodigoInterno,RazaoSocial,NomeFantasia,CPFCNPJ,InscricaoEstadual,Telefone,Celular,Email,Endereco,Cidade,Bairro,Estado,Numero,Cep,Complemento,Ativo,Tipo")] Cliente cliente)
+        public ActionResult Edit([Bind(Include = "ID,CodigoInterno,RazaoSocial,NomeFantasia,CPFCNPJ,InscricaoEstadual,Telefone,Celular,Email,Endereco,Cidade,Bairro,Estado,Numero,Cep,Complemento,Ativo,Tipo,IDRepresentante")] Cliente cliente)
         {
             try
             {

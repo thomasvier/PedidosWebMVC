@@ -8,6 +8,7 @@ using System.Web.Routing;
 using System.Web.Security;
 using PedidosWeb.DAL;
 using PedidosWeb.Models.Admin;
+using PedidosWeb.Models;
 
 namespace PedidosWeb
 {
@@ -37,7 +38,18 @@ namespace PedidosWeb
                         {
                             Usuario user = entities.Usuarios.SingleOrDefault(u => u.Login == username);
 
-                            roles = user.Role;
+                            switch (user.Role)
+                            {
+                                case TipoUsuario.Administrador:
+                                    roles = "Admin";
+                                    break;
+                                case TipoUsuario.Representante:
+                                    roles = "Representante";
+                                    break;
+                                case TipoUsuario.Cliente:
+                                    roles = "Cliente";
+                                    break;
+                            }
                         }
                         //let us extract the roles from our own custom cookie
 

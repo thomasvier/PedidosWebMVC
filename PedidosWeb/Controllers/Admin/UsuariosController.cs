@@ -13,7 +13,7 @@ using PedidosWeb.BLL.Admin;
 
 namespace PedidosWeb.Controllers.Admin
 {
-    [Authorize]
+    [Authorize(Roles="Admin")]
     public class UsuariosController : Controller
     {
         private Contexto db = new Contexto();
@@ -176,7 +176,7 @@ namespace PedidosWeb.Controllers.Admin
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Nome,Login,Senha,Email,Ativo,Role,Tipo")] Usuario usuario)
+        public ActionResult Edit([Bind(Include = "ID,Nome,Login,Senha,Email,Ativo,Role")] Usuario usuario)
         {
             try
             {

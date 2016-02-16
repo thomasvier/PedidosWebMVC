@@ -13,6 +13,7 @@ using PedidosWeb.BLL.Admin;
 
 namespace PedidosWeb.Controllers
 {
+    [Authorize(Roles="Admin")]
     public class PedidosController : Controller
     {
         private Contexto db = new Contexto();

@@ -58,13 +58,18 @@ namespace PedidosWeb.Controllers
                     {
                         return View().ComMensagem(Resources.Geral.UsuarioSenhaInvalidos, TipoMensagem.Aviso);
                     }
-
-                return View();
             }
             catch(Exception ex)
             {
                 return View().ComMensagem(string.Format(Resources.Geral.ContateAdminsitrador, ex.Message), TipoMensagem.Erro);
             }
+        }
+
+        public ActionResult LogOff()
+        {
+            Session.Clear();
+            FormsAuthentication.SignOut();
+            return RedirectToAction("LogOn", "Autenticacao");
         }
     }
 }

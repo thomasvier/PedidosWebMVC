@@ -1,11 +1,11 @@
-﻿@model PedidosWeb.Models.Admin.Usuario
+﻿@model PedidosWeb.Models.Admin.Representante
 
 @{
-    ViewBag.Title = "Usuário";
+    ViewBag.Title = "Representante";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Usuário</h2>
+<h2>Representante</h2>
 
 @using (Html.BeginForm()) 
 {
@@ -17,30 +17,15 @@
         <div class="form-group">
             @Html.Label("ID", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBox("IDUsuario", ViewBag.IDUsuario as string, htmlAttributes: new { @class = "form-control", @disabled = "disabled" })
+                @Html.Editor("IDRepresentante", ViewBag.IDRepresentante as string, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
             </div>
         </div>
+
         <div class="form-group">
             @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Login, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Login, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Login, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Senha, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Senha, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Senha, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -53,10 +38,18 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Role, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Telefone, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.Role, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Role, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Telefone, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Telefone, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Celular, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Celular, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Celular, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -73,7 +66,7 @@
         <div class="row">
             <div class="col-md-10">
                 <button type="submit" class="btn btn-primary" title="Salvar"><i class="glyphicon glyphicon-floppy-save"></i></button>
-                <button type="button" class="btn btn-danger" title="Voltar" onclick="location.href='@Url.Action("Index", "Usuarios")'"><i class="glyphicon glyphicon-arrow-left"></i></button>
+                <button type="button" class="btn btn-danger" title="Voltar" onclick="location.href='@Url.Action("Index", "Representantes")'"><i class="glyphicon glyphicon-arrow-left"></i></button>
             </div>
         </div>
     </div>

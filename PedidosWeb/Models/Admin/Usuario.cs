@@ -12,6 +12,10 @@ namespace PedidosWeb.Models.Admin
         [DisplayFormat(DataFormatString = "{0:000000}", ApplyFormatInEditMode = true)]
         public int ID { get; set; }
 
+        public int IDCliente { get; set; }
+
+        public int IDRepresentante { get; set; }
+
         [Required(ErrorMessageResourceType = typeof(Resources.Validations), ErrorMessageResourceName = "CampoObrigatorio")]
         [StringLength(500)]
         public string Nome { get; set; }
@@ -31,14 +35,13 @@ namespace PedidosWeb.Models.Admin
 
         public bool Ativo { get; set; }
 
-        public string Role { get; set; }
-
-        public TipoUsuario Tipo { get; set; }
+        [Display(Name="Tipo")]
+        public TipoUsuario Role { get; set; }
 
         public Usuario()
         {
             Ativo = true;
-            Tipo = TipoUsuario.Administrador;
+            Role = TipoUsuario.Administrador;
         }
     }
 }
