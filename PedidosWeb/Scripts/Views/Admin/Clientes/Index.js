@@ -1,7 +1,7 @@
 ﻿$(document).ready(function(){
     var tiposTitularFiltro = $('#tiposTitularFiltro').val();
     
-    $("#IDRepresentante").attr('selectedIndex', 0);
+    $("#IDRepresentante").val("0").change();
 
     if (tiposTitularFiltro != "")
         $('#selTiposTitularFiltro').val(tiposTitularFiltro);

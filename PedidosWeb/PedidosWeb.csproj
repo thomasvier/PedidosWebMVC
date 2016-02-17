@@ -65,6 +65,9 @@
     <Reference Include="PagedList.Mvc">
       <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="Rotativa">
+      <HintPath>..\packages\Rotativa.1.6.4\lib\net40\Rotativa.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -148,6 +151,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PedidosCliController.cs" />
     <Compile Include="Controllers\PedidosController.cs" />
+    <Compile Include="Controllers\RelatoriosController.cs" />
     <Compile Include="DAL\Contexto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -264,6 +268,14 @@
     <Compile Include="Migrations\201602161314345_rep2.Designer.cs">
       <DependentUpon>201602161314345_rep2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201602171611294_clipednovo.cs" />
+    <Compile Include="Migrations\201602171611294_clipednovo.Designer.cs">
+      <DependentUpon>201602171611294_clipednovo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602171645186_desconcliped.cs" />
+    <Compile Include="Migrations\201602171645186_desconcliped.Designer.cs">
+      <DependentUpon>201602171645186_desconcliped.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ActionResultExtensions.cs" />
     <Compile Include="Models\Admin\Cliente.cs" />
@@ -313,11 +325,13 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Relatorios\Relatorio.aspx" />
+    <Content Include="Rotativa\wkhtmltopdf.exe" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Relatorios\Produtos.xsc">
       <DependentUpon>Produtos.xsd</DependentUpon>
     </Content>
+    <Content Include="App_Browsers\qt.browser" />
     <None Include="Relatorios\Produtos.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -357,7 +371,9 @@
     <Content Include="Scripts\Views\Admin\Clientes\Index.js" />
     <Content Include="Scripts\Views\Admin\Produtos\Index.js" />
     <Content Include="Scripts\Views\Admin\Produtos\Produto.js" />
+    <Content Include="Scripts\Views\Admin\Representantes\Index.js" />
     <Content Include="Scripts\Views\Admin\Usuarios\Index.js" />
+    <Content Include="Scripts\Views\Pedidos\IndexPedidos.js" />
     <Content Include="Scripts\Views\Pedidos\PedidosAdm.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
@@ -405,6 +421,9 @@
     <Content Include="Views\Admin\Representantes\Details.cshtml" />
     <Content Include="Views\Admin\Representantes\Edit.cshtml" />
     <Content Include="Views\Admin\Representantes\Index.cshtml" />
+    <Content Include="Views\Shared\_Relatorio.cshtml" />
+    <Content Include="Views\Relatorios\Admin\Produto.cshtml" />
+    <Content Include="Views\Relatorios\Produtos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -500,6 +519,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602161314345_rep2.resx">
       <DependentUpon>201602161314345_rep2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602171611294_clipednovo.resx">
+      <DependentUpon>201602171611294_clipednovo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602171645186_desconcliped.resx">
+      <DependentUpon>201602171645186_desconcliped.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Geral.resx">
       <Generator>ResXFileCodeGenerator</Generator>

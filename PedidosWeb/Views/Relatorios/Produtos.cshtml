@@ -1,0 +1,46 @@
+﻿@model IEnumerable<PedidosWeb.Models.Admin.Produto>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Produtos</title>
+</head>
+<body>
+    <div> 
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Produto</th>
+                    <th>Preço</th>
+                    <th>Preço Quantidade</th>
+                    <th>Quantidade</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var item in Model)
+                { 
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Descricao)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PrecoUnitario)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PrecoQuantidade)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.QuantidadePreco)
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

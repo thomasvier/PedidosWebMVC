@@ -22,8 +22,8 @@ namespace PedidosWeb.Controllers.Admin
                                     string filtro, int? page,
                                     string ativoFiltro,
                                     string ativoFiltroAtual,
-                                    string codigoRepresentanteFiltro,
-                                    string codigoRepresentanteFiltroAtual)
+                                    string idFiltro,
+                                    string IDFiltroAtual)
         {
             try
             {
@@ -50,20 +50,20 @@ namespace PedidosWeb.Controllers.Admin
                     ativoFiltro = ativoFiltroAtual;
                 }
 
-                if (codigoRepresentanteFiltro != null)
+                if (idFiltro != null)
                 {
                     page = 1;
                 }
                 else
                 {
-                    codigoRepresentanteFiltro = codigoRepresentanteFiltroAtual;
+                    idFiltro = IDFiltroAtual;
                 }
 
                 ViewBag.FiltroAtual = filtro;
 
                 RepresentanteBll representanteBll = new RepresentanteBll();
 
-                return View("~/Views/Admin/Representantes/Index.cshtml", representanteBll.ListaRepresentantesPaginacao(page, filtro, sortOrder, ativoFiltro, codigoRepresentanteFiltro));
+                return View("~/Views/Admin/Representantes/Index.cshtml", representanteBll.ListaRepresentantesPaginacao(page, filtro, sortOrder, ativoFiltro, idFiltro));
             }
             catch (Exception ex)
             {

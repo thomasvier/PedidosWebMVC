@@ -25,8 +25,8 @@ namespace PedidosWeb.Controllers.Admin
                                     string tipoUsuarioFiltroAtual,
                                     string ativoFiltro,
                                     string ativoFiltroAtual,
-                                    string codigoUsuarioFiltro,
-                                    string codigoUsuarioFiltroAtual)
+                                    string idFiltro,
+                                    string IDFiltroAtual)
         {
             try
             {
@@ -62,20 +62,20 @@ namespace PedidosWeb.Controllers.Admin
                     ativoFiltro = ativoFiltroAtual;
                 }
 
-                if (codigoUsuarioFiltro != null)
+                if (idFiltro != null)
                 {
                     page = 1;
                 }
                 else
                 {
-                    codigoUsuarioFiltro = codigoUsuarioFiltroAtual;
+                    idFiltro = IDFiltroAtual;
                 }
 
                 ViewBag.FiltroAtual = filtro;
 
                 UsuarioBll usuarioBll = new UsuarioBll();
 
-                return View("~/Views/Admin/Usuarios/Index.cshtml", usuarioBll.ListaUsuariosPaginacao(page, filtro, tipoUsuarioFiltro, sortOrder, ativoFiltro, codigoUsuarioFiltro));
+                return View("~/Views/Admin/Usuarios/Index.cshtml", usuarioBll.ListaUsuariosPaginacao(page, filtro, tipoUsuarioFiltro, sortOrder, ativoFiltro, idFiltro));
             }
             catch (Exception ex)
             {

@@ -7,13 +7,8 @@
     ViewBag.Title = "Clientes";
 }
 
-<h2>Clientes</h2>
-
-<p>
-    <button type="button" title="Novo" name="btnNovo" id="btnNovo" class="btn btn-primary" onclick="location.href='@Url.Action("Create", "Clientes")'">Novo</button>
-</p>
 <div class="panel panel-default">
-    <div class="panel-heading">Filtro</div>
+    <div class="panel-heading">Clientes</div>
     <div class="panel-body">
 
         @using (Html.BeginForm("Index", "Clientes", FormMethod.Get))
@@ -46,90 +41,99 @@
                         <option value="0">Inativos</option>
                     </select>
                     @Html.Hidden("ativoFiltro", ViewBag.AtivoFiltroAtual as string, htmlAttributes: new { @value = @ViewBag.AtivoFiltroAtual })
-                </div>                
+                </div>
             </div>
             <br />
-            <div class="row">
-                <div class="col-md-4">
-                    <input type="submit" id="btnPesquisar" class="btn btn-primary" value="Pesquisar">
-                </div>
+            <div>
+                <button type="submit" id="btnPesquisar" class="btn btn-primary pull-left"><i class="glyphicon glyphicon-search"></i> Pesquisar</button>
+                <button type="button" title="Novo" name="btnNovo" id="btnNovo" class="btn btn-success pull-right" onclick="location.href='@Url.Action("Create", "Clientes")'">
+                    <i class="glyphicon glyphicon-plus"></i> Novo item
+                </button>
             </div>
         }
     </div>
-    <table class="table table-striped">
-        <tr>
-            <th>
-                @Html.ActionLink("Código Interno", "Index", new { sortOrder = ViewBag.CodigoInternoSort, filtroAtual = @ViewBag.FiltroAtual })
-            </th>
-            <th>
-                @Html.ActionLink("Razão Social", "Index", new { sortOrder = ViewBag.RazaoSocialSort, filtroAtual = @ViewBag.FiltroAtual })
-            </th>
-            <th>
-                @Html.ActionLink("Nome Fantasia", "Index", new { sortOrder = ViewBag.NomeFantasiaSort, filtroAtual = @ViewBag.FiltroAtual })
-            </th>
-            <th>
-                CNPJ/CPF
-            </th>
-            <th>
-                Telefone
-            </th>
-            <th>
-                E-mail
-            </th>
-            <th>
-                Cidade
-            </th>
-            <th>
-                Ativo
-            </th>
-            <th></th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
-            {
+    <div class="table-responsive">
+        <table class="table table-striped table-condensed">
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CodigoInterno)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RazaoSocial)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NomeFantasia)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CPFCNPJ)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Telefone)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Cidade)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Ativo)
-                </td>
-                <td>
-                    <button type="button" class="btn btn-primary edit" title="Editar" onclick="location.href='@Url.Action("Edit", "Clientes", new { item.ID })'"><i class="glyphicon glyphicon-edit"></i></button>
-                </td>
-                <td>
-                    <button type="button" class="btn btn-default print" title="Editar" onclick="location.href='@Url.Action("Edit", "Clientes", new { item.ID })'"><i class="glyphicon glyphicon-print"></i></button>
-                </td>
+                <th>
+                    @Html.ActionLink("Código Interno", "Index", new { sortOrder = ViewBag.CodigoInternoSort, filtroAtual = @ViewBag.FiltroAtual })
+                </th>
+                <th>
+                    @Html.ActionLink("Razão Social", "Index", new { sortOrder = ViewBag.RazaoSocialSort, filtroAtual = @ViewBag.FiltroAtual })
+                </th>
+                <th>
+                    @Html.ActionLink("Nome Fantasia", "Index", new { sortOrder = ViewBag.NomeFantasiaSort, filtroAtual = @ViewBag.FiltroAtual })
+                </th>
+                <th>
+                    CNPJ/CPF
+                </th>
+                <th>
+                    Telefone
+                </th>
+                <th>
+                    E-mail
+                </th>
+                <th>
+                    Cidade
+                </th>
+                <th>
+                    Ativo
+                </th>
+                <th></th>
+                <th></th>
             </tr>
-        }
-    </table>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CodigoInterno)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RazaoSocial)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NomeFantasia)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CPFCNPJ)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Telefone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cidade)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ativo)
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-primary edit" title="Editar" onclick="location.href='@Url.Action("Edit", "Clientes", new { item.ID })'"><i class="glyphicon glyphicon-edit"></i></button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-default print" title="Editar" onclick="location.href='@Url.Action("Edit", "Clientes", new { item.ID })'"><i class="glyphicon glyphicon-print"></i></button>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    <div class="panel-footer">
+        Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+
+        @Html.PagedListPager(Model, page => Url.Action("Index", new
+{
+    page,
+    sortOrder = ViewBag.CurrentSort,
+    filtroAtual = ViewBag.FiltroAtual,
+    tipoTitularAtual = ViewBag.TipoTitularAtual,
+    ativoFiltroAtual = ViewBag.AtivoFiltroAtual,
+    codigoInternoFiltroAtual = ViewBag.CodigoInternoFiltroAtual
+}), PagedListRenderOptions.Classic)
+    </div>
 </div>
-
-<br />
-Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
-
-@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, filtroAtual = ViewBag.FiltroAtual,
-    tipoTitularAtual = ViewBag.TipoTitularAtual, ativoFiltroAtual = ViewBag.AtivoFiltroAtual,
-    codigoInternoFiltroAtual = ViewBag.CodigoInternoFiltroAtual }), PagedListRenderOptions.Classic)
 
 @section Scripts { 
     @Scripts.Render("~/Scripts/Views/Admin/Index.js")

@@ -117,8 +117,6 @@ namespace PedidosWeb.Controllers
 
                 var representantes = RepresentanteBll.ListarRepresentantesAtivos();
 
-                representantes.Add(new Representante { ID = 0, Nome = "Selecione" });
-
                 ViewBag.Representantes = representantes;
 
                 return View("~/Views/Admin/Clientes/Create.cshtml", Cliente);

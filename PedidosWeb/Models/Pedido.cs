@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using PedidosWeb.Models.Admin;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PedidosWeb.Models
 {
@@ -16,7 +17,8 @@ namespace PedidosWeb.Models
         }
 
         public int ID { get; set; }
-                                
+                         
+        [ForeignKey("Cliente")]
         public int ClienteID { get; set; }
 
         [Display(Name="Código interno")]
@@ -36,7 +38,9 @@ namespace PedidosWeb.Models
 
         [Display(Name="Situação do pedido")]
         public SituacaoPedido SituacaoPedido { get; set; }
-       
+
+        public virtual Cliente Cliente { get; set; }
+
         public List<ItemPedido> ItensPedido { get; set; }
     }
 }

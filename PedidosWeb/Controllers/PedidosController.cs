@@ -23,7 +23,11 @@ namespace PedidosWeb.Controllers
         {
             try
             {
+                List<Cliente> clientes = ClienteBll.ListarClientes();
                 ClienteBll clienteBll = new ClienteBll();
+                
+                ViewBag.Clientes = clientes;
+
                 List<Pedido> pedidos = new List<Pedido>();
                 pedidos = db.Pedidos.ToList();
                 ViewBag.NomeCliente = clienteBll.ListarClientesAtivos();
@@ -51,11 +55,13 @@ namespace PedidosWeb.Controllers
         // GET: Pedidos/Create
         public ActionResult Create()
         {
-            ClienteBll clienteBll = new ClienteBll();
             ProdutoBll produtoBll = new ProdutoBll();
+            List<Cliente> clientes = ClienteBll.ListarClientes();
+
+            clientes.Add(new Cliente { ID = 0, RazaoSocial = "Selecione" });
 
             ViewBag.Produtos = produtoBll.ListarProdutosAtivos();
-            ViewBag.Clientes = clienteBll.ListarClientesAtivos();
+            ViewBag.Clientes = clientes;
 
             Pedido pedido = new Pedido();
 

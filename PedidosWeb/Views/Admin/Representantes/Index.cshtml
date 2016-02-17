@@ -7,13 +7,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Representantes</h2>
-
-<p>
-    <button type="button" title="Novo" name="btnNovo" id="btnNovo" class="btn btn-primary" onclick="location.href='@Url.Action("Create", "Representantes")'">Novo</button>
-</p>
 <div class="panel panel-default">
-    <div class="panel-heading">Filtro</div>
+    <div class="panel-heading">Representantes</div>
     <div class="panel-body">
 
         @using (Html.BeginForm("Index", "Representantes", FormMethod.Get))
@@ -40,10 +35,11 @@
                 </div>
             </div>
             <br />
-            <div class="row">
-                <div class="col-md-4">
-                    <input type="submit" id="btnPesquisar" class="btn btn-primary" value="Pesquisar">
-                </div>
+            <div>
+                <button type="submit" id="btnPesquisar" class="btn btn-primary pull-left"><i class="glyphicon glyphicon-search"></i> Pesquisar</button>
+                <button type="button" title="Novo" name="btnNovo" id="btnNovo" class="btn btn-success pull-right" onclick="location.href='@Url.Action("Create", "Representantes")'">
+                    <i class="glyphicon glyphicon-plus"></i> Novo item
+                </button>
             </div>
         }
     </div>
@@ -99,15 +95,20 @@
         }
 
     </table>
-    </div>
-    <br />
-    Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+    <div class="panel-footer">
+        Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
 
-    @Html.PagedListPager(Model, page => Url.Action("Index", new
-    {
-        page,
-        sortOrder = ViewBag.CurrentSort,
-        filtroAtual = ViewBag.FiltroAtual,
-        ativoFiltroAtual = ViewBag.AtivoFiltroAtual,
-        idFiltroAtual = ViewBag.IDFiltroAtual
-    }), PagedListRenderOptions.Classic)
+        @Html.PagedListPager(Model, page => Url.Action("Index", new
+        {
+            page,
+            sortOrder = ViewBag.CurrentSort,
+            filtroAtual = ViewBag.FiltroAtual,
+            ativoFiltroAtual = ViewBag.AtivoFiltroAtual,
+            idFiltroAtual = ViewBag.IDFiltroAtual
+        }), PagedListRenderOptions.Classic)
+    </div>
+    </div>
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/Views/Admin/Representantes/Index.js")
+}
