@@ -28,12 +28,12 @@
     <div class="row">
         <div class="col-md-4">
             @Html.LabelFor(model => model.DataPedido, htmlAttributes: new { @class = "control-label" })
-            @Html.EditorFor(model => model.DataPedido, new { htmlAttributes = new { @class = "form-control input-sm" } })
+            @Html.EditorFor(model => model.DataPedido, new { htmlAttributes = new { @class = "form-control datepicker input-sm" } })
             @Html.ValidationMessageFor(model => model.DataPedido, "", new { @class = "text-danger" })
         </div>
         <div class="col-md-4">
             @Html.LabelFor(model => model.DataEntrega, htmlAttributes: new { @class = "control-label" })
-            @Html.EditorFor(model => model.DataEntrega, new { htmlAttributes = new { @class = "form-control input-sm" } })
+            @Html.EditorFor(model => model.DataEntrega, new { htmlAttributes = new { @class = "form-control datepicker input-sm" } })
             @Html.ValidationMessageFor(model => model.DataEntrega, "", new { @class = "text-danger" })
         </div>
         <div class="col-md-4">
@@ -72,7 +72,7 @@
                     </div>                                    
                     <div class="col-md-2">
                         <br />
-                        <button type="button" class="btn btn-primary" title="Inserir"><i class="glyphicon glyphicon-plus"></i></button>
+                        <button type="button" class="btn btn-success" title="Inserir"><i class="glyphicon glyphicon-plus"></i></button>
                     </div>
                 </div>
                 <table class="table table-striped">
@@ -107,8 +107,8 @@
     <br />
     <div class="row">
         <div class="col-md-10">
-            <button type="submit" class="btn btn-primary" title="Salvar"><i class="glyphicon glyphicon-floppy-save"></i></button>
-            <button type="button" class="btn btn-danger" title="Voltar" onclick="location.href='@Url.Action("Index", "Pedidos")'"><i class="glyphicon glyphicon-arrow-left"></i></button>
+            <button type="submit" class="btn btn-primary" title="Salvar"><i class="glyphicon glyphicon-floppy-save"></i> Salvar</button>
+            <button type="button" class="btn btn-danger" title="Voltar" onclick="location.href='@Url.Action("Index", "Pedidos")'"><i class="glyphicon glyphicon-arrow-left"></i> Voltar</button>
         </div>
     </div>
 }

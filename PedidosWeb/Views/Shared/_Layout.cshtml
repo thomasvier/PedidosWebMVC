@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Pedidos Web</title>
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/bootstrap-datepicker3.css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>    
@@ -83,6 +84,7 @@
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/Scripts/jquery.mask.js")  
     @Scripts.Render("~/Scripts/jquery.maskMoney.min.js")  
+    @Scripts.Render("~/Scripts/bootstrap-datepicker.min.js")
     @RenderSection("scripts", required: false)
 </body>
 </html>
