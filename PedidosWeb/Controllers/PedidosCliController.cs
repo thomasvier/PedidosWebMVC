@@ -22,6 +22,7 @@ namespace PedidosWeb.Controllers
         {
             return View(db.Pedidos.ToList());
         }
+        
 
         // GET: PedidosCli/Details/5
         public ActionResult Details(int? id)

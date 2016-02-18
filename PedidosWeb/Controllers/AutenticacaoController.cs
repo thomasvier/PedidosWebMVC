@@ -7,6 +7,7 @@ using PedidosWeb.BLL.Admin;
 using PedidosWeb.Models;
 using PedidosWeb.Models.Admin;
 using System.Web.Security;
+using PedidosWeb.BLL;
 
 namespace PedidosWeb.Controllers
 {
@@ -28,6 +29,29 @@ namespace PedidosWeb.Controllers
             {
                 return View();
             }
+        }
+
+        public ActionResult RedirecionaPedidos()
+        {
+            string login = HttpContext.User.Identity.Name;
+
+            TipoUsuario tipoUsuario = AutenticacaoBll.RetornarTipoUsuario(login);
+
+            switch (tipoUsuario)
+            {
+                case TipoUsuario.Administrador:
+                    return RedirectToAction("Index", "Pedidos");
+                    break;
+                case TipoUsuario.Cliente:
+                    return RedirectToAction("Index", "PedidosCli");
+                    break;
+                case TipoUsuario.Representante:
+                    return RedirectToAction("Index", "PedidosRep");
+                    break;
+                default:
+                    return HttpNotFound();
+            }
+            
         }
 
         [HttpPost]

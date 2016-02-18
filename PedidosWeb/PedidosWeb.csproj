@@ -143,6 +143,8 @@
     <Compile Include="BLL\Admin\ProdutoBll.cs" />
     <Compile Include="BLL\Admin\RepresentanteBll.cs" />
     <Compile Include="BLL\Admin\UsuarioBll.cs" />
+    <Compile Include="BLL\AutenticacaoBll.cs" />
+    <Compile Include="BLL\PedidoBll.cs" />
     <Compile Include="Controllers\Admin\ClientesController.cs" />
     <Compile Include="Controllers\Admin\ProdutosController.cs" />
     <Compile Include="Controllers\Admin\RepresentantesController.cs" />
@@ -424,6 +426,8 @@
     <Content Include="Views\Shared\_Relatorio.cshtml" />
     <Content Include="Views\Relatorios\Admin\Produto.cshtml" />
     <Content Include="Views\Relatorios\Produtos.cshtml" />
+    <Content Include="Views\Relatorios\Admin\Clientes.cshtml" />
+    <Content Include="Views\Relatorios\Pedido.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

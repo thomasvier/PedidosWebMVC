@@ -1,0 +1,108 @@
+﻿@model PedidosWeb.Models.Pedido
+@{
+    ViewBag.Title = "Pedido";
+    Layout = "~/Views/Shared/_Relatorio.cshtml";
+}
+
+<h2>Dados empresa</h2>
+
+<hr />
+<div class="row">
+    <div class="col-xs-4">
+        <h5>Pedido de venda Nº @Html.DisplayFor(model => model.ID)</h5>
+    </div>
+    <div class="col-xs-4 pull-right">
+        @Html.Label("Data: ", htmlAttributes: new { @class = "control-label" })
+        @Html.DisplayFor(model => model.DataPedido)
+    </div>
+</div>
+
+
+<hr />
+
+<div class="row">
+    <div class="col-xs-4">
+        @Html.Label("Cliente: ", htmlAttributes: new { @class = "control-label" })
+        @Html.DisplayFor(model => model.Cliente.RazaoSocial)
+    </div>
+    <div class="col-xs-4">
+        @Html.Label("Contato: ", htmlAttributes: new { @class = "control-label" })
+        @Html.DisplayFor(model => model.Cliente.Telefone)
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-4">
+        @Html.Label("Endereço: ", htmlAttributes: new { @class = "control-label" })
+        @Html.DisplayFor(model => model.Cliente.Endereco)
+    </div>
+    <div class="col-xs-4">
+        @Html.Label("Bairro: ", htmlAttributes: new { @class = "control-label" })
+        @Html.DisplayFor(model => model.Cliente.Bairro)
+    </div>
+    <div class="col-xs-4">
+        @Html.Label("Número: ", htmlAttributes: new { @class = "control-label" })
+        @Html.DisplayFor(model => model.Cliente.Numero)
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-4">
+        @Html.Label("Cidade: ", htmlAttributes: new { @class = "control-label" })
+        @Html.DisplayFor(model => model.Cliente.Cidade)
+    </div>
+    <div class="col-xs-4">
+        @Html.Label("Estado: ", htmlAttributes: new { @class = "control-label" })
+        @Html.DisplayFor(model => model.Cliente.Estado)
+    </div>
+</div>
+<br />
+<table class="table table-condensed">
+    <tr>
+        <th>Produto</th>
+        <th>Valor</th>
+        <th>Quantidade</th>
+        <th>Valor Total</th>
+    </tr>
+    <tr>        
+        <td>Produto Teste</td>
+        <td>0,00</td>
+        <td>0,00</td>
+        <td>0,00</td>        
+    </tr>
+    <tr>
+        <td>Produto Teste</td>
+        <td>0,00</td>
+        <td>0,00</td>
+        <td>0,00</td>
+    </tr>
+</table>
+
+<hr />
+
+<div class="row">
+    <div class="col-xs-4">
+        @Html.Label("Vendedor: ", htmlAttributes: new { @class = "control-label" })
+        Vendedor teste
+    </div>
+    <div class="col-xs-4 pull-right">
+        @Html.Label("Valor produtos: ", htmlAttributes: new { @class = "control-label" })
+        R$ 0,00
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-4 pull-right">
+        @Html.Label("Frete: ", htmlAttributes: new { @class = "control-label" })
+        R$ 0,00
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-4 pull-right">
+        @Html.Label("Descontos: ", htmlAttributes: new { @class = "control-label" })
+        R$ 0,00
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-4 pull-right">
+        @Html.Label("Valor Total: ", htmlAttributes: new { @class = "control-label" })
+        R$ 0,00
+    </div>
+</div>

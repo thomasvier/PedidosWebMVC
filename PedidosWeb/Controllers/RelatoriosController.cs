@@ -8,6 +8,9 @@ using Rotativa.Options;
 using PedidosWeb.Models.Admin;
 using PedidosWeb.DAL;
 using PedidosWeb.BLL.Admin;
+using System.Net;
+using PedidosWeb.BLL;
+using PedidosWeb.Models;
 
 namespace PedidosWeb.Controllers
 {
@@ -19,11 +22,49 @@ namespace PedidosWeb.Controllers
             return View();
         }
 
-        public ActionResult Produtos()
+        public ActionResult Pedido(int? id)
         {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Pedido pedido = PedidoBll.RetornarPedido(id);
+
+            if (pedido == null)
+            {
+                return HttpNotFound();
+            }
+
+            return new Rotativa.ViewAsPdf("~/Views/Relatorios/Pedido.cshtml", pedido);
+        }
+
+        public ActionResult Clientes()
+        {
+            List<Cliente> clientes = ClienteBll.ListarClientes();
+
             var pdf = new ViewAsPdf
             {
-                ViewName = "Produtos"
+                ViewName = "~/Views/Relatorios/Admin/Clientes.cshtml",
+                PageSize = Size.A4,
+                IsGrayScale = true,
+                PageMargins = new Margins { Bottom = 5, Left = 5, Right = 5, Top = 5 },
+                Model = clientes
+            };
+
+            return pdf;            
+        }
+
+        public ActionResult Produtos()
+        {
+            ProdutoBll produtoBll = new ProdutoBll();
+
+            List<Produto> produtos = produtoBll.ListarProdutosAtivos();
+
+            var pdf = new ViewAsPdf
+            {
+                ViewName = "Produtos",
+                Model = produtos
             };
             return pdf;
         }
@@ -34,14 +75,7 @@ namespace PedidosWeb.Controllers
 
             List<Produto> produtos = produtoBll.ListarProdutosAtivos();
 
-            Contexto db = new Contexto();
-
-            var pdf = new ViewAsPdf
-            {
-                ViewName = "~/Views/Relatorios/Admin/Produto.cshtml",
-                Model = db.Produtos.ToList()
-            };
-            return pdf;
+            return new Rotativa.ViewAsPdf("~/Views/Relatorios/Produto.cshtml", produtos);
         }
 
         /*

@@ -58,8 +58,6 @@ namespace PedidosWeb.Controllers
             ProdutoBll produtoBll = new ProdutoBll();
             List<Cliente> clientes = ClienteBll.ListarClientes();
 
-            clientes.Add(new Cliente { ID = 0, RazaoSocial = "Selecione" });
-
             ViewBag.Produtos = produtoBll.ListarProdutosAtivos();
             ViewBag.Clientes = clientes;
 

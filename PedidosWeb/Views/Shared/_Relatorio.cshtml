@@ -1,4 +1,5 @@
-﻿
+﻿@Scripts.Render("~/bundles/jquery")
+<link href="@Server.MapPath("~/Content/bootstrap.min.css")" rel="stylesheet" />
 @{
     Layout = null;
 }
@@ -9,11 +10,19 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
     <title>_Relatorio</title>
+
+    <style type="text/css">
+        table tr {
+            page-break-inside: avoid !important;
+        }
+
+    </style>
 </head>
 <body>
     <div> 
+        @RenderBody()
     </div>
 </body>
+
 </html>

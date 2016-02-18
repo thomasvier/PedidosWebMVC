@@ -1,0 +1,40 @@
+﻿@model IEnumerable<PedidosWeb.Models.Admin.Cliente>
+@{
+    ViewBag.Title = "Clientes";
+    Layout = "~/Views/Shared/_Relatorio.cshtml";
+}
+<h3>Relatório de clientes</h3>
+<hr />
+<div>
+    <table cellpadding="0" cellspacing="0" class="table">
+        <thead>
+            <tr>
+                <th>Razão Social</th>
+                <th>Telefone</th>
+                <th>Celular</th>
+                <th>E-mail</th>
+                <th>Endereço</th>
+            </tr>
+        </thead>
+            @foreach(var item in Model)
+            { 
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => item.RazaoSocial)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.Telefone)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.Celular)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.Endereco)
+                </td>
+            </tr>
+            }
+    </table>
+</div>
