@@ -278,6 +278,10 @@
     <Compile Include="Migrations\201602171645186_desconcliped.Designer.cs">
       <DependentUpon>201602171645186_desconcliped.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201602191128143_itemped.cs" />
+    <Compile Include="Migrations\201602191128143_itemped.Designer.cs">
+      <DependentUpon>201602191128143_itemped.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ActionResultExtensions.cs" />
     <Compile Include="Models\Admin\Cliente.cs" />
@@ -459,6 +463,7 @@
     <Content Include="Scripts\Views\Admin\Produtos\Produto.js" />
     <Content Include="Scripts\Views\Admin\Representantes\Index.js" />
     <Content Include="Scripts\Views\Admin\Usuarios\Index.js" />
+    <Content Include="Scripts\Views\Geral.js" />
     <Content Include="Scripts\Views\Pedidos\IndexPedidos.js" />
     <Content Include="Scripts\Views\Pedidos\PedidosAdm.js" />
     <Content Include="Scripts\_references.js" />
@@ -613,6 +618,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602171645186_desconcliped.resx">
       <DependentUpon>201602171645186_desconcliped.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602191128143_itemped.resx">
+      <DependentUpon>201602191128143_itemped.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Geral.resx">
       <Generator>ResXFileCodeGenerator</Generator>

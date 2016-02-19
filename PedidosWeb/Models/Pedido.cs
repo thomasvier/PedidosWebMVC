@@ -40,7 +40,5 @@ namespace PedidosWeb.Models
         public SituacaoPedido SituacaoPedido { get; set; }
 
         public virtual Cliente Cliente { get; set; }
-
-        public List<ItemPedido> ItensPedido { get; set; }
     }
 }
