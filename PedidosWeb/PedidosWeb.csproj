@@ -40,6 +40,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AjaxControlToolkit">
+      <HintPath>..\packages\AjaxControlToolkit.15.1.4.0\lib\net40\AjaxControlToolkit.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -145,12 +148,14 @@
     <Compile Include="BLL\Admin\UsuarioBll.cs" />
     <Compile Include="BLL\AutenticacaoBll.cs" />
     <Compile Include="BLL\PedidoBll.cs" />
+    <Compile Include="BLL\UteisBll.cs" />
     <Compile Include="Controllers\Admin\ClientesController.cs" />
     <Compile Include="Controllers\Admin\ProdutosController.cs" />
     <Compile Include="Controllers\Admin\RepresentantesController.cs" />
     <Compile Include="Controllers\Admin\UsuariosController.cs" />
     <Compile Include="Controllers\AutenticacaoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ItensPedidoController.cs" />
     <Compile Include="Controllers\PedidosCliController.cs" />
     <Compile Include="Controllers\PedidosController.cs" />
     <Compile Include="Controllers\RelatoriosController.cs" />
@@ -282,6 +287,10 @@
     <Compile Include="Migrations\201602191128143_itemped.Designer.cs">
       <DependentUpon>201602191128143_itemped.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201602221704175_valtotal.cs" />
+    <Compile Include="Migrations\201602221704175_valtotal.Designer.cs">
+      <DependentUpon>201602221704175_valtotal.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ActionResultExtensions.cs" />
     <Compile Include="Models\Admin\Cliente.cs" />
@@ -332,8 +341,45 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\ie10-viewport-bug-workaround.css" />
+    <Content Include="Content\jquery-ui.css" />
+    <Content Include="Content\jquery-ui.min.css" />
+    <Content Include="Content\jquery-ui.theme.css" />
+    <Content Include="Content\jquery-ui.theme.min.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\signin.css" />
+    <Content Include="Content\themes\base\accordion.css" />
+    <Content Include="Content\themes\base\all.css" />
+    <Content Include="Content\themes\base\autocomplete.css" />
+    <Content Include="Content\themes\base\base.css" />
+    <Content Include="Content\themes\base\button.css" />
+    <Content Include="Content\themes\base\core.css" />
+    <Content Include="Content\themes\base\datepicker.css" />
+    <Content Include="Content\themes\base\dialog.css" />
+    <Content Include="Content\themes\base\draggable.css" />
+    <Content Include="Content\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\menu.css" />
+    <Content Include="Content\themes\base\progressbar.css" />
+    <Content Include="Content\themes\base\resizable.css" />
+    <Content Include="Content\themes\base\selectable.css" />
+    <Content Include="Content\themes\base\selectmenu.css" />
+    <Content Include="Content\themes\base\slider.css" />
+    <Content Include="Content\themes\base\sortable.css" />
+    <Content Include="Content\themes\base\spinner.css" />
+    <Content Include="Content\themes\base\tabs.css" />
+    <Content Include="Content\themes\base\theme.css" />
+    <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -379,6 +425,10 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui-1.11.4.js" />
+    <Content Include="Scripts\jquery-ui-1.11.4.min.js" />
+    <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
     <Content Include="Scripts\jquery.mask.js" />
     <Content Include="Scripts\jquery.mask.min.js" />
     <Content Include="Scripts\jquery.maskMoney.min.js" />
@@ -517,9 +567,12 @@
     <Content Include="Views\Relatorios\Produtos.cshtml" />
     <Content Include="Views\Relatorios\Admin\Clientes.cshtml" />
     <Content Include="Views\Relatorios\Pedido.cshtml" />
+    <Content Include="Views\Pedidos\CreateOld.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\ItensPedido\" />
+    <Folder Include="Views\Uteis\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -621,6 +674,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602191128143_itemped.resx">
       <DependentUpon>201602191128143_itemped.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602221704175_valtotal.resx">
+      <DependentUpon>201602221704175_valtotal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Geral.resx">
       <Generator>ResXFileCodeGenerator</Generator>

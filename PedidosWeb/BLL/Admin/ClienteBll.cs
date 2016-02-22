@@ -90,6 +90,20 @@ namespace PedidosWeb.BLL.Admin
             return Clientes;
         }
 
+        //public static List<Cliente> RetornarClientes(string nome)
+        //{
+        //    Contexto db = new Contexto();
+            
+        //    var clientes = (from c in db.Clientes
+        //                              where c.RazaoSocial.ToLower().Contains(nome)
+        //                              select new { 
+        //                                ID = c.ID,
+        //                                RazaoSocial = c.RazaoSocial                                      
+        //                              }).ToList();
+
+        //    return 
+        //}
+
         public static Cliente RetornarCliente(int ID)
         {
             Contexto db = new Contexto();

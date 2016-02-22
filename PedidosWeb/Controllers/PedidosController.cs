@@ -10,6 +10,7 @@ using PedidosWeb.DAL;
 using PedidosWeb.Models;
 using PedidosWeb.Models.Admin;
 using PedidosWeb.BLL.Admin;
+using PedidosWeb.BLL;
 
 namespace PedidosWeb.Controllers
 {
@@ -71,7 +72,7 @@ namespace PedidosWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,CodigoInterno,DataPedido, DataEntrega,ValorTotal,SituacaoPedido,ClienteID")] Pedido pedido)
+        public ActionResult Create([Bind(Include = "ID,CodigoInterno,DataPedido, DataEntrega,ValorTotal,SituacaoPedido,ClienteID")] Pedido pedido, string itensPedido)
         {
             if (ModelState.IsValid)
             {
@@ -79,6 +80,12 @@ namespace PedidosWeb.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
+            ProdutoBll produtoBll = new ProdutoBll();
+            List<Cliente> clientes = ClienteBll.ListarClientes();
+
+            ViewBag.Produtos = produtoBll.ListarProdutosAtivos();
+            ViewBag.Clientes = clientes;
 
             return View(pedido);
         }
@@ -169,6 +176,33 @@ namespace PedidosWeb.Controllers
             {
                 return Json(new { preco = "0,00", total = "0,00" });
             }
+        }
+
+        public JsonResult CalcularTotal(string valores)
+        {
+            try
+            {
+                return Json(UteisBll.CalcularTotal(valores), JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json("0,00");
+            }
+        }
+
+        public JsonResult RetornarClientes(string term)
+        {
+            Contexto db = new Contexto();
+
+            var clientes = (from c in db.Clientes
+                            where c.RazaoSocial.ToLower().Contains(term)
+                            select new
+                            {
+                                ID = c.ID,
+                                RazaoSocial = c.RazaoSocial
+                            }).ToList();
+
+            return Json(clientes, JsonRequestBehavior.AllowGet);
         }
     }
 }

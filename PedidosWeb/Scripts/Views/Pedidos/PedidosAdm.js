@@ -6,8 +6,10 @@
 
         calculaItem(idProduto);
     });
-
+    
+    submeterFormulario();
     inserirItem();
+    eventoAutcomplete();
 });
 
 //Remove o item selecionado da tabela de produtos
@@ -46,6 +48,14 @@ var aplicarFuncoesTabela = function (idRemover, idEditar)
             calculaTotal();
         });
     });
+}
+
+var eventoAutcomplete = function()
+{
+    $('#clienteteste').autocomplete({
+        source: "/Pedidos/RetornarClientes"
+        
+        });
 }
 
 //Insere um novo item na tabela de produtos
@@ -113,16 +123,55 @@ var calculaItem = function(idProduto)
         });
 }
 
+//calcular total dos itens
 var calculaTotal = function()
 {
-    var total = 0;
+    var total = '';
 
     $('table#itens-pedido tr').each(function () {
-        var totalItem = parseFloat($(this).data('total'));
-            });
-    
-    $("#ValorTotal").maskMoney({ allowNegative: true, thousands: '.', decimal: ',', affixesStay: false, precision: 2 });
+        var item = parseFloat($(this).data('total'));
+        
+        
 
-    $("#ValorTotal").maskMoney('mask', total);
+        if (!isNaN(item))
+        {            
+            if (!total)
+            {
+                total = $(this).data('total').toString();
+            }
+            else
+            {
+                total += ':' + $(this).data('total').toString();
+            }            
+        }
+    });    
+
+    $.ajax(
+        {
+            url: '/Pedidos/CalcularTotal',
+            dataType: 'json',
+            data: { valores: total },
+            success: function (data) {
+                $("#ValorTotal").val('R$ ' + data);
+            }
+        });
+}
+
+var submeterFormulario = function()
+{
+    $('#btnSalvar').click(function () {
+        var count = $('#itens-pedido >tbody >tr').length;
+
+        if (count > 0) {
+            $('#pedidosCreate').submit();
+
+        }
+        else {
+            alert('erro');
+        }
+    
+
+    
+    });
 }
 
