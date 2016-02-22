@@ -106,5 +106,37 @@ namespace PedidosWeb.BLL.Admin
 
             return Produtos;
         }
+
+        /// <summary>
+        /// Retorna o preço conforme a quantidade passada
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="quantidade"></param>
+        /// <returns></returns>
+        public static decimal? RetornarPreco(int id, decimal quantidade)
+        {
+            Contexto db = new Contexto();
+            decimal? preco = 0;
+
+            var produto = (from p in db.Produtos
+                               where p.ID.Equals(id)
+                               select new
+                               {
+                                   preco = p.PrecoUnitario,
+                                   precoQuantidade = p.PrecoQuantidade,
+                                   quantidadePreco = p.QuantidadePreco
+                               }).FirstOrDefault();
+
+            if(quantidade >= produto.quantidadePreco)
+            {
+                preco = produto.precoQuantidade;
+            }
+            else
+            {
+                preco = produto.preco;
+            }
+
+            return preco;
+        }
     }
 }
