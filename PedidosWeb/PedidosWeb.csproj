@@ -296,6 +296,18 @@
     <Compile Include="Migrations\201602221704175_valtotal.Designer.cs">
       <DependentUpon>201602221704175_valtotal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201602231812416_cadastraritem.cs" />
+    <Compile Include="Migrations\201602231812416_cadastraritem.Designer.cs">
+      <DependentUpon>201602231812416_cadastraritem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602231903275_tonnec.cs" />
+    <Compile Include="Migrations\201602231903275_tonnec.Designer.cs">
+      <DependentUpon>201602231903275_tonnec.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602231904259_tonne.cs" />
+    <Compile Include="Migrations\201602231904259_tonne.Designer.cs">
+      <DependentUpon>201602231904259_tonne.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ActionResultExtensions.cs" />
     <Compile Include="Models\Admin\Cliente.cs" />
@@ -398,6 +410,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="img\loading.gif" />
+    <Content Include="img\loading.svg" />
     <Content Include="Relatorios\Relatorio.aspx" />
     <Content Include="Rotativa\wkhtmltopdf.exe" />
     <Content Include="Scripts\bloodhound.js" />
@@ -532,6 +546,7 @@
     <Content Include="Scripts\Views\Admin\Representantes\Index.js" />
     <Content Include="Scripts\Views\Admin\Usuarios\Index.js" />
     <Content Include="Scripts\Views\Geral.js" />
+    <Content Include="Scripts\Views\ItensPedido\ItensPedido.js" />
     <Content Include="Scripts\Views\Pedidos\IndexPedidos.js" />
     <Content Include="Scripts\Views\Pedidos\PedidosAdm.js" />
     <Content Include="Scripts\_references.js" />
@@ -566,7 +581,7 @@
     <Content Include="Views\Admin\Produtos\Details.cshtml" />
     <Content Include="Views\Admin\Produtos\Edit.cshtml" />
     <Content Include="Views\Admin\Produtos\Index.cshtml" />
-    <Content Include="Views\Pedidos\Create.cshtml" />
+    <Content Include="Views\Pedidos\Pedido.cshtml" />
     <Content Include="Views\Pedidos\Delete.cshtml" />
     <Content Include="Views\Pedidos\Details.cshtml" />
     <Content Include="Views\Pedidos\Edit.cshtml" />
@@ -586,10 +601,11 @@
     <Content Include="Views\Relatorios\Admin\Clientes.cshtml" />
     <Content Include="Views\Relatorios\Pedido.cshtml" />
     <Content Include="Views\Pedidos\CreateOld.cshtml" />
+    <Content Include="Views\ItensPedido\ItensPedido.cshtml" />
+    <Content Include="Views\ItensPedido\CadastrarItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\ItensPedido\" />
     <Folder Include="Views\Uteis\" />
   </ItemGroup>
   <ItemGroup>
@@ -695,6 +711,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602221704175_valtotal.resx">
       <DependentUpon>201602221704175_valtotal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602231812416_cadastraritem.resx">
+      <DependentUpon>201602231812416_cadastraritem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602231903275_tonnec.resx">
+      <DependentUpon>201602231903275_tonnec.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602231904259_tonne.resx">
+      <DependentUpon>201602231904259_tonne.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Geral.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -13,5 +13,10 @@ namespace PedidosWeb.Controllers
         {
             return View();
         }
+
+        public ActionResult CadastrarItem()
+        {
+            return View("~/Views/ItensPedido/CadastrarItem.cshtml");
+        }
     }
 }

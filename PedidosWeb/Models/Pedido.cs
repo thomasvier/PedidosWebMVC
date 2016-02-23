@@ -34,7 +34,7 @@ namespace PedidosWeb.Models
         public DateTime DataEntrega { get; set; }
 
         [Display(Name="Valor total")]
-        public decimal ValorTotal { get; set; }
+        public decimal? ValorTotal { get; set; }
 
         [Display(Name="Situação do pedido")]
         public SituacaoPedido SituacaoPedido { get; set; }

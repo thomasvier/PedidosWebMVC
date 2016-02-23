@@ -40,9 +40,16 @@ namespace PedidosWeb.Controllers
         }
 
         // GET: PedidosCli/Create
-        public ActionResult Create()
+        public ActionResult Create(int? id)
         {
-            return View();
+            if (id != null)
+            {
+                return View();
+            }
+            else
+            {
+                return View();
+            }
         }
 
         // POST: PedidosCli/Create

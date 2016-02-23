@@ -54,8 +54,8 @@ namespace PedidosWeb.Controllers
         }
 
         // GET: Pedidos/Create
-        public ActionResult Create()
-        {
+        public ActionResult Pedido(int? id)
+        {            
             ProdutoBll produtoBll = new ProdutoBll();
             List<Cliente> clientes = ClienteBll.ListarClientes();
 
@@ -64,7 +64,16 @@ namespace PedidosWeb.Controllers
 
             Pedido pedido = new Pedido();
 
-            return View(pedido);
+            if (id != null)
+            {
+                pedido = db.Pedidos.Where(x => x.ID == id).FirstOrDefault();
+
+                return View(pedido);
+            }
+            else
+            {
+                return View(pedido);
+            }
         }
 
         // POST: Pedidos/Create
@@ -72,13 +81,13 @@ namespace PedidosWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,CodigoInterno,DataPedido, DataEntrega,ValorTotal,SituacaoPedido,ClienteID")] Pedido pedido, string itensPedido)
+        public ActionResult Pedido([Bind(Include = "ID,CodigoInterno,DataPedido, DataEntrega,ValorTotal,SituacaoPedido,ClienteID")] Pedido pedido)
         {
             if (ModelState.IsValid)
             {
                 db.Pedidos.Add(pedido);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Pedido(pedido.ID);
             }
 
             ProdutoBll produtoBll = new ProdutoBll();
@@ -210,6 +219,20 @@ namespace PedidosWeb.Controllers
                            select c).FirstOrDefault();
 
             return Json(cli, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult SalvarPedido([Bind(Include = "ID,CodigoInterno,DataPedido, DataEntrega,ValorTotal,SituacaoPedido,ClienteID")] Pedido pedido, string idCliente)
+        {
+            using(Contexto db = new Contexto())
+            {
+                pedido.ClienteID = Convert.ToInt32(idCliente);
+
+                db.Pedidos.Add(pedido);
+                db.SaveChanges();
+            }
+            
+            return Pedido(pedido.ID);
         }
     }
 }

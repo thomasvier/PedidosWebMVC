@@ -16,7 +16,7 @@ namespace PedidosWeb.Models
         [ForeignKey("Produto")]
         public virtual int IDProduto { get; set; }
 
-        [ForeignKey("Cliente")]
+        [ForeignKey("Pedido")]
         public virtual int IDPedido { get; set; }
                 
         public decimal Quantidade { get; set; }
@@ -25,7 +25,7 @@ namespace PedidosWeb.Models
         public decimal PrecoCompra { get; set; }
 
         [Display(Name = "Valor total")]
-        public decimal ValorTotal { get; set; }
+        public decimal? ValorTotal { get; set; }
 
         public virtual Produto Produto { get; set; }
 

@@ -52,7 +52,7 @@ var aplicarFuncoesTabela = function (idRemover, idEditar)
 
 var eventoAutcomplete = function()
 {
-    $('#clienteteste').autocomplete({
+    $('#cliente').autocomplete({
         source: function (request, response) {
             var customer = new Array();
             $.ajax({
@@ -71,8 +71,10 @@ var eventoAutcomplete = function()
             });
             if (customer.length > 0)
                 response(customer);
-            else
+            else {
                 $('#IDCliente').val('');
+                $('#btnSalvar').addClass('disabled');
+            }
         },
         select: function (event, ui) {
             //fill selected customer details on form
@@ -84,7 +86,15 @@ var eventoAutcomplete = function()
                 data: { id: ui.item.Id },
 
                 success: function (data) {
-                    $('#IDCliente').val(data.ID);                    
+                    $('#IDCliente').val(data.ID);
+
+                    //$.ajax({
+                    //    type: "POST",
+                    //    url: "/Pedidos/SalvarPedido",
+                    //    data: { idCliente: data.ID } 
+                    //});
+
+                    $('#btnSalvar').removeClass('disabled');
                     action = data.Action;
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
@@ -200,15 +210,7 @@ var submeterFormulario = function()
     $('#btnSalvar').click(function () {
         var count = $('#itens-pedido >tbody >tr').length;
 
-        if (count > 0) {
             $('#pedidosCreate').submit();
-
-        }
-        else {
-            alert('erro');
-        }
-    
-
     
     });
 }
