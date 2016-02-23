@@ -196,13 +196,20 @@ namespace PedidosWeb.Controllers
 
             var clientes = (from c in db.Clientes
                             where c.RazaoSocial.ToLower().Contains(term)
-                            select new
-                            {
-                                ID = c.ID,
-                                RazaoSocial = c.RazaoSocial
-                            }).ToList();
+                            select c).ToList();
 
             return Json(clientes, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult ClienteSelecionado(int id)
+        {
+            Contexto db = new Contexto();
+
+            Cliente cli = (from c in db.Clientes
+                           where c.ID.Equals(id)
+                           select c).FirstOrDefault();
+
+            return Json(cli, JsonRequestBehavior.AllowGet);
         }
     }
 }

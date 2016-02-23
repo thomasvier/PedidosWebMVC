@@ -53,9 +53,47 @@ var aplicarFuncoesTabela = function (idRemover, idEditar)
 var eventoAutcomplete = function()
 {
     $('#clienteteste').autocomplete({
-        source: "/Pedidos/RetornarClientes"
-        
-        });
+        source: function (request, response) {
+            var customer = new Array();
+            $.ajax({
+                async: false,
+                cache: false,
+                type: "GET",
+                url: "/Pedidos/RetornarClientes",
+                data: { "term": request.term },
+                success: function (data) {
+                    for (var i = 0; i < data.length ; i++) {
+                        customer[i] = { label: data[i].RazaoSocial, Id: data[i].ID };
+
+                    }
+                },
+                
+            });
+            if (customer.length > 0)
+                response(customer);
+            else
+                $('#IDCliente').val('');
+        },
+        select: function (event, ui) {
+            //fill selected customer details on form
+            $.ajax({
+                cache: false,
+                async: false,
+                type: "GET",
+                url: "/Pedidos/ClienteSelecionado",
+                data: { id: ui.item.Id },
+
+                success: function (data) {
+                    $('#IDCliente').val(data.ID);                    
+                    action = data.Action;
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert('Failed to retrieve states.');
+                }
+            });
+        }        
+    });
+    
 }
 
 //Insere um novo item na tabela de produtos
