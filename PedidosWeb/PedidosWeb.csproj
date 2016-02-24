@@ -308,6 +308,14 @@
     <Compile Include="Migrations\201602231904259_tonne.Designer.cs">
       <DependentUpon>201602231904259_tonne.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201602241224406_itempedlis.cs" />
+    <Compile Include="Migrations\201602241224406_itempedlis.Designer.cs">
+      <DependentUpon>201602241224406_itempedlis.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602241959392_asdadas.cs" />
+    <Compile Include="Migrations\201602241959392_asdadas.Designer.cs">
+      <DependentUpon>201602241959392_asdadas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ActionResultExtensions.cs" />
     <Compile Include="Models\Admin\Cliente.cs" />
@@ -546,7 +554,8 @@
     <Content Include="Scripts\Views\Admin\Representantes\Index.js" />
     <Content Include="Scripts\Views\Admin\Usuarios\Index.js" />
     <Content Include="Scripts\Views\Geral.js" />
-    <Content Include="Scripts\Views\ItensPedido\ItensPedido.js" />
+    <Content Include="Scripts\Views\ItensPedido\ItemPedido.js" />
+    <Content Include="Scripts\Views\ItensPedido\ListaItens.js" />
     <Content Include="Scripts\Views\Pedidos\IndexPedidos.js" />
     <Content Include="Scripts\Views\Pedidos\PedidosAdm.js" />
     <Content Include="Scripts\_references.js" />
@@ -601,8 +610,8 @@
     <Content Include="Views\Relatorios\Admin\Clientes.cshtml" />
     <Content Include="Views\Relatorios\Pedido.cshtml" />
     <Content Include="Views\Pedidos\CreateOld.cshtml" />
-    <Content Include="Views\ItensPedido\ItensPedido.cshtml" />
-    <Content Include="Views\ItensPedido\CadastrarItem.cshtml" />
+    <Content Include="Views\ItensPedido\ListaItens.cshtml" />
+    <Content Include="Views\ItensPedido\ItemPedido.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -720,6 +729,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602231904259_tonne.resx">
       <DependentUpon>201602231904259_tonne.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602241224406_itempedlis.resx">
+      <DependentUpon>201602241224406_itempedlis.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602241959392_asdadas.resx">
+      <DependentUpon>201602241959392_asdadas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Geral.resx">
       <Generator>ResXFileCodeGenerator</Generator>

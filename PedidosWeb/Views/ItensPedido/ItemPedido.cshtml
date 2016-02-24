@@ -4,27 +4,22 @@
     Layout = null;
 }
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("ItemPedido", "ItensPedido", null, FormMethod.Post, new { @id = "formItemPedido", @name = "formItemPedido" }))
             {
     @Html.AntiForgeryToken()
-
+    
 <div class="modal-dialog">
     <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
             <h4 class="modal-title">Inserir item</h4>
-        </div>
+        </div>        
         <div class="modal-body">            
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
+            @Html.HiddenFor(model => model.IDPedido)
             <div class="form-group">
-                <div class="input-group">
-                    <input type="text" class="form-control" id="produto-item" placeholder="Digite o nome ou código do produto">
-                    <span class="input-group-btn">
-                        <button class="btn btn-primary" type="button"><i class="glyphicon glyphicon-search"></i></button>
-                    </span>
-                </div>
-                @Html.Hidden("IDProduto")
+                @Html.Label("Produto")
+                @Html.DropDownListFor(model => model.IDProduto, new SelectList(ViewBag.Produtos, "ID", "Descricao"), "Selecione", htmlAttributes: new { @class = "form-control" })                
             </div>
             <div class="row">
                 <div class="col-md-4">
@@ -59,3 +54,6 @@
     </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->
 }
+
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/Scripts/Views/ItensPedido/ItemPedido.js")

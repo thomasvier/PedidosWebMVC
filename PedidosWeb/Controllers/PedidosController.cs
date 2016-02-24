@@ -68,7 +68,7 @@ namespace PedidosWeb.Controllers
 
             if (id != null)
             {
-                pedido = db.Pedidos.Where(x => x.ID == id).FirstOrDefault();
+                pedido = PedidoBll.RetornarPedido(id);
 
                 return View(pedido);
             }
@@ -87,18 +87,19 @@ namespace PedidosWeb.Controllers
         {
             if (ModelState.IsValid)
             {
+                PedidoBll pedidoBll = new PedidoBll();
+
                 pedido.ClienteID = int.Parse(ClienteID);
 
                 if (pedido.ID > 0)
                 {
-                    db.Entry(pedido).State = EntityState.Modified;
+                    pedidoBll.Atualizar(pedido);
                 }
                 else
                 {
-                    db.Pedidos.Add(pedido);
+                    pedidoBll.Criar(pedido);
                 }
 
-                db.SaveChanges();
                 return RedirectToAction("Pedido", new { id = pedido.ID });
             }
 
@@ -234,17 +235,27 @@ namespace PedidosWeb.Controllers
         }
 
         [HttpPost]
-        public ActionResult SalvarPedido([Bind(Include = "ID,CodigoInterno,DataPedido, DataEntrega,ValorTotal,SituacaoPedido,ClienteID")] Pedido pedido, string idCliente)
+        public ActionResult SalvarPedido(string ClienteID)
         {
+            Pedido pedido = new Pedido();
+
             using(Contexto db = new Contexto())
             {
-                pedido.ClienteID = Convert.ToInt32(idCliente);
+                pedido.ClienteID = Convert.ToInt32(ClienteID);
 
                 db.Pedidos.Add(pedido);
                 db.SaveChanges();
             }
-            
-            return Pedido(pedido.ID);
+
+            return RedirectToAction("Pedido", new { id = pedido.ID });
+        }
+
+        public ActionResult ListaItens()
+        {
+            int IDPedido = 0;
+            List<ItemPedido> itens = PedidoBll.RetornarItens(IDPedido);
+
+            return View(itens);
         }
     }
 }

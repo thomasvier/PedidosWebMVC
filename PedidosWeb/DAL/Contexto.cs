@@ -27,6 +27,6 @@ namespace PedidosWeb.DAL
 
         public System.Data.Entity.DbSet<PedidosWeb.Models.Admin.Representante> Representantes { get; set; }
 
-        public System.Data.Entity.DbSet<PedidosWeb.Models.ItemPedido> ItemPedidoes { get; set; }
+        public System.Data.Entity.DbSet<PedidosWeb.Models.ItemPedido> ItemPedidos { get; set; }
     }
 }

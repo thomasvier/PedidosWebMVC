@@ -1,0 +1,59 @@
+﻿@model IEnumerable<PedidosWeb.Models.ItemPedido>
+
+@{
+    ViewBag.Title = "ItensPedido";
+}
+<div class="row">
+    <div class="col-md-12">
+        <button id="btnModalPedidoItem" class="btn btn-success pull-right" type="button"><i class="glyphicon glyphicon-plus"></i> Inserir produto</button>
+    </div>
+</div>
+
+<div class="modal" id="modalPedidoItem">
+
+</div>
+
+<br />
+
+<div class="panel panel-default">
+    <div class="panel-heading">Produtos</div>
+    <div class="panel-body">
+        <table class="table table-responsive table-condensed">
+            <thead>
+                <tr>
+                    <th>Produto</th>
+                    <th>Quantidade</th>
+                    <th>Preço</th>
+                    <th>Total</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Produto.Descricao)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Quantidade)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PrecoCompra)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ValorTotal)
+                        </td>
+                        <td>
+                            <div class="pull-right">
+                                <button class="btn btn-primary details" type="button" data-id="@item.ID"><i class="glyphicon glyphicon-edit"></i></button>
+                                <button type="button" class="btn btn-danger" title="Imprimir" onclick="window.open('@Url.Action("Pedido", "Relatorios", new { item.ID })', '_blank')"><i class="glyphicon glyphicon-remove"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@Scripts.Render("~/Scripts/Views/ItensPedido/ListaItens.js")

@@ -8,10 +8,10 @@
 
 @using (Html.BeginForm("Pedido", "Pedidos", null, FormMethod.Post, new { @id = "pedidosCreate", @name = "pedidosCreate" }))
 {
-                @Html.AntiForgeryToken()
-
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.AntiForgeryToken()
+    
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.ID)
     <div class="form-group">
         @Html.Label("Cliente")
@@ -49,10 +49,12 @@
             @Html.ValidationMessageFor(model => model.SituacaoPedido, "", new { @class = "text-danger" })
         </div>
     </div>
+    
     <br />
-    <div class="form-group">
-        @Html.Partial("~/Views/ItensPedido/ItensPedido.cshtml")
-    </div>  
+        
+    <div>
+        @{Html.RenderAction("ListaItens", "ItensPedido");}
+    </div>
     <div class="row">
         <div class="col-md-4">
             @Html.LabelFor(model => model.ValorTotal, htmlAttributes: new { @class = "control-label" })

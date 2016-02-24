@@ -10,6 +10,14 @@
     submeterFormulario();
     inserirItem();
     eventoAutcomplete();
+
+    $("#btnModalPedidoItem").click(function () {
+        $("#modalPedidoItem").load("/ItensPedido/ItemPedido", function () {
+            $("#modalPedidoItem").modal();
+
+            $("#IDPedido").val($("#ID").val());
+        })
+    });
 });
 
 //Remove o item selecionado da tabela de produtos
@@ -52,6 +60,8 @@ var aplicarFuncoesTabela = function (idRemover, idEditar)
 
 var eventoAutcomplete = function()
 {
+    var InserirPedido = false;
+
     $('#Cliente_RazaoSocial').autocomplete({
         source: function (request, response) {
             var customer = new Array();
@@ -81,21 +91,23 @@ var eventoAutcomplete = function()
             $.ajax({
                 cache: false,
                 async: false,
-                type: "GET",
+                type: "POST",
                 url: "/Pedidos/ClienteSelecionado",
                 data: { id: ui.item.Id },
-
                 success: function (data) {
-                    $('#ClienteID').val(data.ID);
+                    $('#ClienteID').val(data.ID);                    
 
-                    //$.ajax({
-                    //    type: "POST",
-                    //    url: "/Pedidos/SalvarPedido",
-                    //    data: { idCliente: data.ID } 
-                    //});
+                    InserirPedido = true;
 
                     $('#btnSalvar').removeClass('disabled');
                     action = data.Action;
+
+                    $('#pedidosCreate').submit();
+                    //$.ajax({
+                    //    type: "POST",
+                    //    url: "/Pedidos/SalvarPedido",
+                    //    data: { ClienteID: data.ID }
+                    //});
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
                     alert('Failed to retrieve states.');
@@ -210,8 +222,9 @@ var submeterFormulario = function()
     $('#btnSalvar').click(function () {
         var count = $('#itens-pedido >tbody >tr').length;
 
-            $('#pedidosCreate').submit();
-    
+        $('#pedidosCreate').submit();
     });
 }
+
+
 
