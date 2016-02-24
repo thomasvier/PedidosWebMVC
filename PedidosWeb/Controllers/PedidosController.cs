@@ -11,6 +11,7 @@ using PedidosWeb.Models;
 using PedidosWeb.Models.Admin;
 using PedidosWeb.BLL.Admin;
 using PedidosWeb.BLL;
+using System.Web.Routing;
 
 namespace PedidosWeb.Controllers
 {
@@ -62,6 +63,7 @@ namespace PedidosWeb.Controllers
             ViewBag.Produtos = produtoBll.ListarProdutosAtivos();
             ViewBag.Clientes = clientes;
 
+
             Pedido pedido = new Pedido();
 
             if (id != null)
@@ -81,13 +83,23 @@ namespace PedidosWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Pedido([Bind(Include = "ID,CodigoInterno,DataPedido, DataEntrega,ValorTotal,SituacaoPedido,ClienteID")] Pedido pedido)
+        public ActionResult Pedido([Bind(Include = "ID,CodigoInterno,DataPedido, DataEntrega,ValorTotal,SituacaoPedido,ClienteID")] Pedido pedido, string ClienteID)
         {
             if (ModelState.IsValid)
             {
-                db.Pedidos.Add(pedido);
+                pedido.ClienteID = int.Parse(ClienteID);
+
+                if (pedido.ID > 0)
+                {
+                    db.Entry(pedido).State = EntityState.Modified;
+                }
+                else
+                {
+                    db.Pedidos.Add(pedido);
+                }
+
                 db.SaveChanges();
-                return Pedido(pedido.ID);
+                return RedirectToAction("Pedido", new { id = pedido.ID });
             }
 
             ProdutoBll produtoBll = new ProdutoBll();

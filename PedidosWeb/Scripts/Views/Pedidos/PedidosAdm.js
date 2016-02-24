@@ -52,7 +52,7 @@ var aplicarFuncoesTabela = function (idRemover, idEditar)
 
 var eventoAutcomplete = function()
 {
-    $('#cliente').autocomplete({
+    $('#Cliente_RazaoSocial').autocomplete({
         source: function (request, response) {
             var customer = new Array();
             $.ajax({
@@ -72,7 +72,7 @@ var eventoAutcomplete = function()
             if (customer.length > 0)
                 response(customer);
             else {
-                $('#IDCliente').val('');
+                $('#ClienteID').val('');
                 $('#btnSalvar').addClass('disabled');
             }
         },
@@ -86,7 +86,7 @@ var eventoAutcomplete = function()
                 data: { id: ui.item.Id },
 
                 success: function (data) {
-                    $('#IDCliente').val(data.ID);
+                    $('#ClienteID').val(data.ID);
 
                     //$.ajax({
                     //    type: "POST",

@@ -83,7 +83,7 @@
                         @Html.DisplayFor(modelItem => item.SituacaoPedido)
                     </td>
                     <td>
-                        <button type="button" class="btn btn-primary edit" title="Editar" onclick="location.href='@Url.Action("Edit", "Pedidos", new { item.ID })'"><i class="glyphicon glyphicon-edit"></i></button>
+                        <button type="button" class="btn btn-primary edit" title="Editar" onclick="location.href='@Url.Action("Pedido", "Pedidos", new { item.ID })'"><i class="glyphicon glyphicon-edit"></i></button>
                         <button type="button" class="btn btn-default print" title="Imprimir" onclick="window.open('@Url.Action("Pedido", "Relatorios", new { item.ID })', '_blank')"><i class="glyphicon glyphicon-print"></i></button>
                     </td>
                 </tr>
