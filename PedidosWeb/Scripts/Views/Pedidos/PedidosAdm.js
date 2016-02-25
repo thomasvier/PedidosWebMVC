@@ -13,7 +13,8 @@
 
     $("#btnModalPedidoItem").click(function () {
         $("#modalPedidoItem").load("/ItensPedido/ItemPedido", function () {
-            $("#modalPedidoItem").modal();
+            
+            $("#modalPedidoItem").fadeIn().modal();
 
             $("#IDPedido").val($("#ID").val());
         })
