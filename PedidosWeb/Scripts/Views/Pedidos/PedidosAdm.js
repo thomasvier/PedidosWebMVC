@@ -1,15 +1,13 @@
 ﻿$(document).ready(function () {
     $("#txtQuantidade").maskMoney({ allowNegative: true, thousands: '.', decimal: ',', affixesStay: false, precision: 2 });
     $("#txtPreco").maskMoney({ allowNegative: true, thousands: '.', decimal: ',', affixesStay: false, precision: 2 });
-    $('#txtQuantidade').focusout(function () {
-        var idProduto = $('#ddlProdutos').val();
-
-        calculaItem(idProduto);
-    });
-
+    
     submeterFormulario();
     inserirItem();
     eventoAutcomplete();
+
+    if ($('#ID').val() != '0')
+        $('#btnModalPedidoItem').removeClass('disabled');
 
     $("#btnModalPedidoItem").click(function () {
         $("#modalPedidoItem").load("/ItensPedido/ItemPedido", function () {

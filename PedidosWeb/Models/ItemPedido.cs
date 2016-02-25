@@ -5,7 +5,6 @@ using System.Web;
 using PedidosWeb.Models.Admin;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using PedidosWeb.Models.Admin;
 
 namespace PedidosWeb.Models
 {
@@ -13,9 +12,11 @@ namespace PedidosWeb.Models
     {
         public int ID { get; set; }
 
+        [Required]
         [ForeignKey("Produto")]
         public int IDProduto { get; set; }
 
+        [Required]
         [ForeignKey("Pedido")]
         public int IDPedido { get; set; }
                 

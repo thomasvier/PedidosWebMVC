@@ -38,11 +38,11 @@ namespace PedidosWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ItemPedido([Bind(Include = "IDPedido,Quantidade,PrecoCompra,ValorTotal,IDProduto")] ItemPedido itemPedido)
+        public ActionResult ItemPedido([Bind(Include = "ID,IDPedido,Quantidade,PrecoCompra,ValorTotal,IDProduto")] ItemPedido itemPedido)
         {
             PedidoBll pedidoBll = new PedidoBll();
 
-            if(itemPedido.ID > 0)
+            if (itemPedido.ID > 0)
             {
                 pedidoBll.Atualizar(itemPedido);
             }

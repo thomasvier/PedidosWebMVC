@@ -164,6 +164,7 @@
     <Compile Include="Controllers\PedidosCliController.cs" />
     <Compile Include="Controllers\PedidosController.cs" />
     <Compile Include="Controllers\RelatoriosController.cs" />
+    <Compile Include="Controllers\UteisController.cs" />
     <Compile Include="DAL\Contexto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -315,6 +316,10 @@
     <Compile Include="Migrations\201602241959392_asdadas.cs" />
     <Compile Include="Migrations\201602241959392_asdadas.Designer.cs">
       <DependentUpon>201602241959392_asdadas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602252323344_itempedre.cs" />
+    <Compile Include="Migrations\201602252323344_itempedre.Designer.cs">
+      <DependentUpon>201602252323344_itempedre.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ActionResultExtensions.cs" />
@@ -735,6 +740,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602241959392_asdadas.resx">
       <DependentUpon>201602241959392_asdadas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602252323344_itempedre.resx">
+      <DependentUpon>201602252323344_itempedre.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Geral.resx">
       <Generator>ResXFileCodeGenerator</Generator>

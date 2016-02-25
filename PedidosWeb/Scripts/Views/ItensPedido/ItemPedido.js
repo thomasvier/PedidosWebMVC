@@ -2,7 +2,33 @@
     $("#Quantidade").maskMoney({ allowNegative: true, thousands: '.', decimal: ',', affixesStay: false, precision: 2 });
     $("#PrecoCompra").maskMoney({ allowNegative: true, thousands: '.', decimal: ',', affixesStay: false, precision: 2 });
 
+    $('#Quantidade').focusout(function () {
+        var idProduto = $('#IDProduto').val()
+
+        if (idProduto > 0) {
+            calcularTotal();
+        }
+    });
+    
     //$("#btnSalvarItem").click(function () {        
     //    $('#formItemPedido').submit();
     //});
 });
+
+var calcularTotal = function(idProduto)
+{
+    var idProduto = $('#IDProduto').val()
+    var quantidade = $('#Quantidade').val();
+
+    $.ajax(
+        {
+            url: '/Uteis/RetornarPreco',
+            dataType: 'json',
+            data: { id: idProduto, quant: quantidade },
+            async: false,
+            success: function (data) {
+                $('#PrecoCompra').val(data.preco);
+                $('#ValorTotal').val(data.total);
+            }
+        });
+}
