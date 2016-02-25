@@ -1,5 +1,6 @@
-﻿@model IEnumerable<PedidosWeb.Models.Pedido>
-
+﻿@model IPagedList<PedidosWeb.Models.Pedido>
+@using PagedList;
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "Pedidos";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -11,25 +12,24 @@
 
         @using (Html.BeginForm("Index", "Pedidos", FormMethod.Get))
         {
-            <div class="row">
+            <div class="form-group">
+                <label for="filtro">Cliente</label>
+                @Html.TextBox("ClienteFiltro", ViewBag.ClienteFiltroAtual as string, htmlAttributes: new { @class = "form-control", @placeholder = "Digite o nome do cliente ou CNPJ/CPF" })
+            </div>
+            <div class="row">                
                 <div class="col-md-4">
                     <label for="codigoInternoFiltro">Código Interno</label>
                     @Html.TextBox("codigoInternoFiltro", ViewBag.CodigoInternoFiltroAtual as string, htmlAttributes: new { @class = "form-control", @placeholder = "Código Interno" })
                 </div>
-            </div>
-            <div class="row">
                 <div class="col-md-4">
-                    <label for="filtro">Cliente</label>
-                    @Html.DropDownList("ddlClientes", new SelectList(ViewBag.Clientes, "ID", "RazaoSocial"), "Selecione", htmlAttributes: new { @class = "form-control" })
-                </div>
-                <div class="col-md-4">
-                    <label for="selAtivoFiltro">Situação</label>
-                    <select id="selAtivoFiltro" class="form-control">
-                        <option value="2">Todos</option>
-                        <option value="1">Ativos</option>
-                        <option value="0">Inativos</option>
+                    <label for="selSituacaoPedido">Situação</label>
+                    <select id="selSituacaoPedido" class="form-control">
+                        <option value="99">Todos</option>
+                        <option value="2">Cancelado</option>
+                        <option value="1">Aprovado</option>
+                        <option selected="selected" value="0">Pendente</option>
                     </select>
-                    @Html.Hidden("ativoFiltro", ViewBag.AtivoFiltroAtual as string, htmlAttributes: new { @value = @ViewBag.AtivoFiltroAtual })
+                    @Html.Hidden("situacaoPedidoFiltro", ViewBag.SituacaoPedidoAtual as string, htmlAttributes: new { @value = @ViewBag.SituacaoPedidoAtual })
                 </div>
             </div>
             <br />
@@ -45,19 +45,19 @@
         <table class="table table-striped table-condensed">
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.CodigoInterno)
+                    Código Interno
                 </th>
                 <th>
-                    Cliente
+                    @Html.ActionLink("Cliente", "Index", new { sortOrder = ViewBag.RazaoSocialSort, filtroAtual = @ViewBag.ClienteAtual })
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.DataPedido)
+                    @Html.ActionLink("Data do pedido", "Index", new { sortOrder = ViewBag.DataPedidoSort, filtroAtual = @ViewBag.ClienteAtual })
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ValorTotal)
+                    Valor total
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.SituacaoPedido)
+                    Situação
                 </th>
                 <th></th>
             </tr>
@@ -91,7 +91,15 @@
 
         </table>
         <div class="panel-footer">
-            Footer
+            Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+            @Html.PagedListPager(Model, page => Url.Action("Index", new
+            {
+                page,
+                sortOrder = ViewBag.CurrentSort,
+                clienteFiltroAtual = ViewBag.ClienteFiltroAtual,
+                situacaoPedidoAtual = ViewBag.SituacaoPedidoAtual,
+                codigoInternoFiltroAtual = ViewBag.CodigoInternoFiltroAtual
+            }), PagedListRenderOptions.Classic)
         </div>
         </div>
     </div>

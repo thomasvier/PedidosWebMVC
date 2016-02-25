@@ -6,7 +6,7 @@
 
         calculaItem(idProduto);
     });
-    
+
     submeterFormulario();
     inserirItem();
     eventoAutcomplete();
@@ -103,6 +103,7 @@ var eventoAutcomplete = function()
                     $('#btnSalvar').removeClass('disabled');
                     action = data.Action;
 
+                    $('#Permanecer').val('1');
                     $('#pedidosCreate').submit();
                     //$.ajax({
                     //    type: "POST",
@@ -220,10 +221,8 @@ var calculaTotal = function()
 
 var submeterFormulario = function()
 {
-    $('#btnSalvar').click(function () {
-        var count = $('#itens-pedido >tbody >tr').length;
-
-        $('#pedidosCreate').submit();
+    $('#btnSalvar').click(function () {        
+        $('#pedidosCreate').submit();        
     });
 }
 

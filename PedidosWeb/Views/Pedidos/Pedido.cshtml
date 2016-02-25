@@ -66,7 +66,8 @@
     <br />
     <div class="row">
         <div class="col-md-10">
-            <button id="btnSalvar" type="button" class="btn btn-primary disabled" title="Salvar"><i class="glyphicon glyphicon-floppy-save"></i> Salvar</button>
+            @Html.Hidden("Permanecer")
+            <button id="btnSalvar" type="button" class="btn btn-primary" title="Salvar"><i class="glyphicon glyphicon-floppy-save"></i> Salvar</button>
             <button type="button" class="btn btn-danger" title="Voltar" onclick="location.href='@Url.Action("Index", "Pedidos")'"><i class="glyphicon glyphicon-arrow-left"></i> Voltar</button>
         </div>
     </div>

@@ -12,6 +12,7 @@ using PedidosWeb.Models.Admin;
 using PedidosWeb.BLL.Admin;
 using PedidosWeb.BLL;
 using System.Web.Routing;
+using PagedList;
 
 namespace PedidosWeb.Controllers
 {
@@ -21,18 +22,55 @@ namespace PedidosWeb.Controllers
         private Contexto db = new Contexto();
 
         // GET: Pedidos
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string filtroAtual,
+                                    int? page,
+                                    string situacaoPedidoFiltro,
+                                    string situacaoPedidoAtual,
+                                    string clienteFiltro,
+                                    string clienteFiltroAtual,
+                                    string codigoInternoFiltro,
+                                    string codigoInternoFiltroAtual)
         {
             try
             {
-                List<Cliente> clientes = ClienteBll.ListarClientes();
-                ClienteBll clienteBll = new ClienteBll();
-                
-                ViewBag.Clientes = clientes;
+                ViewBag.CurrentSort = sortOrder;
+                ViewBag.RazaoSocialSort = string.IsNullOrEmpty(sortOrder) ? "razaosocial_desc" : "";
+                ViewBag.DataPedidoSort = sortOrder == "DataPedido" ? "datapedido_desc" : "DataPedido";
 
-                List<Pedido> pedidos = new List<Pedido>();
-                pedidos = db.Pedidos.ToList();
-                ViewBag.NomeCliente = clienteBll.ListarClientesAtivos();
+
+                if (clienteFiltro != null)
+                {
+                    page = 1;
+                }
+                else 
+                {
+                    clienteFiltro = clienteFiltroAtual;
+                }
+                
+                if (situacaoPedidoFiltro != null)
+                {
+                    page = 1;
+                }
+                else
+                {
+                    situacaoPedidoFiltro = situacaoPedidoAtual;
+                }
+
+                if (codigoInternoFiltro != null)
+                {
+                    page = 1;
+                }
+                else
+                {
+                    codigoInternoFiltro = codigoInternoFiltroAtual;
+                }
+
+                ViewBag.ClienteFiltroAtual = clienteFiltro;
+                ViewBag.SituacaoPedidoAtual = situacaoPedidoFiltro;                
+
+                PedidoBll pedidoBll = new PedidoBll();
+
+                return View(pedidoBll.ListaPedidosPaginacao(page, clienteFiltro, situacaoPedidoFiltro, sortOrder, codigoInternoFiltro));
             }
 
             catch (Exception ex) { }
@@ -83,7 +121,7 @@ namespace PedidosWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Pedido([Bind(Include = "ID,CodigoInterno,DataPedido, DataEntrega,ValorTotal,SituacaoPedido,ClienteID")] Pedido pedido, string ClienteID)
+        public ActionResult Pedido([Bind(Include = "ID,CodigoInterno,DataPedido, DataEntrega,ValorTotal,SituacaoPedido,ClienteID")] Pedido pedido, string ClienteID, string Permanecer)
         {
             if (ModelState.IsValid)
             {
@@ -100,7 +138,14 @@ namespace PedidosWeb.Controllers
                     pedidoBll.Criar(pedido);
                 }
 
-                return RedirectToAction("Pedido", new { id = pedido.ID });
+                if (string.IsNullOrEmpty(Permanecer))
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return RedirectToAction("Pedido", new { id = pedido.ID });                    
+                }
             }
 
             ProdutoBll produtoBll = new ProdutoBll();

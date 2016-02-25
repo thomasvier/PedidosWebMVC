@@ -5,12 +5,61 @@ using System.Web;
 using PedidosWeb.DAL;
 using PedidosWeb.Models;
 using System.Data.Entity;
+using PagedList;
 
 namespace PedidosWeb.BLL
 {
     public class PedidoBll
     {
         Contexto db;
+
+        public IPagedList<Pedido> ListaPedidosPaginacao(int? page, string clienteFiltro,
+                                                            string situacaoPedidoFiltro, 
+                                                            string sortOrder, 
+                                                            string codigoInternoFiltro)
+        {
+            int situacao = int.TryParse(situacaoPedidoFiltro, out situacao) ? situacao : 99;
+            
+            var pedidos = from p in db.Pedidos
+                           select p;
+
+            if (!string.IsNullOrEmpty(clienteFiltro))
+            {
+                pedidos = pedidos.Where(p => p.Cliente.RazaoSocial.Contains(clienteFiltro) || p.Cliente.NomeFantasia.Contains(clienteFiltro) || p.Cliente.CPFCNPJ == clienteFiltro);
+            }
+
+            if (situacao < 99)
+            {
+                SituacaoPedido situacaoPedido = (SituacaoPedido)situacao;
+                pedidos = pedidos.Where(x => x.SituacaoPedido == situacaoPedido);
+            }
+            
+            if (!string.IsNullOrEmpty(codigoInternoFiltro))
+            {
+                pedidos = pedidos.Where(x => x.CodigoInterno.Equals(codigoInternoFiltro));
+            }
+
+            switch (sortOrder)
+            {
+                case "razaosocial_desc":
+                    pedidos = pedidos.OrderByDescending(s => s.Cliente.RazaoSocial);
+                    break;
+                case "DataPedido":
+                    pedidos = pedidos.OrderBy(s => s.DataPedido);
+                    break;
+                case "datapedido_desc":
+                    pedidos = pedidos.OrderByDescending(s => s.DataPedido);
+                    break;
+                default:
+                    pedidos = pedidos.OrderBy(s => s.Cliente.RazaoSocial);
+                    break;
+            }
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+            return pedidos.ToPagedList(pageNumber, pageSize);
+        }
 
         public PedidoBll()
         {
