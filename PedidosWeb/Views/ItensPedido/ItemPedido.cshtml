@@ -35,9 +35,9 @@
                 </div>
 
                 <div class="col-md-4">
-                    @Html.LabelFor(model => model.ValorTotal, htmlAttributes: new { @class = "control-label" })
-                    @Html.EditorFor(model => model.ValorTotal, new { htmlAttributes = new { @class = "form-control", @placeholder = "0,00", @disabled = "disabled" } })
-                    @Html.ValidationMessageFor(model => model.ValorTotal, "", new { @class = "text-danger" })
+                    @Html.LabelFor(model => model.TotalItem, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.TotalItem, new { htmlAttributes = new { @class = "form-control disabled", @placeholder = "0,00" } })
+                    @Html.ValidationMessageFor(model => model.TotalItem, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="row">
@@ -54,6 +54,5 @@
     </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->
 }
-
 @Scripts.Render("~/bundles/jqueryval")
 @Scripts.Render("~/Scripts/Views/ItensPedido/ItemPedido.js")

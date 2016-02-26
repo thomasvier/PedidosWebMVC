@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    $("#Quantidade").maskMoney({ allowNegative: true, thousands: '.', decimal: ',', affixesStay: false, precision: 2 });
+    $("#Quantidade").maskMoney({ allowNegative: true, thousands: '.', decimal: ',', affixesStay: false, precision: 3 });
     $("#PrecoCompra").maskMoney({ allowNegative: true, thousands: '.', decimal: ',', affixesStay: false, precision: 2 });
 
     $('#Quantidade').focusout(function () {
@@ -28,7 +28,7 @@ var calcularTotal = function(idProduto)
             async: false,
             success: function (data) {
                 $('#PrecoCompra').val(data.preco);
-                $('#ValorTotal').val(data.total);
+                $('#TotalItem').val(data.total);
             }
         });
 }

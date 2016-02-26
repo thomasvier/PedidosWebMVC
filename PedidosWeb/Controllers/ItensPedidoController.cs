@@ -38,7 +38,7 @@ namespace PedidosWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ItemPedido([Bind(Include = "ID,IDPedido,Quantidade,PrecoCompra,ValorTotal,IDProduto")] ItemPedido itemPedido)
+        public ActionResult ItemPedido([Bind(Include = "ID,IDPedido,Quantidade,PrecoCompra,TotalItem,IDProduto")] ItemPedido itemPedido)
         {
             PedidoBll pedidoBll = new PedidoBll();
 

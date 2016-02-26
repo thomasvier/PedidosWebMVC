@@ -321,12 +321,41 @@
     <Compile Include="Migrations\201602252323344_itempedre.Designer.cs">
       <DependentUpon>201602252323344_itempedre.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201602261321153_rengaeprecos.cs" />
+    <Compile Include="Migrations\201602261321153_rengaeprecos.Designer.cs">
+      <DependentUpon>201602261321153_rengaeprecos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602261335264_doub.cs" />
+    <Compile Include="Migrations\201602261335264_doub.Designer.cs">
+      <DependentUpon>201602261335264_doub.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602261403290_asdasd.cs" />
+    <Compile Include="Migrations\201602261403290_asdasd.Designer.cs">
+      <DependentUpon>201602261403290_asdasd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602261407386_totalitem.cs" />
+    <Compile Include="Migrations\201602261407386_totalitem.Designer.cs">
+      <DependentUpon>201602261407386_totalitem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602261409506_quante.cs" />
+    <Compile Include="Migrations\201602261409506_quante.Designer.cs">
+      <DependentUpon>201602261409506_quante.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602261410347_quante2.cs" />
+    <Compile Include="Migrations\201602261410347_quante2.Designer.cs">
+      <DependentUpon>201602261410347_quante2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602261420319_quante3.cs" />
+    <Compile Include="Migrations\201602261420319_quante3.Designer.cs">
+      <DependentUpon>201602261420319_quante3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ActionResultExtensions.cs" />
     <Compile Include="Models\Admin\Cliente.cs" />
     <Compile Include="Models\Admin\Produto.cs" />
     <Compile Include="Models\Admin\Representante.cs" />
     <Compile Include="Models\Admin\TipoTitular.cs" />
+    <Compile Include="Models\DecimalModelBinder.cs" />
     <Compile Include="Models\ItemPedido.cs" />
     <Compile Include="Models\Pedido.cs" />
     <Compile Include="Models\SituacaoPedido.cs" />
@@ -743,6 +772,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602252323344_itempedre.resx">
       <DependentUpon>201602252323344_itempedre.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602261321153_rengaeprecos.resx">
+      <DependentUpon>201602261321153_rengaeprecos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602261335264_doub.resx">
+      <DependentUpon>201602261335264_doub.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602261403290_asdasd.resx">
+      <DependentUpon>201602261403290_asdasd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602261407386_totalitem.resx">
+      <DependentUpon>201602261407386_totalitem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602261409506_quante.resx">
+      <DependentUpon>201602261409506_quante.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602261410347_quante2.resx">
+      <DependentUpon>201602261410347_quante2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602261420319_quante3.resx">
+      <DependentUpon>201602261420319_quante3.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Geral.resx">
       <Generator>ResXFileCodeGenerator</Generator>

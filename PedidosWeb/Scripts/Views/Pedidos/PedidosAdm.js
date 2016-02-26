@@ -6,6 +6,12 @@
     inserirItem();
     eventoAutcomplete();
 
+    $('#listarClientes').click(function () {
+        $("#Cliente_RazaoSocial").focus();
+        $('#Cliente_RazaoSocial').autocomplete("search", "");        
+        
+    })
+    
     if ($('#ID').val() != '0')
         $('#btnModalPedidoItem').removeClass('disabled');
 
@@ -62,11 +68,12 @@ var eventoAutcomplete = function()
     var InserirPedido = false;
 
     $('#Cliente_RazaoSocial').autocomplete({
+        minLength: 0,
         source: function (request, response) {
             var customer = new Array();
             $.ajax({
                 async: false,
-                cache: false,
+                cache: false,                
                 type: "GET",
                 url: "/Pedidos/RetornarClientes",
                 data: { "term": request.term },

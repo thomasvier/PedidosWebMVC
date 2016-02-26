@@ -27,11 +27,11 @@ namespace PedidosWeb.Models.Admin
         [Display(Name="Preço Unitário")]        
         public decimal? PrecoUnitario { get; set; }
                 
-        [Display(Name = "Preço Quantidade")]
+        [Display(Name = "Preço Quantidade")]        
         public decimal? PrecoQuantidade { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:n3}", ApplyFormatInEditMode = true)]
-        [Display(Name = "Quantidade preço")]
+        [Display(Name = "Quantidade preço")]        
         public decimal? QuantidadePreco { get; set; }
 
         public bool Ativo { get; set; }

@@ -78,3 +78,8 @@
     z-index: 999999;
 }
 /* FIM EFEITO LOADING */
+
+.links-autocomplete
+{
+    margin-top: 5px;
+}

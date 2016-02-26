@@ -19,14 +19,20 @@ namespace PedidosWeb.Models
         [Required]
         [ForeignKey("Pedido")]
         public int IDPedido { get; set; }
-                
+
+        [DataType(DataType.Currency)]
+        [DisplayFormat(DataFormatString = "{0:N3}", ApplyFormatInEditMode = true)]
         public decimal? Quantidade { get; set; }
 
         [Display(Name="Preço")]
+        [DataType(DataType.Currency)]
+        [DisplayFormat(DataFormatString = "{0:N2}", ApplyFormatInEditMode = true)]
         public decimal? PrecoCompra { get; set; }
 
         [Display(Name = "Valor total")]
-        public decimal? ValorTotal { get; set; }
+        [DisplayFormat(DataFormatString = "{0:N2}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Currency)]
+        public decimal? TotalItem { get; set; }
 
         public virtual Produto Produto { get; set; }
 
