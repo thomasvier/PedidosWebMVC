@@ -82,4 +82,10 @@
 .links-autocomplete
 {
     margin-top: 5px;
+
+}
+
+.links-autocomplete:hover
+{
+    cursor: pointer;
 }
