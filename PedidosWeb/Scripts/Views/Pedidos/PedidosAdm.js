@@ -15,6 +15,13 @@
     if ($('#ID').val() != '0')
         $('#btnModalPedidoItem').removeClass('disabled');
 
+    $('#btnCadastroRapido').click(function () {
+        $('#cadastroRapidoClientes').load("/Clientes/CadastroRapido", function () {
+            $('#cadastroRapidoClientes').modal();
+        })
+
+    });
+
     $("#btnModalPedidoItem").click(function () {
         $("#modalPedidoItem").load("/ItensPedido/ItemPedido", function () {
             

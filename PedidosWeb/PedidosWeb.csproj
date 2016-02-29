@@ -580,6 +580,7 @@
     <Content Include="Scripts\typeahead.bundle.min.js" />
     <Content Include="Scripts\typeahead.jquery.js" />
     <Content Include="Scripts\typeahead.jquery.min.js" />
+    <Content Include="Scripts\Views\Admin\Clientes\CadastroRapido.js" />
     <Content Include="Scripts\Views\Admin\Clientes\Cliente.js" />
     <Content Include="Scripts\Views\Admin\Clientes\Index.js" />
     <Content Include="Scripts\Views\Admin\Clientes\Index.js" />
@@ -646,6 +647,7 @@
     <Content Include="Views\Pedidos\CreateOld.cshtml" />
     <Content Include="Views\ItensPedido\ListaItens.cshtml" />
     <Content Include="Views\ItensPedido\ItemPedido.cshtml" />
+    <Content Include="Views\Admin\Clientes\CadastroRapido.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

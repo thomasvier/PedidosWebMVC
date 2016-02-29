@@ -218,6 +218,24 @@ namespace PedidosWeb.Controllers
             return View("~/Views/Admin/Clientes/Edit.cshtml", cliente);
         }
 
+        public ActionResult CadastroRapido()
+        {
+            try
+            {
+                Cliente Cliente = new Cliente();
+
+                var representantes = RepresentanteBll.ListarRepresentantesAtivos();
+
+                ViewBag.Representantes = representantes;
+
+                return PartialView("~/Views/Admin/Clientes/CadastroRapido.cshtml", Cliente);
+            }
+            catch (Exception ex)
+            {
+                return View("~/Views/Admin/Clientes/Create.cshtml").ComMensagem(Resources.Geral.TenteNovamente, TipoMensagem.Erro);
+            }
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

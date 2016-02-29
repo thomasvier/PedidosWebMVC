@@ -15,16 +15,13 @@
     @Html.HiddenFor(model => model.ID)
     <div class="form-group">
         @Html.Label("Cliente")
-        <div class="input-group">
-            @Html.TextBoxFor(model => model.Cliente.RazaoSocial, "", htmlAttributes: new { @class = "form-control", @placeholder = "Digite o nome ou CNPJ/CPF do cliente" })            
+        
+        @Html.TextBoxFor(model => model.Cliente.RazaoSocial, "", htmlAttributes: new { @class = "form-control", @placeholder = "Digite o nome ou CNPJ/CPF do cliente" })            
             
-            @Html.HiddenFor(model => model.ClienteID)
-            <span class="input-group-btn">
-                <button class="btn btn-primary" type="button"><i class="glyphicon glyphicon-search"></i></button>
-            </span>
-        </div>     
+        @Html.HiddenFor(model => model.ClienteID)
+        
         <div class="links-autocomplete">
-            <button type="button" class="btn btn-primary btn-xs">Novo cliente</button>
+            <button type="button" id="btnCadastroRapido" class="btn btn-primary btn-xs">Novo cliente</button>
             <a id="listarClientes" href="#">
                 <span class="glyphicon glyphicon-chevron-down">
                 </span>
@@ -60,6 +57,9 @@
     </div>
     
     <br />
+    <div class="modal" id="cadastroRapidoClientes">
+
+    </div>
         
     <div>
         @{Html.RenderAction("ListaItens", "ItensPedido");}
