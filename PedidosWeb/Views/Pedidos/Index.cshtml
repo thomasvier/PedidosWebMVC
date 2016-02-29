@@ -64,12 +64,10 @@
 
             @foreach (var item in Model)
             {
-
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.CodigoInterno)
                     </td>
-
                     <td>
                         @Html.DisplayFor(modelItem => item.Cliente.RazaoSocial)
                     </td>
@@ -89,19 +87,19 @@
                 </tr>
             }
 
-        </table>
+        </table>                
+        </div>      
         <div class="panel-footer">
             Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
             @Html.PagedListPager(Model, page => Url.Action("Index", new
-            {
-                page,
-                sortOrder = ViewBag.CurrentSort,
-                clienteFiltroAtual = ViewBag.ClienteFiltroAtual,
-                situacaoPedidoAtual = ViewBag.SituacaoPedidoAtual,
-                codigoInternoFiltroAtual = ViewBag.CodigoInternoFiltroAtual
-            }), PagedListRenderOptions.Classic)
-        </div>
-        </div>
+                    {
+                        page,
+                        sortOrder = ViewBag.CurrentSort,
+                        clienteFiltroAtual = ViewBag.ClienteFiltroAtual,
+                        situacaoPedidoAtual = ViewBag.SituacaoPedidoAtual,
+                        codigoInternoFiltroAtual = ViewBag.CodigoInternoFiltroAtual
+                    }), PagedListRenderOptions.Classic)
+        </div>  
     </div>
 
 @section Scripts {

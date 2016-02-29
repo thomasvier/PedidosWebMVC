@@ -10,6 +10,11 @@
         }
     });
     
+    //if($('#IDProduto').val() != null)
+    //{
+    //    $('#IDProduto').attr('disabled', 'disabled');
+    //}
+
     //$("#btnSalvarItem").click(function () {        
     //    $('#formItemPedido').submit();
     //});

@@ -34,6 +34,7 @@ namespace PedidosWeb.Models
         public DateTime DataEntrega { get; set; }
 
         [Display(Name="Valor total")]
+        [DisplayFormat(ApplyFormatInEditMode=true, DataFormatString="{0:N2}")]
         public decimal? ValorTotal { get; set; }
 
         [Display(Name="Situação do pedido")]

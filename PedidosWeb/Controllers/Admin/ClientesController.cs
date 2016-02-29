@@ -218,7 +218,7 @@ namespace PedidosWeb.Controllers
             return View("~/Views/Admin/Clientes/Edit.cshtml", cliente);
         }
 
-        public ActionResult CadastroRapido()
+        public ActionResult CadastroRapido(string vw)
         {
             try
             {
@@ -233,6 +233,34 @@ namespace PedidosWeb.Controllers
             catch (Exception ex)
             {
                 return View("~/Views/Admin/Clientes/Create.cshtml").ComMensagem(Resources.Geral.TenteNovamente, TipoMensagem.Erro);
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CadastroRapido([Bind(Include = "ID,CodigoInterno,RazaoSocial,NomeFantasia,CPFCNPJ,InscricaoEstadual,Telefone,Celular,Email,Endereco,Cidade,Bairro,Estado,Numero,Cep,Complemento,Ativo,Tipo,IDRepresentante")] Cliente cliente)
+        {
+            try
+            {
+                Contexto db = new Contexto();
+                string view = Request["view"];
+                string action = Request["action"];
+                var idc = Request["idc"];
+                db.Clientes.Add(cliente);
+                db.SaveChanges();
+
+                if (idc != "0")
+                {
+                    return RedirectToAction(view, action, new { id = idc, idcli = cliente.ID });
+                }
+                else
+                {
+                    return RedirectToAction(view, action, new { idcli = cliente.ID });
+                }
+            }
+            catch (Exception ex)
+            {
+                return View();
             }
         }
 

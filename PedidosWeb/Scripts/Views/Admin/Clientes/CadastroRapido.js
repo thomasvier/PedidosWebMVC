@@ -1,10 +1,4 @@
 ﻿$(document).ready(function () {
-    //MascaraCampos();
-    //AplicaFuncoes();
-});
-
-//Método que mascara os campos do form
-var MascaraCampos = function () {
     $('#Cep').mask('00000-000');
     $('#Numero').mask('000000');
     $('#Telefone').mask('(00) 0000-00000')
@@ -20,9 +14,7 @@ var MascaraCampos = function () {
         $('#lblCPFCNPJ').text('CNPJ');
         $('#CPFCNPJ').mask('00.000.000/0000-00');
     }
-}
 
-var AplicaFuncoes = function () {
     $('#Tipo').change(function () {
         var value = $('option:selected', $(this)).val();
 
@@ -34,5 +26,25 @@ var AplicaFuncoes = function () {
             $('#CPFCNPJ').mask('00.000.000/0000-00');
             $('#lblCPFCNPJ').text('CNPJ');
         }
-    })
-}
+    });
+
+    //$('#btnSalvarCliente').click(function () {
+    //    var tipo = $('#Tipo').val();
+    //    var codigoInterno = $('#CodigoInterno').val();
+    //    var razaoSocial = $('#RazaoSocial').val();
+    //    var nomeFantasia = $('#NomeFantasia').val();
+    //    var representante = $('#Representante');
+
+    //    $.ajax(
+    //    {
+    //        url: '/Uteis/RetornarPreco',
+    //        dataType: 'json',
+    //        data: { cliente: idProduto },
+    //        async: false,
+    //        success: function (data) {
+    //            $('#PrecoCompra').val(data.preco);
+    //            $('#TotalItem').val(data.total);
+    //        }
+    //    });
+    //});
+});

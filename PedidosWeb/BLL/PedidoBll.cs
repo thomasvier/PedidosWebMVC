@@ -76,6 +76,7 @@ namespace PedidosWeb.BLL
 
         public Pedido Atualizar(Pedido pedido)
         {
+            pedido.ValorTotal = this.CalcularTotal(pedido.ID);
             db.Entry(pedido).State = EntityState.Modified;
             db.SaveChanges();
 
@@ -115,7 +116,7 @@ namespace PedidosWeb.BLL
         }
 
         public ItemPedido Criar(ItemPedido itemPedido)
-        {
+        {            
             db.ItemPedidos.Add(itemPedido);
             db.SaveChanges();
 
@@ -137,6 +138,13 @@ namespace PedidosWeb.BLL
             ItemPedido itemPedido = db.ItemPedidos.Find(ID);
 
             return itemPedido;
+        }
+
+        public decimal? CalcularTotal(int id)
+        {
+            decimal? total = db.ItemPedidos.Where(x => x.IDPedido == id).Sum(x => x.TotalItem);
+
+            return total;
         }
     }
 }

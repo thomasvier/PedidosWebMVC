@@ -17,6 +17,7 @@
         <div class="modal-body">            
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.IDPedido)
+            @Html.HiddenFor(model => model.ID)
             <div class="form-group">
                 @Html.Label("Produto")
                 @Html.DropDownListFor(model => model.IDProduto, new SelectList(ViewBag.Produtos, "ID", "Descricao"), "Selecione", htmlAttributes: new { @class = "form-control" })                

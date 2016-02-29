@@ -67,7 +67,7 @@
     <div class="row">
         <div class="col-md-4">
             @Html.LabelFor(model => model.ValorTotal, htmlAttributes: new { @class = "control-label" })
-            @Html.EditorFor(model => model.ValorTotal, new { htmlAttributes = new { @class = "form-control input-sm", @placeholder = "0,00" } })
+            @Html.EditorFor(model => model.ValorTotal, new { htmlAttributes = new { @class = "form-control input-sm", @placeholder = "0,00", @disabled = "disabled" } })
             @Html.ValidationMessageFor(model => model.ValorTotal, "", new { @class = "text-danger" })
         </div>
     </div>

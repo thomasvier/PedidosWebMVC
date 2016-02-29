@@ -12,11 +12,18 @@
         
     })
     
-    if ($('#ID').val() != '0')
+    if ($('#ID').val() != '0') {
         $('#btnModalPedidoItem').removeClass('disabled');
+    }
+
+    if ($('#ClienteID').val() != '0') {
+        $('#btnModalPedidoItem').removeClass('disabled');
+    }
 
     $('#btnCadastroRapido').click(function () {
-        $('#cadastroRapidoClientes').load("/Clientes/CadastroRapido", function () {
+        var ID = $('#ID').val();
+        
+        $('#cadastroRapidoClientes').load("/Clientes/CadastroRapido?a=Pedidos&v=Pedido&idc="+ ID, function () {
             $('#cadastroRapidoClientes').modal();
         })
 

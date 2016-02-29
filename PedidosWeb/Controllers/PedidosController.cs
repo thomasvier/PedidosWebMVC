@@ -93,7 +93,7 @@ namespace PedidosWeb.Controllers
         }
 
         // GET: Pedidos/Create
-        public ActionResult Pedido(int? id)
+        public ActionResult Pedido(int? id, int? idcli)
         {            
             ProdutoBll produtoBll = new ProdutoBll();
             List<Cliente> clientes = ClienteBll.ListarClientes();
@@ -103,17 +103,30 @@ namespace PedidosWeb.Controllers
 
 
             Pedido pedido = new Pedido();
-
-            if (id != null)
+            
+            if(id != null)
             {
                 pedido = PedidoBll.RetornarPedido(id);
+            }
 
-                return View(pedido);
+            if (idcli != null)
+            {    
+                pedido.ClienteID = (int)idcli;
+                pedido.Cliente = ClienteBll.RetornarCliente((int)idcli);
+
+                PedidoBll pedidoBll = new PedidoBll();
+                
+                if(id != null)
+                {
+                    pedidoBll.Atualizar(pedido);                    
+                }
+                else
+                {
+                    pedidoBll.Criar(pedido);
+                }
             }
-            else
-            {
-                return View(pedido);
-            }
+
+            return View(pedido);
         }
 
         // POST: Pedidos/Create
