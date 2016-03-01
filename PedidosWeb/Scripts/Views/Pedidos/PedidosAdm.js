@@ -1,6 +1,7 @@
 ﻿$(document).ready(function () {
     $("#txtQuantidade").maskMoney({ allowNegative: true, thousands: '.', decimal: ',', affixesStay: false, precision: 2 });
     $("#txtPreco").maskMoney({ allowNegative: true, thousands: '.', decimal: ',', affixesStay: false, precision: 2 });
+    $("#ValorFrete").maskMoney({ allowNegative: true, thousands: '.', decimal: ',', affixesStay: false, precision: 2 });
     
     submeterFormulario();
     inserirItem();

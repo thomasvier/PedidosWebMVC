@@ -62,18 +62,27 @@
         <th>Quantidade</th>
         <th>Valor Total</th>
     </tr>
+@{ 
+    List<PedidosWeb.Models.ItemPedido> itens = ViewBag.Itens as List<PedidosWeb.Models.ItemPedido>;
+        
+    foreach(var item in itens)
+    {     
     <tr>        
-        <td>Produto Teste</td>
-        <td>0,00</td>
-        <td>0,00</td>
-        <td>0,00</td>        
+        <td>
+            @Html.DisplayFor(modelItem => item.Produto.Descricao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PrecoCompra)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantidade)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalItem)
+        </td>        
     </tr>
-    <tr>
-        <td>Produto Teste</td>
-        <td>0,00</td>
-        <td>0,00</td>
-        <td>0,00</td>
-    </tr>
+    }
+}
 </table>
 
 <hr />
@@ -81,17 +90,17 @@
 <div class="row">
     <div class="col-xs-4">
         @Html.Label("Vendedor: ", htmlAttributes: new { @class = "control-label" })
-        Vendedor teste
+        <span>@ViewBag.Vendedor</span>
     </div>
     <div class="col-xs-4 pull-right">
         @Html.Label("Valor produtos: ", htmlAttributes: new { @class = "control-label" })
-        R$ 0,00
+        <span>R$ @ViewBag.TotalItens</span>
     </div>
 </div>
 <div class="row">
     <div class="col-xs-4 pull-right">
         @Html.Label("Frete: ", htmlAttributes: new { @class = "control-label" })
-        R$ 0,00
+        R$ @Html.DisplayFor(model => model.ValorFrete)
     </div>
 </div>
 <div class="row">
@@ -103,6 +112,6 @@
 <div class="row">
     <div class="col-xs-4 pull-right">
         @Html.Label("Valor Total: ", htmlAttributes: new { @class = "control-label" })
-        R$ 0,00
+        R$ @Html.DisplayFor(model => model.ValorTotal)
     </div>
 </div>

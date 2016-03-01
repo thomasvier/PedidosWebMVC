@@ -94,5 +94,14 @@ namespace PedidosWeb.BLL.Admin
 
             return ID;
         }
+
+        public static Representante RetornarRepresentante(int ID)
+        {
+            Contexto db = new Contexto();
+
+            Representante representante = db.Representantes.Where(x => x.ID == ID).FirstOrDefault();
+
+            return representante;
+        }
     }
 }

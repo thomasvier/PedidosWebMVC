@@ -134,7 +134,7 @@ namespace PedidosWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Pedido([Bind(Include = "ID,CodigoInterno,DataPedido, DataEntrega,ValorTotal,SituacaoPedido,ClienteID")] Pedido pedido, string ClienteID, string Permanecer)
+        public ActionResult Pedido([Bind(Include = "ID,CodigoInterno,DataPedido, DataEntrega,ValorTotal,ValorFrete,SituacaoPedido,ClienteID")] Pedido pedido, string ClienteID, string Permanecer)
         {
             if (ModelState.IsValid)
             {

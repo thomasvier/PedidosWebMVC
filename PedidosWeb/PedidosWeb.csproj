@@ -349,6 +349,10 @@
     <Compile Include="Migrations\201602261420319_quante3.Designer.cs">
       <DependentUpon>201602261420319_quante3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603011758381_pedido.cs" />
+    <Compile Include="Migrations\201603011758381_pedido.Designer.cs">
+      <DependentUpon>201603011758381_pedido.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ActionResultExtensions.cs" />
     <Compile Include="Models\Admin\Cliente.cs" />
@@ -648,6 +652,8 @@
     <Content Include="Views\ItensPedido\ListaItens.cshtml" />
     <Content Include="Views\ItensPedido\ItemPedido.cshtml" />
     <Content Include="Views\Admin\Clientes\CadastroRapido.cshtml" />
+    <Content Include="Views\Relatorios\PedidosFiltro.cshtml" />
+    <Content Include="Views\Relatorios\Pedidos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -795,6 +801,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602261420319_quante3.resx">
       <DependentUpon>201602261420319_quante3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603011758381_pedido.resx">
+      <DependentUpon>201603011758381_pedido.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Geral.resx">
       <Generator>ResXFileCodeGenerator</Generator>

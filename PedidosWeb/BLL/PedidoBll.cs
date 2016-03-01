@@ -146,5 +146,19 @@ namespace PedidosWeb.BLL
 
             return total;
         }
+
+        public List<Pedido> RelatorioPedidos(int? idCliente, DateTime dataInicial, DateTime dataFinal)
+        {
+            List<Pedido> pedidos = (from p in db.Pedidos
+                                    where p.DataPedido >= dataInicial && p.DataPedido <= dataFinal
+                                    select p).ToList();
+
+            if(idCliente > 0)
+            {
+                pedidos = pedidos.Where(x => x.ClienteID == idCliente).ToList();
+            }
+
+            return pedidos;
+        }
     }
 }

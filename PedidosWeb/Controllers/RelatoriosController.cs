@@ -30,6 +30,10 @@ namespace PedidosWeb.Controllers
             }
 
             Pedido pedido = PedidoBll.RetornarPedido(id);
+            List<ItemPedido> itens = PedidoBll.RetornarItens(id);
+            ViewBag.Itens = itens;
+            ViewBag.Vendedor = RepresentanteBll.RetornarRepresentante(pedido.Cliente.IDRepresentante).Nome;
+            ViewBag.TotalItens = string.Format("{0:N2}", itens.Sum(x => x.TotalItem));
 
             if (pedido == null)
             {
@@ -78,60 +82,23 @@ namespace PedidosWeb.Controllers
             return new Rotativa.ViewAsPdf("~/Views/Relatorios/Produto.cshtml", produtos);
         }
 
-        /*
-         * Retorna um PDF diretamente no browser com as configurações padrões
-         * ViewName é setado somente para utilizar o próprio Modelo anterior
-         * Caso não queira setar o ViewName, você deve gerar a view com o mesmo nome da action
-         */
-        public ActionResult PDFPadrao()
+        public ActionResult PedidosFiltro()
         {
-            ProdutoBll produtoBll = new ProdutoBll();
+            ViewBag.Clientes = ClienteBll.ListarClientes();
 
-            List<Produto> produtos = produtoBll.ListarProdutosAtivos();
-
-            var pdf = new ViewAsPdf
-                          {
-                              ViewName = "Produtos",
-                              Model = produtos
-                          };
-            return pdf;
+            return View();
         }
- 
-        /*
-         * Configura algumas propriedades do PDF, inclusive o nome do arquivo gerado,
-         * Porem agora ele baixa o pdf ao invés de mostrar no browser
-         */
-        public ActionResult PDFConfigurado()
+        
+        public ActionResult Pedidos(int? idCliente, string dataInicial, string dataFinal)
         {
-            var pdf = new ViewAsPdf
-            {
-                ViewName = "Produtos",
-                FileName = "NomeDoArquivoPDF.pdf",
-                PageSize = Size.A4,
-                IsGrayScale = true,
-                PageMargins = new Margins{Bottom = 5, Left = 5, Right = 5, Top = 5},
-            };
-            return pdf;
-        }
- 
-        /*
-         * Pode passar um modelo para a view que vai ser utilizada para gerar o PDF
-         */
-        public ActionResult PDFComModel()
-        {
-            Contexto db = new Contexto();
+            DateTime inicio = DateTime.TryParse(dataInicial, out inicio) ? inicio : DateTime.MinValue;
+            DateTime fim = DateTime.TryParse(dataFinal, out fim) ? fim : DateTime.MaxValue;
 
-            var modelo = (from p in db.Produtos
-                          where p.ID.Equals(1)
-                          select p).FirstOrDefault();
- 
-            var pdf = new ViewAsPdf
-            {
-                ViewName = "Produtos",
-                Model = modelo
-            };
- 
-            return pdf;
+            PedidoBll pedidoBll = new PedidoBll();
+
+            List<Pedido> pedidos = pedidoBll.RelatorioPedidos(idCliente, inicio, fim);
+
+            return new Rotativa.ViewAsPdf("Pedidos", pedidos);
         }
     }
 }

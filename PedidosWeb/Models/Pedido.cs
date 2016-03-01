@@ -37,6 +37,10 @@ namespace PedidosWeb.Models
         [DisplayFormat(ApplyFormatInEditMode=true, DataFormatString="{0:N2}")]
         public decimal? ValorTotal { get; set; }
 
+        [Display(Name = "Valor do frete")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:N2}")]
+        public decimal? ValorFrete { get; set; }
+
         [Display(Name="Situação do pedido")]
         public SituacaoPedido SituacaoPedido { get; set; }
 

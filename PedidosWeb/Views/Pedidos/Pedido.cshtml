@@ -36,6 +36,11 @@
             @Html.EditorFor(model => model.CodigoInterno, new { htmlAttributes = new { @class = "form-control input-sm" } })
             @Html.ValidationMessageFor(model => model.CodigoInterno, "", new { @class = "text-danger" })
         </div>
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.ValorFrete, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.ValorFrete, new { htmlAttributes = new { @class = "form-control input-sm", @placeholder = "0,00" } })
+            @Html.ValidationMessageFor(model => model.ValorFrete, "", new { @class = "text-danger" })
+        </div>
     </div>
 
     <div class="row">
