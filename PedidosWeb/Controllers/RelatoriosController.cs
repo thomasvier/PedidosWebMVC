@@ -98,6 +98,8 @@ namespace PedidosWeb.Controllers
 
             List<Pedido> pedidos = pedidoBll.RelatorioPedidos(idCliente, inicio, fim);
 
+            ViewBag.Total = string.Format("{0:N2}", pedidos.Sum(x => x.ValorTotal));
+
             return new Rotativa.ViewAsPdf("Pedidos", pedidos);
         }
     }

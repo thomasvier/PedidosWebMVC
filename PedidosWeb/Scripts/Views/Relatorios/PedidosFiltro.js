@@ -4,13 +4,13 @@
         var url = '';
         var parametros = false;
 
-        if ($('#ddlClientes').val() != null)
+        if ($('#ddlClientes').val() != '')
         {
             url = 'idCliente=' + $('#ddlClientes').val();
             parametros = true;
         }
 
-        if ($('#DataInicial').val() != null)
+        if ($('#DataInicial').val() != '')
         {
             if (url != null) {
                 url += '&dataInicial=' + $('#DataInicial').val();
@@ -23,7 +23,7 @@
             parametros = true;
         }
 
-        if($('#DataFinal').val() != null)
+        if($('#DataFinal').val() != '')
         {
             if (url != null) {
                 url += '&dataFinal=' + $('#DataFinal').val();
