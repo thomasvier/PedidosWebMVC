@@ -597,6 +597,7 @@
     <Content Include="Scripts\Views\ItensPedido\ListaItens.js" />
     <Content Include="Scripts\Views\Pedidos\IndexPedidos.js" />
     <Content Include="Scripts\Views\Pedidos\PedidosAdm.js" />
+    <Content Include="Scripts\Views\Relatorios\PedidosFiltro.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
