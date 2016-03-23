@@ -7,6 +7,7 @@ using System.Data.Entity;
 using System.ComponentModel;
 using PedidosWeb.Resources;
 using PedidosWeb.Models.Admin;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PedidosWeb.Models.Admin
 {
@@ -70,7 +71,10 @@ namespace PedidosWeb.Models.Admin
 
         public TipoTitular Tipo { get; set; }
 
-        public int IDRepresentante { get; set; }
+        [ForeignKey("Representante")]
+        public virtual int? IDRepresentante { get; set; }
+
+        public virtual Representante Representante { get; set; }
 
         public Cliente()
         {

@@ -95,7 +95,7 @@ namespace PedidosWeb.BLL.Admin
             return ID;
         }
 
-        public static Representante RetornarRepresentante(int ID)
+        public static Representante RetornarRepresentante(int? ID)
         {
             Contexto db = new Contexto();
 
