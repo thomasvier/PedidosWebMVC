@@ -73,8 +73,11 @@ namespace PedidosWeb.Controllers
                 return View(pedidoBll.ListaPedidosPaginacao(page, clienteFiltro, situacaoPedidoFiltro, sortOrder, codigoInternoFiltro));
             }
 
-            catch (Exception ex) { }
-            return View(db.Pedidos.ToList());
+            catch (Exception ex) 
+            {
+                return RedirectToAction("Index");
+            }
+            
         }
 
         // GET: Pedidos/Details/5
@@ -94,39 +97,30 @@ namespace PedidosWeb.Controllers
 
         // GET: Pedidos/Create
         public ActionResult Pedido(int? id, int? idcli)
-        {            
-            ProdutoBll produtoBll = new ProdutoBll();
-            List<Cliente> clientes = ClienteBll.ListarClientes();
-
-            ViewBag.Produtos = produtoBll.ListarProdutosAtivos();
-            ViewBag.Clientes = clientes;
-
-
-            Pedido pedido = new Pedido();
-            
-            if(id != null)
+        {
+            try
             {
-                pedido = PedidoBll.RetornarPedido(id);
-            }
+                ProdutoBll produtoBll = new ProdutoBll();
+                List<Cliente> clientes = ClienteBll.ListarClientes();
 
-            if (idcli != null)
-            {    
-                pedido.ClienteID = (int)idcli;
-                pedido.Cliente = ClienteBll.RetornarCliente((int)idcli);
+                ViewBag.Produtos = produtoBll.ListarProdutosAtivos();
+                ViewBag.Clientes = clientes;
 
-                PedidoBll pedidoBll = new PedidoBll();
-                
-                if(id != null)
+                Pedido pedido = new Pedido();
+
+                if (id != null)
                 {
-                    pedidoBll.Atualizar(pedido);                    
+                    PedidoBll pedidoBll = new PedidoBll();
+                    pedido = PedidoBll.RetornarPedido(id);
+                    pedido.ValorTotal = pedidoBll.CalcularTotal(pedido.ID) + pedido.ValorFrete;
                 }
-                else
-                {
-                    pedidoBll.Criar(pedido);
-                }
-            }
 
-            return View(pedido);
+                return View(pedido);
+            }
+            catch(Exception exception)
+            {
+                return RedirectToAction("Index").ComMensagem(Resources.Geral.TenteNovamente, TipoMensagem.Erro);
+            }
         }
 
         // POST: Pedidos/Create
@@ -136,95 +130,45 @@ namespace PedidosWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Pedido([Bind(Include = "ID,CodigoInterno,DataPedido, DataEntrega,ValorTotal,ValorFrete,SituacaoPedido,ClienteID")] Pedido pedido, string ClienteID, string Permanecer)
         {
-            if (ModelState.IsValid)
+            try
             {
-                PedidoBll pedidoBll = new PedidoBll();
-
-                pedido.ClienteID = int.Parse(ClienteID);
-
-                if (pedido.ID > 0)
+                if (ModelState.IsValid)
                 {
-                    pedidoBll.Atualizar(pedido);
+                    PedidoBll pedidoBll = new PedidoBll();
+
+                    pedido.ClienteID = int.Parse(ClienteID);
+
+                    if (pedido.ID > 0)
+                    {
+                        pedidoBll.Atualizar(pedido);
+                    }
+                    else
+                    {
+                        pedidoBll.Criar(pedido);
+                    }
+
+                    if (string.IsNullOrEmpty(Permanecer))
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Pedido", new { id = pedido.ID });
+                    }
                 }
-                else
-                {
-                    pedidoBll.Criar(pedido);
-                }
 
-                if (string.IsNullOrEmpty(Permanecer))
-                {
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    return RedirectToAction("Pedido", new { id = pedido.ID });                    
-                }
+                ProdutoBll produtoBll = new ProdutoBll();
+                List<Cliente> clientes = ClienteBll.ListarClientes();
+
+                ViewBag.Produtos = produtoBll.ListarProdutosAtivos();
+                ViewBag.Clientes = clientes;
+
+                return View(pedido);
             }
-
-            ProdutoBll produtoBll = new ProdutoBll();
-            List<Cliente> clientes = ClienteBll.ListarClientes();
-
-            ViewBag.Produtos = produtoBll.ListarProdutosAtivos();
-            ViewBag.Clientes = clientes;
-
-            return View(pedido);
-        }
-
-        // GET: Pedidos/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
+            catch(Exception ex)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index").ComMensagem(Resources.Geral.TenteNovamente, TipoMensagem.Erro);
             }
-            Pedido pedido = db.Pedidos.Find(id);
-            if (pedido == null)
-            {
-                return HttpNotFound();
-            }
-            return View(pedido);
-        }
-
-        // POST: Pedidos/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,CodigoInterno,DataPedido,DataEntrega,ValorTotal,SituacaoPedido,ClienteID")] Pedido pedido)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(pedido).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(pedido);
-        }
-
-        // GET: Pedidos/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Pedido pedido = db.Pedidos.Find(id);
-            if (pedido == null)
-            {
-                return HttpNotFound();
-            }
-            return View(pedido);
-        }
-
-        // POST: Pedidos/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Pedido pedido = db.Pedidos.Find(id);
-            db.Pedidos.Remove(pedido);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

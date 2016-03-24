@@ -5,30 +5,46 @@
     
     submeterFormulario();
     inserirItem();
-    eventoAutcomplete();
-
-    $('#listarClientes').click(function () {
-        $("#Cliente_RazaoSocial").focus();
-        $('#Cliente_RazaoSocial').autocomplete("search", "");        
+    
+    $('#ClienteID').change(function () {
+        var value = $('option:selected', $(this)).val();
         
-    })
+        if(value == '0')
+        {
+            $('#btnModalPedidoItem').addClass('disabled');
+        }
+        else
+        {
+            $('#Permanecer').val('1');
+            $('#pedidosCreate').submit();
+            $('#btnModalPedidoItem').removeClass('disabled');
+        }
+    });
+
+    //eventoAutcomplete();
+
+    //$('#listarClientes').click(function () {
+    //    $("#Cliente_RazaoSocial").focus();
+    //    $('#Cliente_RazaoSocial').autocomplete("search", "");        
+        
+    //})
     
     if ($('#ID').val() != '0') {
         $('#btnModalPedidoItem').removeClass('disabled');
     }
 
-    if ($('#ClienteID').val() != '0') {
+    if ($('#ClienteID').val() != '') {
         $('#btnModalPedidoItem').removeClass('disabled');
     }
 
-    $('#btnCadastroRapido').click(function () {
-        var ID = $('#ID').val();
+    //$('#btnCadastroRapido').click(function () {
+    //    var ID = $('#ID').val();
         
-        $('#cadastroRapidoClientes').load("/Clientes/CadastroRapido?a=Pedidos&v=Pedido&idc="+ ID, function () {
-            $('#cadastroRapidoClientes').modal();
-        })
+    //    $('#cadastroRapidoClientes').load("/Clientes/CadastroRapido?a=Pedidos&v=Pedido&idc="+ ID, function () {
+    //        $('#cadastroRapidoClientes').modal();
+    //    })
 
-    });
+    //});
 
     $("#btnModalPedidoItem").click(function () {
         $("#modalPedidoItem").load("/ItensPedido/ItemPedido", function () {

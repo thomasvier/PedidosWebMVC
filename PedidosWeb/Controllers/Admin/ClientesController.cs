@@ -242,12 +242,18 @@ namespace PedidosWeb.Controllers
         {
             try
             {
-                Contexto db = new Contexto();
-                string view = Request["view"];
-                string action = Request["action"];
-                var idc = Request["idc"];
-                db.Clientes.Add(cliente);
-                db.SaveChanges();
+                string view = "";
+                string action = "";
+                string idc = "";
+
+                using (Contexto db = new Contexto())
+                {
+                    view = Request["view"];
+                    action = Request["action"];
+                    idc = Request["idc"];
+                    db.Clientes.Add(cliente);
+                    db.SaveChanges();
+                }
 
                 if (idc != "0")
                 {

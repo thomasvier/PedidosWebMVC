@@ -76,7 +76,7 @@ namespace PedidosWeb.BLL
 
         public Pedido Atualizar(Pedido pedido)
         {
-            pedido.ValorTotal = this.CalcularTotal(pedido.ID);
+            pedido.ValorTotal = this.CalcularTotal(pedido.ID) + pedido.ValorFrete;
             db.Entry(pedido).State = EntityState.Modified;
             db.SaveChanges();
 

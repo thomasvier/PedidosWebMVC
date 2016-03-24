@@ -361,6 +361,14 @@
     <Compile Include="Migrations\201603231758464_repclinotob2.Designer.cs">
       <DependentUpon>201603231758464_repclinotob2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603241428361_pedasda.cs" />
+    <Compile Include="Migrations\201603241428361_pedasda.Designer.cs">
+      <DependentUpon>201603241428361_pedasda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603241454251_ahagfasf.cs" />
+    <Compile Include="Migrations\201603241454251_ahagfasf.Designer.cs">
+      <DependentUpon>201603241454251_ahagfasf.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ActionResultExtensions.cs" />
     <Compile Include="Models\Admin\Cliente.cs" />
@@ -466,6 +474,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="img\loading.gif" />
     <Content Include="img\loading.svg" />
+    <Content Include="img\logo.jpg" />
     <Content Include="Relatorios\Relatorio.aspx" />
     <Content Include="Rotativa\wkhtmltopdf.exe" />
     <Content Include="Scripts\bloodhound.js" />
@@ -486,6 +495,7 @@
     <Content Include="Content\bootstrap-datepicker.standalone.css.map" />
     <Content Include="Content\bootstrap-datepicker.min.css.map" />
     <Content Include="Content\bootstrap-datepicker.css.map" />
+    <None Include="Properties\PublishProfiles\deploy.pubxml" />
     <None Include="Relatorios\Produtos.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -819,6 +829,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603231758464_repclinotob2.resx">
       <DependentUpon>201603231758464_repclinotob2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603241428361_pedasda.resx">
+      <DependentUpon>201603241428361_pedasda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603241454251_ahagfasf.resx">
+      <DependentUpon>201603241454251_ahagfasf.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Geral.resx">
       <Generator>ResXFileCodeGenerator</Generator>

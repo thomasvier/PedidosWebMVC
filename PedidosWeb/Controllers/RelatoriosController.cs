@@ -32,7 +32,8 @@ namespace PedidosWeb.Controllers
             Pedido pedido = PedidoBll.RetornarPedido(id);
             List<ItemPedido> itens = PedidoBll.RetornarItens(id);
             ViewBag.Itens = itens;
-            ViewBag.Vendedor = RepresentanteBll.RetornarRepresentante(pedido.Cliente.IDRepresentante).Nome;
+            Representante representante = RepresentanteBll.RetornarRepresentante(pedido.Cliente.IDRepresentante);
+            ViewBag.Vendedor = representante != null ? representante.Nome : string.Empty;
             ViewBag.TotalItens = string.Format("{0:N2}", itens.Sum(x => x.TotalItem));
 
             if (pedido == null)

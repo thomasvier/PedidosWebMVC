@@ -16,10 +16,11 @@ namespace PedidosWeb.Models
             DataEntrega = DateTime.Now.AddDays(1);
         }
 
+        [DisplayFormat(ApplyFormatInEditMode=true, DataFormatString="{0:000000}")]
         public int ID { get; set; }
                          
         [ForeignKey("Cliente")]
-        public int ClienteID { get; set; }
+        public virtual int ClienteID { get; set; }
 
         [Display(Name="Código interno")]
         public string CodigoInterno { get; set; }
